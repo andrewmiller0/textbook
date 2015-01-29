@@ -41,6 +41,11 @@ var all = {
     }
   },
 
+  twilio: {
+    clientID:     process.env.TWILIO_ACCOUNT_SID,
+    clientToken: process.env.TWILIO_AUTH_TOKEN
+  },
+
 };
 
 // Export the config object based on the NODE_ENV
