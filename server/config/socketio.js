@@ -18,6 +18,9 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/schedMsg/schedMsg.socket').register(socket);
+  require('../api/conversation/conversation.socket').register(socket);
+  require('../api/classroom/classroom.socket').register(socket);
   require('../api/student/student.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
 }
