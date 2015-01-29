@@ -3,6 +3,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
+var Classroom = require('../classroom/classroom.model');
 
 var UserSchema = new Schema({
   name: String,
@@ -13,7 +14,9 @@ var UserSchema = new Schema({
   },
   hashedPassword: String,
   provider: String,
-  salt: String
+  salt: String,
+  phone: String,
+  classrooms: [{type: Schema.Types.ObjectId, ref: 'ClassroomZ'}]
 });
 
 /**
