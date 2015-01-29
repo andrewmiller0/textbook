@@ -16,7 +16,7 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   phone: String,
-  classrooms: [{type: Schema.Types.ObjectId, ref: 'ClassroomZ'}]
+  classrooms: [{type: Schema.Types.ObjectId, ref: 'Classroom'}]
 });
 
 /**
