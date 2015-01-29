@@ -18,7 +18,7 @@ var ConversationSchema = new Schema({
   messages: {type: [MessageSchema]} // this is how we did it in stackstore but idk
 });
 
-CoversationSchema.virtual('updated').get(function() {
+ConversationSchema.virtual('updated').get(function() {
 	var sorted = this.messages.sort(function(a,b) {
 		if (a.dateSent > b.dateSent) return -1;
 		if (a.dateSent < b.dateSent) return 1;
