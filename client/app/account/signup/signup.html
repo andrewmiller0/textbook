@@ -1,11 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-  <div class="row">
-    <div class="col-sm-12">
       <h1>Sign up</h1>
-    </div>
-    <div class="col-sm-12">
+    <div layout="column">
       <form class="form" name="form" ng-submit="register(form)" novalidate>
 
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
@@ -65,6 +62,5 @@
 
       </form>
     </div>
-  </div>
   <hr>
 </div>
