@@ -15,7 +15,7 @@ var student = new Student({
 
 describe('Student Model', function() {
   before(function(done) {
-    // Clear users before testing
+    // Clear students before testing
     Student.remove().exec().then(function() {
       done();
     });
