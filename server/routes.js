@@ -9,6 +9,10 @@ var errors = require('./components/errors');
 module.exports = function(app) {
 
   // Insert routes below
+  app.use('/api/schedMsgs', require('./api/schedMsg'));
+  app.use('/api/conversations', require('./api/conversation'));
+  app.use('/api/classrooms', require('./api/classroom'));
+  app.use('/api/students', require('./api/student'));
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
 
