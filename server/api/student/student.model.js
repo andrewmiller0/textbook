@@ -11,4 +11,16 @@ var StudentSchema = new Schema({
   phoneNumber: {type: Number, required: true}
 });
 
+StudentSchema
+.virtual('fullName')
+.get(function() {
+	return this.firstName + ' ' + this.lastName;
+});
+
+StudentSchema
+.virtual('parentFullName')
+.get(function() {
+	return this.parentFirstName + ' ' + this.parentLastName;
+});
+
 module.exports = mongoose.model('Student', StudentSchema);
