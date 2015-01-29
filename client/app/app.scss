@@ -18,6 +18,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @media screen and (min-width: 768px) {
     .container {
         max-width: 730px;
+        margin: 0 auto;
     }
 }
 
@@ -27,3 +28,17 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'admin/admin.scss';
 @import 'main/main.scss';
 // endinjector
+
+.nav li {
+	display: inline;
+}
+
+a {
+	text-decoration: none;
+}
+
+.content {
+	margin: 20px auto;
+	border: 1px solid #eee;
+	padding: 15px;
+}
