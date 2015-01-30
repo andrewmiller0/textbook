@@ -4,10 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var Classroom = require('../classroom/classroom.model');
-var config = require('../config/environment');
-var accountSid = config.twilio.clientID;
-var authToken = config.twilio.clientToken;
-var client = require('twilio')(accountSid, authToken);
+var config = require('../../config/environment');
+var client = require('twilio')(config.twilio.clientID, config.twilio.clientToken);
 
 var UserSchema = new Schema({
   name: String,
@@ -146,8 +144,8 @@ UserSchema.methods = {
   },
 
   getPhoneNumber: function() {
-    client.availablePhoneNumbers("US").tollFree.list({  }, function(err, numbers) {
-      console.log(numbers);
+    // client.availablePhoneNumbers("US").tollFree.list({  }, function(err, numbers) {
+    //   console.log(numbers);
       // for (var number in numbers) {
       //     client.incomingPhoneNumbers.create({
       //         phoneNumber: number.phone_number
@@ -155,7 +153,8 @@ UserSchema.methods = {
       //         console.log(purchasedNumber.sid);
       //     });
       // }
-    });
+    // });
+  this.phone = '+18563515245'
   }
 };
 
