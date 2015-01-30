@@ -4,6 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var Classroom = require('../classroom/classroom.model');
+var config = require('../config/environment');
+var accountSid = config.twilio.clientID;
+var authToken = config.twilio.clientToken;
+var client = require('twilio')(accountSid, authToken);
 
 var UserSchema = new Schema({
   name: String,
@@ -139,6 +143,19 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  getPhoneNumber: function() {
+    client.availablePhoneNumbers("US").tollFree.list({  }, function(err, numbers) {
+      console.log(numbers);
+      // for (var number in numbers) {
+      //     client.incomingPhoneNumbers.create({
+      //         phoneNumber: number.phone_number
+      //     }, function(err, purchasedNumber) {
+      //         console.log(purchasedNumber.sid);
+      //     });
+      // }
+    });
   }
 };
 
