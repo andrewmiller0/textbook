@@ -42,22 +42,8 @@ describe('Student Model', function() {
         done();
       })
     });
-     it('should require a parent first name', function(done) {
-      student.parentFirstName = '';
-      student.save(function(err) {
-        should.exist(err);
-        done();
-      })
-    });
-     it('should require a parent last name', function(done) {
-      student.parentLastName = '';
-      student.save(function(err) {
-        should.exist(err);
-        done();
-      })
-    });
-     it('should require a phone number', function(done) {
-      student.phoneNumber = '';
+     it('should require a primary phone number', function(done) {
+      student.primaryPhone = '';
       student.save(function(err) {
         should.exist(err);
         done();
