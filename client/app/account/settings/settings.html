@@ -4,6 +4,13 @@
     <md-content class="md-padding main">
     <div layout="column">
       <h1>Classrooms</h1>
+      <ul ng-show="classrooms">
+        <li ng-repeat="classroom in classrooms">
+          {{classroom.name}}
+        </li>
+      </ul>
+      <h2>You don't have any classrooms!</h2>
+      <md-button ng-href="/classroom/add"class="md-raised md-primary" md-no-ink>Create A Class</md-button>
     </div>
     </md-content>
     <md-content class="md-padding main">
