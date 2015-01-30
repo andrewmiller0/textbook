@@ -3,24 +3,19 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+var Contact = require('../contact/contact.model');
+
 var StudentSchema = new Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
-  parentFirstName: {type: String, required: true},
-  parentLastName: {type: String, required: true},
-  phoneNumber: {type: Number, required: true}
+  primaryPhone: {type: String, required: true},
+  contacts: [{type: Schema.Types.ObjectId, ref: 'Contact'}]
 });
 
 StudentSchema
 .virtual('fullName')
 .get(function() {
 	return this.firstName + ' ' + this.lastName;
-});
-
-StudentSchema
-.virtual('parentFullName')
-.get(function() {
-	return this.parentFirstName + ' ' + this.parentLastName;
 });
 
 module.exports = mongoose.model('Student', StudentSchema);
