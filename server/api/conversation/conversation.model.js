@@ -3,7 +3,8 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
-var User = require('../user/user.model');
+var User = require('../user/user.model'),
+	Student = require('../student/student.model');
 
 var types = ['sent', 'received'];
 
@@ -15,6 +16,7 @@ var MessageSchema = new Schema({
 
 var ConversationSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
+  studentId: {type: Schema.Types.ObjectId, ref: 'Student'},
   messages: {type: [MessageSchema]} // this is how we did it in stackstore but idk
 });
 
