@@ -5,7 +5,9 @@ angular.module('textbookApp', [
   'ngResource',
   'ngSanitize',
   'btford.socket-io',
-  'ui.router'
+  'ui.router',
+  'ngSanitize',
+  'ngMaterial'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
