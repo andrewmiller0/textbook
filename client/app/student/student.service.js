@@ -1,16 +1,13 @@
 'use strict';
 
 angular.module('textbookApp')
-  .factory('Student', function () {
+  .factory('Student', function ($resource) {
     // Service logic
     // ...
 
-    var meaningOfLife = 42;
-
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
+    var Student = $resource('/api/students/:id', {id: '@_id'} {
+      update: {
+        method: 'PUT'
       }
-    };
+    })
   });
