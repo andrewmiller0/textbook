@@ -16,9 +16,21 @@ exports.show = function(req, res) {
   Classroom.findById(req.params.id, function (err, classroom) {
     if(err) { return handleError(res, err); }
     if(!classroom) { return res.send(404); }
+  })
+  .populate('students')
+  .exec(function(classroom) {
+    if(err) { return handleError(res, err); }
     return res.json(classroom);
   });
 };
+
+exports.getUnpopulated = function(req, res) {
+  Classroom.findById(req.params.id, function (err, classroom) {
+    if(err) { return handleError(res, err); }
+    if(!classroom) { return res.send(404); }
+    return res.json(classroom);
+  })
+}
 
 // Creates a new classroom in the DB.
 exports.create = function(req, res) {
