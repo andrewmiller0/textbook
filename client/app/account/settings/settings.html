@@ -9,7 +9,7 @@
           {{classroom.name}}
         </li>
       </ul>
-      <h2>You don't have any classrooms!</h2>
+      <h2 ng-hide="classrooms">You don't have any classrooms!</h2>
       <md-button ng-href="/classroom/add"class="md-raised md-primary" md-no-ink>Create A Class</md-button>
     </div>
     </md-content>

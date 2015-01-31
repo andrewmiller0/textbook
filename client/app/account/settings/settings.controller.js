@@ -3,8 +3,9 @@
 angular.module('textbookApp')
   .controller('SettingsCtrl', function ($scope, User, Auth, Classroom) {
     $scope.errors = {};
-    $scope.classrooms = Classroom.query();
-
+    User.get().$promise.then(function(user) {
+      $scope.classrooms = user.classrooms;
+    });
     $scope.changePassword = function(form) {
       $scope.submitted = true;
       if(form.$valid) {
