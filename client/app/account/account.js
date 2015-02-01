@@ -18,5 +18,5 @@ angular.module('textbookApp')
         templateUrl: 'app/account/settings/settings.html',
         controller: 'SettingsCtrl',
         authenticate: true
-      });
+      })
   });

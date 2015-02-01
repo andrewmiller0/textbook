@@ -1,0 +1,48 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div layout="row">
+  <md-content class="main md-padding" flex="75">
+    <div layout="column">
+    	<form name="form" ng-submit="addClassroom(form)" novalidate>
+    		<md-input-container>
+	    		<label>Class name</label>
+	    		<input type="text" name="name" ng-model="classroom.name" required/>
+    		</md-input-container>
+    		<div>
+    			<ul>
+    				<h3 ng-show="classroom.students.length">Students in {{ classroom.name }}</h3>
+    				<li ng-repeat="student in classroom.students">{{ student }}</li>
+    			</ul>
+    		</div>
+
+    		<div class="student-add-form" layout-margin layout-padding>
+    			<h4>Add a student:</h4>
+    			<md-input-container>
+	    			<label>First name</label>
+		    		<input type="text" name="firstName" ng-model="currentStudent.firstName" required />
+    			</md-input-container>
+    			<md-input-container>
+	    			<label>Last name</label>
+		    		<input type="text" name="lastName" ng-model="currentStudent.lastName" required />
+    			</md-input-container>
+    			<ul>
+    				<h5>Contacts</h5>
+    				<li ng-repeat="contact in currentStudent.contacts">{{ contact }}</li>
+    			</ul>
+    			<div class="contact-add-form" layout-margin layout-padding>
+	    			<h5>Add a contact for this student:</h5>
+	    			<md-input-container>
+	    				<label>Contact's name</label>
+	    				<input type="text" name="lastName" ng-model="currentContact.name" />
+	    			</md-input-container>
+	    			<md-input-container>
+	    				<label>Contact's cell phone number</label>
+	    				<input type="text" name="lastName" ng-model="currentContact.number" />
+	    			</md-input-container>
+	    			<md-button md-no-ink ng-click="addContact()">Add contact</md-button>
+    			</div>
+    			<md-button md-no-ink ng-disabled="!$scope.currentStudent.firstName.length || !$scope.currentStudent.lastName.length || !$scope.currentStudent.contacts.length" ng-click="addStudent()">Add student</md-button>
+    		</div>
+    		<md-button type="submit" ng-disabled="!$scope.classroom.students.length">Submit</md-button>
+    	</form>
+    </div>
+</div>
