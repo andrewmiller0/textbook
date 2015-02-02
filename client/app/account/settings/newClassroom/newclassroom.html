@@ -10,45 +10,12 @@
     		<div>
     			<ul>
     				<h3 ng-show="classroom.students.length">Students in {{ classroom.name }}</h3>
-    				<li ng-repeat="student in classroom.students">{{ student }}</li>
+    				<li ng-repeat="student in classroom.students"><button type="button">{{ student.firstName }} {{ student.lastName }}</button></li>
     			</ul>
     		</div>
-<<<<<<< HEAD
     		<h4>Add a student:</h4>
             <student-form></student-form>
-=======
-
-    		<div class="student-add-form" layout-margin layout-padding>
-    			<h4>Add a student:</h4>
-    			<md-input-container>
-	    			<label>First name</label>
-		    		<input type="text" name="firstName" ng-model="currentStudent.firstName" />
-    			</md-input-container>
-    			<md-input-container>
-	    			<label>Last name</label>
-		    		<input type="text" name="lastName" ng-model="currentStudent.lastName" />
-    			</md-input-container>
-    			<ul>
-    				<h5>Contacts</h5>
-    				<li ng-repeat="contact in currentStudent.contacts">{{ contact }}</li>
-    			</ul>
-    			<div class="contact-add-form" layout-margin layout-padding>
-	    			<h5>Add a contact for this student:</h5>
-	    			<md-input-container>
-	    				<label>Contact's name</label>
-	    				<input type="text" name="lastName" ng-model="currentContact.name" />
-	    			</md-input-container>
-	    			<md-input-container>
-	    				<label>Contact's cell phone number</label>
-	    				<input type="text" name="lastName" ng-model="currentContact.phone" />
-	    			</md-input-container>
-	    			<md-button class="md-raised" type="button" md-no-ink ng-click="addContact()">Add contact</md-button>
-    			</div>
-    			<md-button class="md-raised" type="button" md-no-ink ng-click="addStudent()">Add student</md-button>
-    		</div>
->>>>>>> master
     		<md-button type="submit" class="md-raised">Submit</md-button>
     	</form>
-        {{ user }} || {{ classroom }} || {{ currentStudent }} || {{ currentContact }}
     </div>
 </div>

@@ -4,7 +4,7 @@ describe('Directive: studentForm', function () {
 
   // load the directive's module and view
   beforeEach(module('textbookApp'));
-  beforeEach(module('app/account/settings/addClassroom/studentForm/studentForm.html'));
+  beforeEach(module('app/account/settings/newClassroom/studentForm/studentForm.html'));
 
   var element, scope;
 
