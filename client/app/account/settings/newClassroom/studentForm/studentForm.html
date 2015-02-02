@@ -11,6 +11,8 @@
 		<h5>Add a contact for this student:</h5>
 			<label>Contact's name</label>
 			<input type="text" name="lastName" ng-model="currentContact.name" />
+			<label>Contact's relationship to student:</label>
+			<input type="text" name="relationship" ng-model="currentContact.relationship" />
 			<label>Contact's cell phone number</label>
 			<input type="text" name="lastName" ng-model="currentContact.phone" />
 		<md-button class="md-raised" type="button" md-no-ink ng-click="addContact()">Save contact</md-button>

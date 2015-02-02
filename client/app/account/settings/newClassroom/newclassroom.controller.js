@@ -17,6 +17,7 @@ angular.module('textbookApp')
 
     $scope.currentContact = {
       name: "",
+      relationship: "",
       phone: ""
     };
 
@@ -28,6 +29,7 @@ angular.module('textbookApp')
       });
       $scope.currentContact = {
         name: "",
+        relationship: "",
         phone: ""
       };
     };
