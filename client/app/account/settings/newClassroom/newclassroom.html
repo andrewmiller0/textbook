@@ -1,21 +1,23 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div layout="row">
   <md-content class="main md-padding" flex="75">
-    <div layout="column">
-    	<form name="form" ng-submit="addClassroom()" novalidate>
-    		<md-input-container>
-	    		<label>Class name</label>
-	    		<input type="text" name="name" ng-model="classroom.name" required/>
-    		</md-input-container>
-    		<div>
-    			<ul>
-    				<h3 ng-show="classroom.students.length">Students in {{ classroom.name }}</h3>
-    				<li ng-repeat="student in classroom.students"><button type="button">{{ student.firstName }} {{ student.lastName }}</button></li>
-    			</ul>
-    		</div>
-    		<h4>Add a student:</h4>
-            <student-form></student-form>
-    		<md-button type="submit" class="md-raised">Submit</md-button>
-    	</form>
+    <div layout="row">
+        <div flex="40">
+            <ul>
+                <h3 ng-show="classroom.students.length">Students in {{ classroom.name }}</h3>
+                <li ng-repeat="student in classroom.students"><button type="button">{{ student.firstName }} {{ student.lastName }}</button></li>
+            </ul>
+        </div>
+        <div flex="55">
+            <form name="form" ng-submit="addClassroom()" novalidate>
+                <md-input-container>
+                    <label>Class name</label>
+                    <input type="text" name="name" ng-model="classroom.name" required/>
+                </md-input-container>
+                <h4>Add a student:</h4>
+                <student-form></student-form>
+                <md-button type="submit" class="md-raised">Submit</md-button>
+            </form>
+        </div>
     </div>
 </div>

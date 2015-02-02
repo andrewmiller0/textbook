@@ -5,6 +5,7 @@ var mongoose = require('mongoose'),
 
 var ContactSchema = new Schema({
   name: String,
+  relationship: String,
   phone: String
 });
 
