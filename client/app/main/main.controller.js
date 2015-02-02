@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, $http, socket, Auth) {
+    $scope.user = Auth.getCurrentUser();
 
-    $scope.$on('$destroy', function () {
-      socket.unsyncUpdates('thing');
-    });
   });

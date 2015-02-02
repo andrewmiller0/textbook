@@ -17,7 +17,7 @@ angular.module('textbookApp', [
     $httpProvider.interceptors.push('authInterceptor');
     $mdThemingProvider.theme('default')
       .primaryColor('blue', {
-        'default': '700', 
+        'default': '700',
         'hue-1': '300',
         'hue-2': '900'
       })
