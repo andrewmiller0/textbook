@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 
 var ContactSchema = new Schema({
   name: String,
-  number: String
+  phone: String
 });
 
 module.exports = mongoose.model('Contact', ContactSchema);

@@ -18,11 +18,11 @@
     			<h4>Add a student:</h4>
     			<md-input-container>
 	    			<label>First name</label>
-		    		<input type="text" name="firstName" ng-model="currentStudent.firstName" required />
+		    		<input type="text" name="firstName" ng-model="currentStudent.firstName" />
     			</md-input-container>
     			<md-input-container>
 	    			<label>Last name</label>
-		    		<input type="text" name="lastName" ng-model="currentStudent.lastName" required />
+		    		<input type="text" name="lastName" ng-model="currentStudent.lastName" />
     			</md-input-container>
     			<ul>
     				<h5>Contacts</h5>
@@ -36,7 +36,7 @@
 	    			</md-input-container>
 	    			<md-input-container>
 	    				<label>Contact's cell phone number</label>
-	    				<input type="text" name="lastName" ng-model="currentContact.number" />
+	    				<input type="text" name="lastName" ng-model="currentContact.phone" />
 	    			</md-input-container>
 	    			<md-button class="md-raised" type="button" md-no-ink ng-click="addContact()">Add contact</md-button>
     			</div>
@@ -44,5 +44,6 @@
     		</div>
     		<md-button type="submit" class="md-raised">Submit</md-button>
     	</form>
+        {{ classroom }} || {{ currentStudent }} || {{ currentContact }}
     </div>
 </div>
