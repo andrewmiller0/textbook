@@ -1,6 +1,23 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-
+  <div layout="column" layout-align="center center">
+    <md-content>
+    <h1 style="text-align: center;">{{user.name}}</h1>
+    <h3 style="text-align: center;">Your TextBook Number: {{user.phone | tel}}</h3>
+  </md-content>
+  </div>
   <div layout="row">
+    <md-content class="md-padding main">
+    <div layout="column">
+      <h1>Classrooms</h1>
+      <md-list ng-show="classrooms.length">
+        <md-item ng-repeat="classroom in classrooms">
+          {{classroom.name}}
+        </md-item>
+      </md-list>
+      <h2 ng-hide="classrooms.length">You don't have any classrooms!</h2>
+      <md-button ng-href="/classroom/add"class="md-raised md-primary" md-no-ink>Create A Class</md-button>
+    </div>
+    </md-content>
     <md-content class="md-padding main">
       <div layout="column">
         <h1>Change Password</h1>

@@ -6,6 +6,7 @@
 'use strict';
 
 var User = require('../api/user/user.model');
+var Classroom = require('../api/classroom/classroom.model');
 var config = require('./environment');
 
 User.find({}).remove(function() {
@@ -22,9 +23,27 @@ User.find({}).remove(function() {
     password: 'admin'
   }, function() {
       console.log('finished populating users');
+      // User.findOne({name: 'Test User'}, function(err, user) {
+      //   console.log(user);
+      //   Classroom.findOne({name: 'Math'}, function(err, classroom) {
+      //     user.classrooms.push(classroom._id);
+      //     user.save();
+      //   });
+      // });
     }
   );
 });
+
+// Classroom.find({}).remove(function() {
+//   Classroom.create({
+//     name: 'Math'
+//   }, {
+//     name:'Science'
+//   }, function() {
+//       console.log('finished populating classrooms');
+//     }
+//   );
+// });
 
 // var accountSid = config.twilio.clientID;
 // var authToken = config.twilio.clientToken;
