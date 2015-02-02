@@ -6,28 +6,15 @@ angular.module('textbookApp', [
   'ngSanitize',
   'btford.socket-io',
   'ui.router',
-  'ngSanitize',
-  'ngMaterial'
+  'ngSanitize'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-    $mdThemingProvider.theme('default')
-      .primaryColor('blue', {
-        'default': '700',
-        'hue-1': '300',
-        'hue-2': '900'
-      })
-      .accentColor('amber')
-      .backgroundColor('grey', {
-        'default': '100',
-        'hue-1': '50',
-        'hue-2': '600',
-        'hue-3': '50'
-      });
+
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {

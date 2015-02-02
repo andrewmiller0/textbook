@@ -1,5 +1,5 @@
-.thing-form {
-    margin: 20px 0;
+.container {
+    min-width: 900px;
 }
 
 #banner h1 {
@@ -33,8 +33,8 @@ a {
 }
 
 .main {
-    margin: 20px auto 0;
-    border: 1px solid #ddd;
+    width: 80%;
+    margin: 0 auto;
 }
 
 md-content {
@@ -43,9 +43,23 @@ md-content {
 
 .contact-add-form {
     margin-left: 50px;
+    padding: 10px;
+    border-radius: 8px;
     background-color: #f0f0f0;
 }
 
 .student-add-form {
     background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.panel {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
 }
