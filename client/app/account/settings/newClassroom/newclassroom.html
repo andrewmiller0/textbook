@@ -38,11 +38,11 @@
 	    				<label>Contact's cell phone number</label>
 	    				<input type="text" name="lastName" ng-model="currentContact.number" />
 	    			</md-input-container>
-	    			<md-button md-no-ink ng-click="addContact()">Add contact</md-button>
+	    			<md-button class="md-raised" type="button" md-no-ink ng-click="addContact()">Add contact</md-button>
     			</div>
-    			<md-button md-no-ink ng-disabled="!$scope.currentStudent.firstName.length || !$scope.currentStudent.lastName.length || !$scope.currentStudent.contacts.length" ng-click="addStudent()">Add student</md-button>
+    			<md-button class="md-raised" type="button" md-no-ink ng-click="addStudent()">Add student</md-button>
     		</div>
-    		<md-button type="submit" ng-disabled="!$scope.classroom.students.length">Submit</md-button>
+    		<md-button type="submit" class="md-raised">Submit</md-button>
     	</form>
     </div>
 </div>

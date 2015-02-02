@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NewClassCtrl', function ($scope, $location, Classroom) {
+  .controller('NewClassCtrl', function ($scope, $location, Classroom, Student) {
     $scope.classroom = {
       students: []
     };
@@ -17,7 +17,10 @@ angular.module('textbookApp')
 
     $scope.addContact = function() {
       $scope.contactSubmiited = true;
-      $scope.currentStudent.contacts.push($scope.currentContact);
+      // $scope.currentStudent.contacts.push($scope.currentContact);
+      Contact.save($scope.currentContact, function(contact) {
+        console.log(contact);
+      })
       $scope.currentContact = {
         name: "",
         number: ""
@@ -27,7 +30,11 @@ angular.module('textbookApp')
     $scope.addStudent = function() {
       $scope.studentSubmitted = true;
       if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
-         $scope.classroom.students.push($scope.currentStudent);
+         // $scope.classroom.students.push($scope.currentStudent);
+         // Student.save($scope.currentStudent, function(student) {
+         //  console.log(student);
+         // });
+
          $scope.currentStudent = {
           firstName: "",
           lastName: "",
@@ -39,7 +46,8 @@ angular.module('textbookApp')
 
     $scope.addClassroom = function() {
       $scope.submitted = true;
-      if (form.$valid) Classroom.save($scope.classroom);
+      Classroom.save($scope.classroom);
+      console.log("is this even happening");
     };
 
   });
