@@ -7,6 +7,5 @@ angular.module('textbookApp')
           method: 'PUT'
         }
       });
-
-      return Contact;
+    return Contact;
   });
