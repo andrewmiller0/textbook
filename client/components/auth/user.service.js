@@ -17,6 +17,9 @@ angular.module('textbookApp')
         params: {
           id:'me'
         }
+      },
+      update: {
+        method: 'PUT'
       }
 	  });
   });

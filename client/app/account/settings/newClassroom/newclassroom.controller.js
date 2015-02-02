@@ -50,6 +50,11 @@ angular.module('textbookApp')
       $scope.submitted = true;
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom._id);
+<<<<<<< HEAD
+=======
+        $scope.user.blah = "hi";
+        console.log($scope.user);
+>>>>>>> master
         User.update($scope.user);
       });
     };
