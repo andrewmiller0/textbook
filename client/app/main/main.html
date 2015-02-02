@@ -1,8 +1,8 @@
 <div layout="row" layout-align="center center">
   <md-content>
-<select name="classrooms" form="carform">
-  <option ng-repeat="classroom in user.classrooms" ng-value="{{classroom.name}}">{{classroom.name}}</option>
-</select>
+<md-tabs>
+  <md-tab ng-repeat="classroom in user.classrooms" label="{{classroom.name}}"></md-tab>
+</md-tabs>
   </md-content>
 </div>
 <div layout="row" layout-align="center center">
