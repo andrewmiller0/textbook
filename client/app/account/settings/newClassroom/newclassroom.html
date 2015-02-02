@@ -2,7 +2,7 @@
 <div layout="row">
   <md-content class="main md-padding" flex="75">
     <div layout="column">
-    	<form name="form" ng-submit="addClassroom(form)" novalidate>
+    	<form name="form" ng-submit="addClassroom()" novalidate>
     		<md-input-container>
 	    		<label>Class name</label>
 	    		<input type="text" name="name" ng-model="classroom.name" required/>
@@ -44,6 +44,6 @@
     		</div>
     		<md-button type="submit" class="md-raised">Submit</md-button>
     	</form>
-        {{ classroom }} || {{ currentStudent }} || {{ currentContact }}
+        {{ user }} || {{ classroom }} || {{ currentStudent }} || {{ currentContact }}
     </div>
 </div>

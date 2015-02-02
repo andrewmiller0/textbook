@@ -59,6 +59,22 @@ exports.destroy = function(req, res) {
   });
 };
 
+// user update (add/remove classrooms really) 
+exports.update = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findById(userId, function (err, user) {
+      if (err) return next(err);
+      if (!user) return res.send(401);
+      user.classrooms = req.body.classrooms;
+      user.save(function(err) {
+        if (err) return validationError(res, err);
+        res.send(200);
+      });
+  });
+};
+
+
 /**
  * Change a users password
  */
