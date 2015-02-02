@@ -29,37 +29,9 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 	}
 }
 
-.nav-options {
-		font-size: 0.9em;
-	}
-
-.md-toolbar-tools {
-	span {
-		padding-left: 5px;
-		padding-right: 5px;
-		border-radius: 3px;
-	}
-	span:hover {
-		background-color: lighten(#1976D2, 1%);
-	}
-	a {
-		color: #f2f2f2;
-	}
-	a:hover {
-			color: #fff;
-		}
-}
 
 h1, h2, h3, h4, h5, p, button, a {
 	font-family: 'Open Sans', sans-serif;
-}
-
-.pull-right {
-  float: right !important;
-}
-
-.pull-left {
-	float: left !important;
 }
 
 body {
@@ -67,12 +39,12 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-        margin: 0 auto;
-    }
-}
+// @media screen and (min-width: 768px) {
+//     .container {
+//         max-width: 730px;
+//         margin: 0 auto;
+//     }
+// }
 
 // Component styles are injected through grunt
 // injector
