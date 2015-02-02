@@ -2,6 +2,7 @@
 $fa-font-path: "/bower_components/font-awesome/fonts";
 
 @import 'font-awesome/scss/font-awesome';
+@import url(http://fonts.googleapis.com/css?family=Arvo:400,700|Open+Sans:400,600,700);
 
 /**
  * App-wide Styles
@@ -12,6 +13,53 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     background: #ccc;
     color: #000;
     padding: 0.2em 0;
+}
+
+.logo {
+	font-family: 'Arvo', serif;
+	font-size: 1.3em;
+}
+
+.nav {
+	a {
+		color: #f2f2f2;
+	}
+	a:hover {
+		color: #fff;
+	}
+}
+
+.nav-options {
+		font-size: 0.9em;
+	}
+
+.md-toolbar-tools {
+	span {
+		padding-left: 5px;
+		padding-right: 5px;
+		border-radius: 3px;
+	}
+	span:hover {
+		background-color: lighten(#1976D2, 1%);
+	}
+	a {
+		color: #f2f2f2;
+	}
+	a:hover {
+			color: #fff;
+		}
+}
+
+h1, h2, h3, h4, h5, p, button, a {
+	font-family: 'Open Sans', sans-serif;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+body {
+	background-color: #FAFAFA;
 }
 
 /* Responsive: Portrait tablets and up */
