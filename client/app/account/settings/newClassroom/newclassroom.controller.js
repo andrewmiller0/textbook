@@ -3,7 +3,9 @@
 angular.module('textbookApp')
   .controller('NewClassCtrl', function ($scope, $location, Auth, Classroom, Student, Contact, User) {
     $scope.user = Auth.getCurrentUser();
-
+    console.log($scope.user.classrooms);
+    $scope.user.classrooms = $scope.user.classrooms.map(function(classroom) {return classroom._id});
+    console.log($scope.user.classrooms);
     $scope.classroom = {
       students: []
     };

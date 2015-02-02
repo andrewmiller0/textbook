@@ -1,7 +1,8 @@
+
 <div layout="row" layout-align="center center">
   <md-content>
 <md-tabs>
-  <md-tab ng-repeat="classroom in user.classrooms" label="{{classroom.name}}"></md-tab>
+  <md-tab ng-repeat="classroom in user.classrooms" label="{{classroom.name}}" ng-click="toggleClassrooms(classroom.name)"></md-tab>
 </md-tabs>
   </md-content>
 </div>
