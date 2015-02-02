@@ -31,7 +31,6 @@ angular.module('textbookApp')
 
     $scope.addStudent = function() {
       $scope.studentSubmitted = true;
-      $scope.displayClassroom.push($scope.currentStudent);
       if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
          // $scope.classroom.students.push($scope.currentStudent);
          Student.save($scope.currentStudent, function(student) {
