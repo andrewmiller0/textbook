@@ -17,9 +17,9 @@
             </ul>
           </div>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Message...">
+            <input type="text" class="form-control" ng-model="msgToSend" placeholder="Message...">
             <span class="input-group-btn">
-              <button class="btn btn-default" type="button">Send!</button>
+              <button class="btn btn-default" type="button" ng-click="sendMsg(msgToSend)">Send!</button>
             </span>
           </div>
         </div>

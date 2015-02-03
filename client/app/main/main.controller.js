@@ -13,6 +13,7 @@ angular.module('textbookApp')
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
+      console.log("Send Msg");
       Conversation.getConversation({userId: $scope.user._id, contactId: $scope.contacts._id})
         .$promise
         .then(function(conversation){
