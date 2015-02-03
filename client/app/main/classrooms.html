@@ -1,0 +1,15 @@
+<div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms" ng-click="toggleClassrooms(classroom.name)">
+            {{classroom.name}}
+           </button>
+        </div>
+    <div class="row">
+      <div class="col-lg-6">
+        <conversation>
+        </conversation>
+     </div>
+    <div class="col-lg-6">
+      Messages will go here
+    </div>
+  </div>
+</div>
