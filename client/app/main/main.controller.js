@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth, Classroom, User, $location) {
+  .controller('MainCtrl', function ($scope, $http, socket, Auth, Classroom, User, $location, Student) {
   	
   	User.get().$promise.then(function(user) {
       $scope.user = user;
@@ -19,6 +19,21 @@ angular.module('textbookApp')
     			setcurrentClassroom(classroom._id);
     		}
     	}); 
+    };
+
+    $scope.toggleContacts = function(argId) {
+    	if($scope.id === argId) {
+    		$scope.id = '';
+    		$scope.contacts = '';
+    	} else {
+	    		Student.get({id: argId}, function(student) {
+	    		console.log(student);
+	    		$scope.contacts = student.contacts;
+	    		$scope.id = argId;
+	    		console.log($scope.contacts);
+    		});
+    	}
+    	
     };
 
     var setcurrentClassroom = function(id) {
