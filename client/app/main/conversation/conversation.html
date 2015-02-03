@@ -1,14 +1,9 @@
 <div>
-
-	<ul class="list-group">
-		<li class="list-group-item" ng-repeat="student in currentClass.students">
-			<i class="fa fa-circle-o"></i>
-			<span ng-click="toggleContacts(student._id)">{{student.firstName}} {{student.lastName}}</span>
-			<ul ng-show="id === student._id">
-				<li ng-repeat="contact in contacts">
-					{{contact.name}} --<span>{{conversation.messages.snippit}} Message Snippet Here</span>
-				</li>
-			</ul>
-		</li>
-	</ul>
+	<accordion close-others="true">
+                   <accordion-group ng-repeat="student in currentClass.students" heading="{{ student.firstName }} {{ student.lastName }}" ng-click="toggleContacts(student._id)">
+						<li ng-repeat="contact in contacts">
+							{{contact.name}} --<span>{{conversation.messages.snippit}} Message Snippet Here</span>
+						</li>
+                   </accordion-group>
+               </accordion>
 </div>
