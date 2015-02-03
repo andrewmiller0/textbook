@@ -1,3 +1,5 @@
 <div class="main">
-			<div class="collapsible-header" ng-repeat="student in currentClass.students"><i class="fa fa-circle-o"></i>{{student.firstName}} {{student.lastName}}</div>
+			<div class="collapsible-header" ng-repeat="student in currentClass.students"><i class="fa fa-circle-o"></i>{{student.firstName}} {{student.lastName}}
+			<li ng-repeat="contact in student.contacts">{{contact}}</li>
+			</div>
 </div>
