@@ -13,7 +13,9 @@ exports.index = function(req, res) {
 
 // Get a single student
 exports.show = function(req, res) {
-  Student.findById(req.params.id, function (err, student) {
+  Student.findById(req.params.id)
+  .populate('contacts')
+  .exec(function (err, student) {
     if(err) { return handleError(res, err); }
     if(!student) { return res.send(404); }
     return res.json(student);

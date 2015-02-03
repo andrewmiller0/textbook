@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NewClassCtrl', function ($scope, $location, Auth, Classroom, Student, Contact, User) {
-    $scope.user = Auth.getCurrentUser();
-
+  .controller('NewClassCtrl', function ($scope, $location, Auth, Classroom, Student, Contact, User, socket) {
+    $scope.user = User.getUnpopulated({id: Auth.getCurrentUser()._id});
+    console.log($scope.user.classrooms);
     $scope.classroom = {
       students: []
     };
