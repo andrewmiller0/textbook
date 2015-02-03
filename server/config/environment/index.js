@@ -43,7 +43,8 @@ var all = {
 
   twilio: {
     clientID:     process.env.TWILIO_ACCOUNT_SID,
-    clientToken: process.env.TWILIO_AUTH_TOKEN
+    clientToken: process.env.TWILIO_AUTH_TOKEN,
+    smsWebhook: process.env.TWILIO_WEB_HOOK
   },
 
 };
