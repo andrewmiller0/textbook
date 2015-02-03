@@ -38,7 +38,6 @@ angular.module('textbookApp')
       $scope.studentSubmitted = true;
       if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
          $scope.currentStudent.contacts = $scope.currentStudent.contacts.map(function(contact) {return contact._id});
-         console.log($scope.currentStudent.contacts);
          Student.save($scope.currentStudent, function(student) {
           $scope.classroom.students.push(student);
 

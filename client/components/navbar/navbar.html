@@ -1,16 +1,13 @@
-<div ng-controller="NavbarCtrl" layout="column" layout-fill>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-        <span><a href="/" class="logo">Text<strong class="black">Book</strong></a></span>
-        <span flex></span>
-        <div class="nav-options">
-        <span ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></span>
-        <span ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></span>
-        <span ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings">Settings</a></span>
-        <span ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></span>
+<div class="navbar navbar-static-top navbar-inverse" ng-controller="NavbarCtrl">
+  <div class="container">
+        <div class="navbar-header"><a href="/" class="logo navbar-brand">Text<strong class="black">Book</strong></a></div>
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
+          <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
+          <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings">Settings</a></li>
+          <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
+        </ul>
       </div>
-      </ul>
     </div>
-  </md-toolbar>
 </div>
  

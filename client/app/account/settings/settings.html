@@ -1,50 +1,40 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-  <div layout="column" layout-align="center center">
-    <md-content>
-    <h1 style="text-align: center;">{{user.name}}</h1>
-    <h3 style="text-align: center;">Your TextBook Number: {{user.phone | tel}}</h3>
-  </md-content>
+<div class="container">
+  <div class="text-center">
+    <h2>{{user.name}}</h2>
+    <h3>Your TextBook Number: {{user.phone | tel}}</h3>
   </div>
-  <div layout="row">
-    <md-content class="md-padding main">
-    <div layout="column">
-      <h1>Classrooms</h1>
-      <md-list ng-show="classrooms.length">
-        <md-item ng-repeat="classroom in classrooms">
+  <div>
+      <h3>Classrooms</h3>
+      <ul ng-show="classrooms.length">
+        <li ng-repeat="classroom in classrooms">
           {{classroom.name}}
-        </md-item>
-      </md-list>
-      <h2 ng-hide="classrooms.length">You don't have any classrooms!</h2>
-      <md-button ng-href="/classroom/add"class="md-raised md-primary" md-no-ink>Create A Class</md-button>
-    </div>
-    </md-content>
-    <md-content class="md-padding main">
-      <div layout="column">
-        <h1>Change Password</h1>
+        </li>
+      </ul>
+      <h4 ng-hide="classrooms.length">You don't have any classrooms!</h4>
+      <a href="/classroom/add"><button class="btn btn-success">Create a class</button></a>
+      <div>
+        <h3>Change Password</h3>
         <form name="form" ng-submit="changePassword(form)" novalidate>
-            <md-input-container>
                 <label>Current Password</label>
-                <input type="password" name="password" ng-model="user.oldPassword" mongoose-error/>
+                <input type="password" class="form-control" name="password" ng-model="user.oldPassword" mongoose-error/>
                 <p class="help-block" ng-show="form.password.$error.mongoose">
                     {{ errors.other }}
                 </p>
-            </md-input-container>
 
-            <md-input-container>
                 <label>New Password</label>
-                <input type="password" name="newPassword" ng-model="user.newPassword"
+                <input type="password" class="form-control" name="newPassword" ng-model="user.newPassword"
                        ng-minlength="3"
                        required/>
                 <p class="help-block"
                    ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
                   Password must be at least 3 characters.
                 </p>
-            </md-input-container>
 
           <p class="help-block"> {{ message }} </p>
 
-          <md-button class="md-raised md-primary" md-no-ink type="submit">Save changes</md-button>
+          <button class="btn btn-primary" type="submit">Save changes</button>
         </form>
       </div>
-    </md-content>
   </div>
+</div>
