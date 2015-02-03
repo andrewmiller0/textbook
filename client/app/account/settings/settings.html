@@ -12,18 +12,18 @@
         </li>
       </ul>
       <h4 ng-hide="classrooms.length">You don't have any classrooms!</h4>
-      <button ng-href="/classroom/add" class="btn btn-success">Create a class</button>
+      <a href="/classroom/add"><button class="btn btn-success">Create a class</button></a>
       <div>
         <h3>Change Password</h3>
         <form name="form" ng-submit="changePassword(form)" novalidate>
                 <label>Current Password</label>
-                <input type="password" name="password" ng-model="user.oldPassword" mongoose-error/>
+                <input type="password" class="form-control" name="password" ng-model="user.oldPassword" mongoose-error/>
                 <p class="help-block" ng-show="form.password.$error.mongoose">
                     {{ errors.other }}
                 </p>
 
                 <label>New Password</label>
-                <input type="password" name="newPassword" ng-model="user.newPassword"
+                <input type="password" class="form-control" name="newPassword" ng-model="user.newPassword"
                        ng-minlength="3"
                        required/>
                 <p class="help-block"
