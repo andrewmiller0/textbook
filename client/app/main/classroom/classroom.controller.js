@@ -1,7 +1,15 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams) {
-    $scope.classroom = $stateParams.className;
-    console.log($scope.classroom);
+  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom) {
+    User.get().$promise.then(function(user) {
+    	$scope.user = user;
+      	setcurrentClassroom($stateParams.className);
+    });
+
+       var setcurrentClassroom = function(id) {
+		Classroom.get({id: id}, function(classroom) {
+    			$scope.currentClass = classroom;
+    	});
+	}
   });
