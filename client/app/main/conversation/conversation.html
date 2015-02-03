@@ -3,12 +3,8 @@
 	<ul class="list-group">
 		<li class="list-group-item" ng-repeat="student in currentClass.students">
 			<i class="fa fa-circle-o"></i>
-			<span ng-click="toggleContacts(student._id)">{{student.firstName}} {{student.lastName}}</span>
-			<ul ng-show="id === student._id">
-				<li ng-repeat="contact in contacts">
-					{{contact.name}}
-				</li>
-			</ul>
+			<a ui-sref=".contacts({studentName: student._id})">{{student.firstName}} {{student.lastName}}</a>
+			<div ui-view ng-show="id === student._id"></div>
 		</li>
 	</ul>
 
