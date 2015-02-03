@@ -16,17 +16,10 @@ angular.module('textbookApp')
     };
 
     $scope.toggleContacts = function(argId) {
-    	if($scope.id === argId) {
-    		$scope.id = '';
-    		$scope.contacts = '';
-    	} else {
-	    		Student.get({id: argId}, function(student) {
-	    		console.log(student);
-	    		$scope.contacts = student.contacts;
-	    		$scope.id = argId;
-	    		console.log($scope.contacts);
-    		});
-    	}
+			Student.get({id: argId}, function(student) {
+				$scope.contacts = student.contacts;
+				$scope.id = argId;
+			});
     	
     };
 
