@@ -20,6 +20,9 @@ exports.show = function(req, res) {
   });
 };
 
+exports.sendMsg = function(req, res) {
+  console.log(req.body.message)
+}
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
   Conversation.create(req.body, function(err, conversation) {
@@ -27,6 +30,15 @@ exports.create = function(req, res) {
     return res.json(201, conversation);
   });
 };
+
+exports.getOne = function(req, res) {
+  console.log('Get One');
+  Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
+    console.log(data)
+    if(err) console.log(err);
+    res.send(data);
+  })
+}
 
 // Updates an existing conversation in the DB.
 exports.update = function(req, res) {
