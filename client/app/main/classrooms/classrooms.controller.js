@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, User, $location, Classroom, Student) {
+  .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state) {
   	User.get().$promise.then(function(user) {
       $scope.user = user;
       $scope.classrooms = user.classrooms;
       if($scope.user.classrooms.length === 0) {
-      	$location.path('/');
+      	$state.go('main');
       } else {
       	// $location.path('/classrooms');
-      	$location.path('/classrooms/' + user.classrooms[0]._id);
+      	$state.go('classrooms.classroom', {className: user.classrooms[0]._id});
       }
     });
 
