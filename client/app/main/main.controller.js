@@ -13,24 +13,11 @@ angular.module('textbookApp')
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
-      // console.log(message);
-      // Conversation.sendMsg({message: message});
-      // console.log($scope.contacts);
-      Conversation.getConversation(
-        {
-          userId: $scope.user._id,
-          contactId: $scope.contacts._id
-          })
+      Conversation.getConversation({userId: $scope.user._id, contactId: $scope.contacts._id})
         .$promise
         .then(function(conversation){
           console.log(conversation);
-          Conversation.sendMsg(
-            {
-              _id: conversation._id,
-              message: message,
-              to: $scope.contacts.primaryPhone,
-              from: $scope.user.phone
-            });
+          Conversation.sendMsg({_id: conversation._id, message: message, to: $scope.contacts.primaryPhone, from: $scope.user.phone})
         });
 
       $scope.msgToSend = "";

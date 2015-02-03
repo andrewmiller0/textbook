@@ -15,11 +15,3 @@ angular.module('textbookApp')
     });
     return Conversation;
   });
-
-Conversation.sendMsg({_id: fsjhfakljfhl, )]
-
-  Conversation.getConversation({userId: afjahdlkasjd, contactId: qiuqwioque})
-
-
-
-  
