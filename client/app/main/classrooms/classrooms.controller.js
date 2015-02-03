@@ -8,7 +8,8 @@ angular.module('textbookApp')
       if($scope.user.classrooms.length === 0) {
       	$location.path('/');
       } else {
-      	setcurrentClassroom(user.classrooms[0]._id);
+      	$location.path('/classrooms');
+      	// $location.path('/classrooms/' + user.classrooms[0].name);
       }
     });
 

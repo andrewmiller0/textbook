@@ -17,5 +17,10 @@ angular.module('textbookApp')
       	url: '/classroom/add',
       	templateUrl: 'app/account/settings/newClassroom/newclassroom.html',
       	controller: 'NewClassCtrl'
+      })
+      .state('classrooms.classroom', {
+        url: '/:className',
+        templateUrl: 'app/main/classroom.html',
+        controller: 'ClassroomCtrl'
       });
   });
