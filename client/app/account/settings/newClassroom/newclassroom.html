@@ -14,7 +14,7 @@
                     <span ng-show="!classroom.students.length">None yet!</span>
                 <accordion close-others="true">
                     <accordion-group ng-repeat="student in classroom.students" heading="{{ student.firstName }} {{ student.lastName }}" ng-click="setStudentBeingEdited(student)">
-                        <edit-student-form id="student"></edit-student-form>
+                        <edit-student-form curr="student"></edit-student-form>
                     </accordion-group>
                 </accordion>
             </div>

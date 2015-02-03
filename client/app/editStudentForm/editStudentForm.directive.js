@@ -6,7 +6,7 @@ angular.module('textbookApp')
       templateUrl: 'app/editStudentForm/editStudentForm.html',
       restrict: 'EA',
       scope: {
-      	currentStudent: '=id'
+      	currentStudent: '=curr'
       },
       link: function (scope, element, attrs) {
       	console.log(scope);
