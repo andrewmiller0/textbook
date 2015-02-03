@@ -20,6 +20,12 @@ angular.module('textbookApp')
       },
       update: {
         method: 'PUT'
+      },
+      getUnpopulated: {
+        method: 'GET',
+        params: {
+          controller: 'unpopulated'
+        }
       }
 	  });
   });

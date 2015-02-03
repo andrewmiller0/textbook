@@ -1,18 +1,15 @@
-<div class="main">
-	<ul class="list-group">
-		<li class="list-group-item">
-			<i class="fa fa-circle-o"></i>Chuck
-		</li>
-		<li class="list-group-item">
-			<i class="fa fa-circle-o"></i>Andrew
-		</li>
-		<li class="list-group-item">
-			<i class="fa fa-circle-o"></i>Melissa
-		</li>
-		<li class="list-group-item">
-			<i class="fa fa-circle-o"></i>John
-		</li>
+<div>
 
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="student in currentClass.students">
+			<i class="fa fa-circle-o"></i>
+			<span ng-click="toggleContacts(student._id)">{{student.firstName}} {{student.lastName}}</span>
+			<ul ng-show="id === student._id">
+				<li ng-repeat="contact in contacts">
+					{{contact.name}}
+				</li>
+			</ul>
+		</li>
 	</ul>
 
 	<div>{{conversation.messages.snippit}} Message Snippet Here</div>

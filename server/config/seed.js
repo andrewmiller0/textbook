@@ -34,16 +34,8 @@ User.find({}).remove(function() {
   );
 });
 
-// Classroom.find({}).remove(function() {
-//   Classroom.create({
-//     name: 'Math'
-//   }, {
-//     name:'Science'
-//   }, function() {
-//       console.log('finished populating classrooms');
-//     }
-//   );
-// });
+Classroom.find({}).remove(function() {
+});
 
 // var accountSid = config.twilio.clientID;
 // var authToken = config.twilio.clientToken;
