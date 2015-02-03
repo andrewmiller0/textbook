@@ -1,12 +1,13 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth, Classroom) {
-    Auth.getCurrentUser().$promise.then(function(user) {
-    	$scope.user = user;
-    	setcurrentClassroom(user.classrooms[0]._id);
+  .controller('MainCtrl', function ($scope, $http, socket, Auth, Classroom, User) {
+  	
+  	User.get().$promise.then(function(user) {
+      $scope.user = user;
+      $scope.classrooms = user.classrooms;
+      if($scope.user.classrooms.length) { setcurrentClassroom(user.classrooms[0]._id); }
     });
-
 
     $scope.toggleClassrooms = function(name) {
     	$scope.user.classrooms.forEach(function(classroom) {
