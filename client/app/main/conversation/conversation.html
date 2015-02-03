@@ -1,5 +1,10 @@
 <div class="main">
-			<div class="collapsible-header" ng-repeat="student in currentClass.students"><i class="fa fa-circle-o"></i>{{student.firstName}} {{student.lastName}}
-			<li ng-repeat="contact in student.contacts">{{contact}}</li>
-			</div>
+
+	<ul class="list-group">
+		<li class="list-group-item" ng-repeat="student in currentClass.students">
+			<i class="fa fa-circle-o"></i>{{student.firstName}} {{student.lastName}}
+		</li>
+	</ul>
+
+	<div>{{conversation.messages.snippit}} Message Snippet Here</div>
 </div>

@@ -1,19 +1,41 @@
 <div class="student-add-form">
-		<label>First name</label>
-		<input type="text" name="firstName" ng-model="currentStudent.firstName" />
-		<label>Last name</label>
-		<input type="text" name="lastName" ng-model="currentStudent.lastName" />
+		<div class="form-group">
+			<label class="control-label col-lg-4">First name</label>
+			<div class="col-lg-8">
+				<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label col-lg-4">Last name</label>
+			<div class="col-lg-8">
+				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
+			</div>
+		</div>
 	<ul>
 		<h4>Contacts</h4>
 		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }}: {{contact.phone}}</li>
 	</ul>
-	<div class="contact-add-form" layout-margin layout-padding>
+	<div class="contact-add-form">
 		<h5>Add a contact for this student:</h5>
-			<label>Contact's name</label>
-			<input type="text" name="lastName" ng-model="currentContact.name" />
-			<label>Contact's cell phone number</label>
-			<input type="text" name="lastName" ng-model="currentContact.phone" />
-		<md-button class="md-raised" type="button" md-no-ink ng-click="addContact()">Save contact</md-button>
-	</div>
-	<md-button class="md-raised" type="button" md-no-ink ng-click="addStudent()">Save student</md-button>
+			<div class="form-group">
+				<label class="control-label col-lg-4">Contact's name</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="lastName" ng-model="currentContact.name" /> <br />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-4">Relationship to student</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="relationship" ng-model="currentContact.relationship" /><br />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-4">Cell phone number</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="lastName" ng-model="currentContact.phone" /><br />	
+				</div>
+			</div>
+		<button class="btn btn-default center-block" type="button" ng-click="addContact()">Save contact</button>
+	</div><br />
+	<button class="btn btn-default center-block" type="button" ng-click="addStudent()">Save student</button>
 </div>

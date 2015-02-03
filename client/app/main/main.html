@@ -1,29 +1,14 @@
-
-<div layout="row" layout-align="center center">
-  <md-content>
-<md-tabs>
-  <md-tab ng-repeat="classroom in user.classrooms" label="{{classroom.name}}" ng-click="toggleClassrooms(classroom.name)"></md-tab>
-</md-tabs>
-  </md-content>
-</div>
-<div layout="row" layout-align="center center">
-  <md-content>
-    <md-card>
-      <md-card-content>
-        <div layout="row">
-        <div flex="33">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
         <conversation>
         </conversation>
-        </div>
-        <div flex>
-          Messages Will go here
-        </div>
-      </div>
-      </md-card-content>
-    </md-card>
-  </md-content>
+     </div>
+    <div class="col-lg-6">
+      Messages will go here
+    </div>
+  </div>
 </div>
-
 
 <footer class="footer">
       :O

@@ -1,24 +1,18 @@
-<div layout="row">
-  <md-content class="md-padding main">
-    <div layout="column">
-      <h1>Sign up</h1>
+<div class="container">
+      <h2 class="text-center">Sign up</h2>
       <form name="form" ng-submit="register(form)" novalidate>
-        <md-input-container ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
           <!-- <span > -->
-            <label>Name</label>
-
-            <input type="text" name="name" ng-model="user.name"
-                   required/>
-            <p class="help-block" ng-show="form.name.$error.required && submitted">
-              A name is required
-            </p>
+            <label class="control-label">Name</label>
+              <input class="form-control" type="text" name="name" ng-model="user.name" required/>
+              <p class="help-block" ng-show="form.name.$error.required && submitted">
+                A name is required
+              </p>
           <!-- </span> -->
-        </md-input-container>
-        <md-input-container ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
-            <label>Email</label>
-
-            <input type="email" name="email" ng-model="user.email"
-                   required
+        </div>
+        <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted, 'has-error': form.email.$invalid && submitted }">
+            <label class="control-label">Email</label>
+            <input class="form-control" type="email" name="email" ng-model="user.email" required
                    mongoose-error/>
             <p class="help-block" ng-show="form.email.$error.email && submitted">
               Doesn't look like a valid email.
@@ -29,12 +23,12 @@
             <p class="help-block" ng-show="form.email.$error.mongoose">
               {{ errors.email }}
             </p>
-        </md-input-container>
+        </div>
 
-        <md-input-container ng-class="{ 'has-success': form.password.$valid && submitted, 'has-error': form.password.$invalid && submitted }">
-            <label>Password</label>
+        <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted, 'has-error': form.password.$invalid && submitted }">
+            <label class="control-label">Password</label>
 
-            <input type="password" name="password" ng-model="user.password"
+            <input class="form-control" type="password" name="password" ng-model="user.password"
                    ng-minlength="3"
                    required
                    mongoose-error/>
@@ -45,18 +39,16 @@
             <p class="help-block" ng-show="form.password.$error.mongoose">
               {{ errors.password }}
             </p>
-        </md-input-container>
+        </div>
 
         <div>
-           <md-button md-no-ink class="md-raised md-primary" type="submit">
+           <button class="btn btn-primary" type="submit">
             Sign up
-          </md-button>
-          <a href="/login"><md-button md-no-ink class="md-raised">
+          </button>
+          <a href="/login"><button class="btn btn-default">
             Login
-          </md-button></a>
+          </button></a>
         </div>
 
       </form>
-    </div>
-  </md-content>
 </div>
