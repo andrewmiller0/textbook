@@ -1,4 +1,4 @@
-<div class="student-add-form" ng-controller="studentFormController">
+<div class="student-add-form">
 		<div class="form-group">
 			<label class="control-label col-lg-4">First name</label>
 			<div class="col-lg-8">
@@ -15,8 +15,8 @@
 		<h4>Contacts</h4>
 		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}</li>
 	</ul>
-	<div class="contact-add-form">
-		<h5>Add a contact for this student:</h5>
+	<button class="btn" type="button" ng-click="show=true">Add a contact for this student</button>
+	<div class="contact-add-form" ng-show="show">
 			<div class="form-group">
 				<label class="control-label col-lg-4">Contact's name</label>
 				<div class="col-lg-8">
@@ -37,5 +37,5 @@
 			</div>
 		<button class="btn btn-default center-block" type="button" ng-click="addContact()">Save contact</button>
 	</div><br />
-	<button class="btn btn-default center-block" type="button" ng-click="addStudent()">Save student</button>
+	<button class="btn btn-default center-block" type="button" ng-click="saveStudent()">Save student</button>
 </div>
