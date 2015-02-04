@@ -23,14 +23,12 @@ module.exports = function(req, res) {
 	User.findOne({phone: text.To}, function(err, user) {
 		Contact.findOne({phone: text.From}, function(err, contact) {
 			Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
-				console.log('found conversation', conversation);
 				conversation.messages.push(newMessage);
 				conversation.unreadMessages = true;
 				conversation.save(function(err, conversation2) {
-					console.log('saved conversation', conversation2);
 					res.send(200);
-				})
-			})
-		})
+				});
+			});
+		});
 	});
 };
