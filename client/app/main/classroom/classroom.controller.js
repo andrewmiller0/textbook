@@ -23,16 +23,22 @@ angular.module('textbookApp')
 
     };
 
+    $scope.activeContact;
+    $scope.setActive = function(contact){
+      $scope.activeContact = contact;
+      console.log ($scope.activeContact);
+    }
+
     $scope.msgToSend;
     $scope.sendMsg = function(message){
       console.log("Send Msg");
       console.log(message);
-      console.log($scope.contacts._id);
-      Conversation.getConversation({userId: $scope.user._id, contactId: $scope.contacts._id})
+      console.log($scope.activeContact);
+      Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
         .$promise
         .then(function(conversation){
           console.log(conversation.data);
-          Conversation.sendMsg({_id: conversation.data[1]._id, message: message, to: $scope.contacts.primaryPhone, from: $scope.user.phone})
+          Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone})
         });
 
       $scope.msgToSend = "";

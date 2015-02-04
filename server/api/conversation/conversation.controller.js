@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Conversation = require('./conversation.model');
+var config = require('../../config/environment');
 
 // Get list of conversations
 exports.index = function(req, res) {
@@ -21,7 +22,20 @@ exports.show = function(req, res) {
 };
 
 exports.sendMsg = function(req, res) {
-  console.log(req.body.message)
+
+  var accountSid = config.twilio.clientID;
+  var authToken = config.twilio.clientToken;
+  var client = require('twilio')(accountSid, authToken);
+
+  client.messages.create({
+      body: req.body.message,
+      to: "+1" + req.body.to,
+      from: req.body.from
+  }, function(err, message) {
+      console.log(message);
+      if(err) console.log(err);
+
+  });
 }
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
