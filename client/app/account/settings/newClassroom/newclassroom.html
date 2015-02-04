@@ -10,11 +10,13 @@
                 </form>
             </div>
             <div class="col-lg-6">
-                <ul class="list-group">
                     <h3>Students<span ng-show="classroom.name.length"> in {{ classroom.name }}</span>:</h3>
-                    <li ng-show="!classroom.students.length">None yet!</li>
-                    <li class="list-group-item" ng-repeat="student in classroom.students">{{ student.firstName }} {{ student.lastName }}</li>
-                </ul>
+                    <span ng-show="!classroom.students.length">None yet!</span>
+                <accordion close-others="true">
+                    <accordion-group ng-repeat="student in classroom.students" heading="{{ student.firstName }} {{ student.lastName }}" ng-click="setStudentBeingEdited(student)">
+                        <edit-student-form curr="student"></edit-student-form>
+                    </accordion-group>
+                </accordion>
             </div>
         </div>
     </div>
