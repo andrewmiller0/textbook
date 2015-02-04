@@ -7,6 +7,8 @@
 
 var User = require('../api/user/user.model');
 var Classroom = require('../api/classroom/classroom.model');
+var Conversation = require('../api/conversation/conversation.model');
+var Contact = require('../api/contact/contact.model');
 var config = require('./environment');
 
 User.find({}).remove(function() {
@@ -37,6 +39,11 @@ User.find({}).remove(function() {
 Classroom.find({}).remove(function() {
 });
 
+Conversation.find({}).remove(function() {
+});
+
+Contact.find({}).remove(function() {
+});
 // var accountSid = config.twilio.clientID;
 // var authToken = config.twilio.clientToken;
 // var client = require('twilio')(accountSid, authToken);

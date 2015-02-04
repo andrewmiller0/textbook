@@ -11,15 +11,17 @@ var ContactSchema = new Schema({
 });
 
 ContactSchema.methods.createConversation = function(userId, contactId) {
-		console.log('hello!');
 		Conversation.create({
 		  userId: userId,
 		  contactId: contactId,
 		  messages: [],
 		  unreadMessages: false
 		}, function(err, conversation) {
-			if(err) return err;
-			else return conversation;
+			if(err) { return err; }
+			else {
+				console.log(conversation.contactId);
+				return conversation;
+			}
 		});
 	}
 
