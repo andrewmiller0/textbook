@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation) {
     User.get().$promise.then(function(user) {
     	$scope.user = user;
       	setcurrentClassroom($stateParams.className);
@@ -12,7 +12,7 @@ angular.module('textbookApp')
     		if(classroom.name === name) {
     			setcurrentClassroom(classroom._id);
     		}
-    	}); 
+    	});
     };
 
     $scope.toggleContacts = function(argId) {
@@ -20,8 +20,31 @@ angular.module('textbookApp')
 				$scope.contacts = student.contacts;
 				$scope.id = argId;
 			});
-    	
+
     };
+
+    $scope.activeContact;
+    $scope.setActive = function(contact){
+      $scope.activeContact = contact;
+      console.log ($scope.activeContact);
+    }
+
+    $scope.msgToSend;
+    $scope.sendMsg = function(message){
+      console.log("Send Msg");
+      console.log(message);
+      console.log($scope.activeContact);
+      Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
+        .$promise
+        .then(function(conversation){
+          console.log(conversation.data);
+          Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone})
+        });
+
+      $scope.msgToSend = "";
+      // console.log($scope.user);
+    };
+
 
     var setcurrentClassroom = function(id) {
 		Classroom.get({id: id}, function(classroom) {
