@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NewClassCtrl', function ($scope, $location, Auth, Classroom, User, socket) {
+  .controller('NewClassCtrl', function ($scope, $location, Auth, Classroom, User, socket, Student) {
     $scope.user = User.getUnpopulated({id: Auth.getCurrentUser()._id});
     console.log($scope.user.classrooms);
     
@@ -21,6 +21,20 @@ angular.module('textbookApp')
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom._id);
         User.update($scope.user);
+      });
+    };
+
+    $scope.deleteStudent = function(studentId) {
+      $scope.classroom.students.forEach(function(student, i) {
+        if(student._id === studentId) {
+          Student.get({id: student._id}, function(student) {
+            student.contacts.forEach(function(contact) {
+              Contact.delete({id: contact._id});
+            });
+          });
+          Student.delete({id: student._id});
+          $scope.classroom.students.splice(i,1);
+        }
       });
     };
   });
