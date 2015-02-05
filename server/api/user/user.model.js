@@ -155,7 +155,7 @@ UserSchema.methods = {
       //     });
       // }
     // });
-  this.phone = 'localENV.phoneNumber'
+  this.phone = localENV.phoneNumber
   }
 };
 
