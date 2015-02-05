@@ -14,7 +14,9 @@ angular.module('textbookApp')
   		Contact.update({id: contactId}, $scope.contact, function(contactSaved) {
   			console.log(contactSaved);
   			$scope.editView = false;
+  			$scope.addEditView = false;
   			$scope.$emit('close editview');
+  			$scope.$emit('close addeditview');
   		});
   	}
 

@@ -53,4 +53,32 @@ angular.module('textbookApp')
 
       }
     };
+
+    $scope.deleteContact = function(contactId) {
+        $scope.currentStudent.contacts.forEach(function(contact, i) {
+          if(contact._id === contactId) {
+            Contact.delete({id: contact._id});
+            $scope.currentStudent.contacts.splice(i, 1);
+          } 
+        })
+      };
+      
+      $scope.$on('close editview', function(event, data) {
+        $scope.editView = '';
+      });
+
+    $scope.editView;
+    $scope.showEdit = function(contactId) {
+      if($scope.editView === contactId) {
+        $scope.editView = '';
+      } else {
+        $scope.editView = contactId;  
+      }
+    };
+
+
   })
+
+
+
+
