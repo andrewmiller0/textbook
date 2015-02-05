@@ -9,7 +9,6 @@ angular.module('textbookApp')
       	currentStudent: '=curr'
       },
       link: function (scope, element, attrs) {
-      	console.log(scope);
 	  	scope.addContact = function() {
 	      scope.currentStudent.primaryPhone = scope.currentContact.phone;
 	      Contact.save(scope.currentContact, function(contact) {

@@ -19,11 +19,9 @@ angular.module('textbookApp')
 		};
 
     $scope.updateClassroom = function() {
-      console.log($scope.classroom);
       $scope.classroom.students = $scope.classroom.students.map(function(student) {return student._id});
       Classroom.update($scope.classroom, function(classroom) {
       	$scope.user.classrooms = $scope.user.classrooms.map(function(classroom2) {return classroom2._id});
-        console.log($scope.user)
         User.update($scope.user);
         $scope.$emit('updated user', $scope.user);
         $state.go('classrooms.classroom', {className: $stateParams.className});
