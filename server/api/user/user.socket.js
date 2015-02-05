@@ -10,7 +10,7 @@ exports.register = function(socket) {
     onRemove(socket, doc);
   });
   User.schema.put('save', function (doc) {
-    onSave(socket, doc);
+    onUpdate(socket, doc);
   });
 }
 
@@ -22,6 +22,6 @@ function onRemove(socket, doc, cb) {
   socket.emit('user:remove', doc);
 }
 
-// function onUpdate(socket, doc, cb) {
-//   socket.emit('student:update', doc);
-// }
+function onUpdate(socket, doc, cb) {
+  socket.emit('user:'+doc._id, doc);
+}
