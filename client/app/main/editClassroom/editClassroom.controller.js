@@ -27,4 +27,13 @@ angular.module('textbookApp')
         $state.go('classrooms.classroom', {className: $stateParams.className});
       });
     };
+
+    $scope.deleteStudent = function(studentId) {
+      $scope.classroom.students.forEach(function(student, i) {
+        if(student._id === studentId) {
+          Student.delete({id: student._id});
+          $scope.classroom.students.splice(i,1);
+        }
+      });
+    };
   });
