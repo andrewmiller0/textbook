@@ -34,7 +34,19 @@ exports.sendMsg = function(req, res) {
   }, function(err, message) {
       console.log(message);
       if(err) console.log(err);
-
+      if(message.errorMessage === null){
+        var newMessage = {
+          body: req.body.message,
+          dateSent: new Date(),
+          type: 'sent'
+        };
+        Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
+          conversation.messages.push(newMessage);
+          conversation.save(function(err, conversation2) {
+            res.send(200);
+          });
+        });
+      }
   });
 }
 // Creates a new conversation in the DB.
@@ -46,9 +58,7 @@ exports.create = function(req, res) {
 };
 
 exports.getOne = function(req, res) {
-  console.log('Get One');
   Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
-    console.log(data)
     if(err) console.log(err);
     res.send({data: data});
   })

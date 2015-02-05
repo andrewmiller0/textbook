@@ -12,6 +12,7 @@ angular.module('textbookApp')
       	$state.go('classrooms.classroom', {className: user.classrooms[0]._id});
       }
     });
+
     $scope.$on('updated user', function(event, data) {
       User.get().$promise.then(function(user) {
         $scope.user = user;
