@@ -26,6 +26,6 @@ angular.module('textbookApp')
       .state('classrooms.edit', {
         url: '/:className/edit',
         templateUrl: 'app/main/editClassroom.html',
-        controller: 'ClassroomCtrl'
+        controller: 'EditClassroomCtrl'
       });
   });

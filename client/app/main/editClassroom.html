@@ -2,8 +2,9 @@
             <div class="col-lg-6">
                 <form class="form-horizontal" name="form" ng-submit="editClassroom()" novalidate>
                         <label><h3>Edit class name</h3></label>
-                        {{currentClass}}
                         <input class="form-control" type="text" name="name" ng-model="currentClass.name" />
+                        <h4>Add additional students:</h4>
+                        <student-form></student-form>
                     <h4>Edit students:</h4>
                     <div ng-repeat="student in currentClass.students">
                     	<input class="form-control" type="text" name="student" ng-model="student.firstName">
