@@ -34,7 +34,7 @@ angular.module('textbookApp')
       Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
         .$promise
         .then(function(conversation){
-          Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone})
+          Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone, userId: $scope.user._id, contactId: $scope.activeContact._id})
         });
 
       $scope.msgToSend = "";
