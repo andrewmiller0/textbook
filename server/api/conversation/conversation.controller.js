@@ -46,9 +46,7 @@ exports.create = function(req, res) {
 };
 
 exports.getOne = function(req, res) {
-  console.log('Get One');
   Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
-    console.log(data)
     if(err) console.log(err);
     res.send({data: data});
   })

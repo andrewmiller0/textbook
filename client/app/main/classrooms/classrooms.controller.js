@@ -18,7 +18,7 @@ angular.module('textbookApp')
   //   		if(classroom.name === name) {
   //   			setcurrentClassroom(classroom._id);
   //   		}
-  //   	}); 
+  //   	});
   //   };
 
   //   $scope.toggleContacts = function(argId) {
@@ -33,7 +33,7 @@ angular.module('textbookApp')
 	 //    		console.log($scope.contacts);
   //   		});
   //   	}
-    	
+
   //   };
 
   //   var setcurrentClassroom = function(id) {

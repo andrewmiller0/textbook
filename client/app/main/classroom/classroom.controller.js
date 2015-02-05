@@ -31,18 +31,13 @@ angular.module('textbookApp')
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
-      console.log("Send Msg");
-      console.log(message);
-      console.log($scope.activeContact);
       Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
         .$promise
         .then(function(conversation){
-          console.log(conversation.data);
           Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone})
         });
 
       $scope.msgToSend = "";
-      // console.log($scope.user);
     };
 
 
