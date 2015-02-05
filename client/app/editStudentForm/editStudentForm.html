@@ -13,7 +13,7 @@
 		</div>
 		<h4>Contacts</h4>
 		<div ng-repeat="contact in currentStudent.contacts">
-			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button></li>
+			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button></li>
 	</div>
 	<button class="btn" type="button" ng-click="show=true">Add a contact for this student</button>
 	<div class="contact-add-form" ng-show="show">

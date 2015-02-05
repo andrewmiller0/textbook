@@ -13,7 +13,7 @@
 		</div>
 	<ul>
 		<h4>Contacts</h4>
-		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}</li>
+		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}</li>
 	</ul>
 	<div class="contact-add-form">
 		<h5>Add a contact for this student:</h5>
