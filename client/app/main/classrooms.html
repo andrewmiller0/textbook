@@ -1,6 +1,8 @@
-<div class="btn-group" role="group">
-            <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms" ui-sref=".classroom({className: classroom._id})">
-            {{classroom.name}}
-           </button>
-        </div>
-    <div ui-view></div>
+<div class="container">
+	<div class="btn-group" role="group">
+	            <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms" ui-sref=".classroom({className: classroom._id})">
+	            {{classroom.name}}
+	           </button>
+	        </div>
+	    <div ui-view></div>
+</div>

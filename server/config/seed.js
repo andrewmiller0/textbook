@@ -9,6 +9,7 @@ var User = require('../api/user/user.model');
 var Classroom = require('../api/classroom/classroom.model');
 var Conversation = require('../api/conversation/conversation.model');
 var Contact = require('../api/contact/contact.model');
+var Student = require('../api/student/student.model');
 var config = require('./environment');
 
 User.find({}).remove(function() {
@@ -43,6 +44,8 @@ Conversation.find({}).remove(function() {
 });
 
 Contact.find({}).remove(function() {
+});
+Student.find({}).remove(function() {
 });
 // var accountSid = config.twilio.clientID;
 // var authToken = config.twilio.clientToken;

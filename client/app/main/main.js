@@ -22,5 +22,10 @@ angular.module('textbookApp')
         url: '/:className',
         templateUrl: 'app/main/classroom.html',
         controller: 'ClassroomCtrl'
+      })
+      .state('classrooms.edit', {
+        url: '/:className/edit',
+        templateUrl: 'app/main/editClassroom.html',
+        controller: 'EditClassroomCtrl'
       });
   });

@@ -46,10 +46,4 @@ angular.module('textbookApp')
     			$scope.currentClass = classroom;
     	});
 	}
-
-       var setcurrentClassroom = function(id) {
-		Classroom.get({id: id}, function(classroom) {
-    			$scope.currentClass = classroom;
-    	});
-	}
   });
