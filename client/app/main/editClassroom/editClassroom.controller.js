@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student) {
+  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, socket) {
   		User.get().$promise.then(function(user) {
     		$scope.user = user;
       		setcurrentClassroom($stateParams.className);
@@ -17,26 +17,6 @@ angular.module('textbookApp')
 				$scope.classroom = classroom;
 	    	});
 		};
-		// $scope.addStudent = function() {
-  //     if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
-  //        $scope.classroom.students.push($scope.currentStudent);
-  //        var studentToSave = _.clone($scope.currentStudent);
-  //        console.log($scope.currentStudent);
-  //        console.log(studentToSave);
-  //        studentToSave.contacts = studentToSave.contacts.map(function(contact) {return contact._id});
-  //        Student.save(studentToSave, function(student) {
-  //        	console.log(student);
-  //         $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
-  //         $scope.currentStudent = {
-  //           firstName: "",
-  //           lastName: "",
-  //           primaryPhone: "",
-  //           contacts: []
-  //          };
-  //        });
-
-  //     }
-  //   };
 
     $scope.updateClassroom = function() {
       console.log($scope.classroom);
@@ -45,6 +25,9 @@ angular.module('textbookApp')
       	$scope.user.classrooms = $scope.user.classrooms.map(function(classroom2) {return classroom2._id});
         console.log($scope.user)
         User.update($scope.user);
+        // socket.socket.on('classroom'+$scope.classroom._id, function(classroom) {
+        //   $scope.classroom = classroom;
+        // });
       });
     };
   });
