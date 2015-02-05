@@ -23,6 +23,14 @@ angular.module('textbookApp')
 	    };
 	},
 	controller: function($scope, Contact, Student) {
+		$scope.editView;
+		$scope.showEdit = function(contactId) {
+			if($scope.editView === contactId) {
+				$scope.editView = '';
+			} else {
+				$scope.editView = contactId;	
+			}
+		};
 	    $scope.saveStudent = function() {
 	      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
 	         var studentToUpdate = _.clone($scope.currentStudent);
@@ -34,14 +42,16 @@ angular.module('textbookApp')
 	    };
 
 	    $scope.deleteContact = function(contactId) {
-	    	console.log('working');
 	    	$scope.currentStudent.contacts.forEach(function(contact, i) {
 	    		if(contact._id === contactId) {
 	    			Contact.delete({id: contact._id});
 	    			$scope.currentStudent.contacts.splice(i, 1);
 	    		}	
 	    	})
-	    }
+	    };
+	    $scope.$on('close editview', function(event, data) {
+	    	$scope.editView = '';
+	    });
       }
 	}
   })
