@@ -11,10 +11,10 @@
 				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
 			</div>
 		</div>
-	<ul>
 		<h4>Contacts</h4>
-		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}</li>
-	</ul>
+		<div ng-repeat="contact in currentStudent.contacts">
+			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button></li>
+	</div>
 	<button class="btn" type="button" ng-click="show=true">Add a contact for this student</button>
 	<div class="contact-add-form" ng-show="show">
 			<div class="form-group">
