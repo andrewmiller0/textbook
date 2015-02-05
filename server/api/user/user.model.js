@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var Classroom = require('../classroom/classroom.model');
 var config = require('../../config/environment');
+var localENV = require('../../config/local.env.js')
 var client = require('twilio')(config.twilio.clientID, config.twilio.clientToken);
 
 var UserSchema = new Schema({
@@ -154,7 +155,7 @@ UserSchema.methods = {
       //     });
       // }
     // });
-  this.phone = '+18563515245'
+  this.phone = 'localENV.phoneNumber'
   }
 };
 
