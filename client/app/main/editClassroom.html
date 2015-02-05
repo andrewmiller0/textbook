@@ -1,24 +1,18 @@
  <div class="row">
             <div class="col-lg-6">
-                <form class="form-horizontal" name="form" ng-submit="editClassroom()" novalidate>
+                <form class="form-horizontal" name="form" ng-submit="updateClassroom()" novalidate>
                         <label><h3>Edit class name</h3></label>
                         <input class="form-control" type="text" name="name" ng-model="currentClass.name" />
                         <h4>Add additional students:</h4>
                         <student-form></student-form>
-                    <h4>Edit students:</h4>
-                    <div ng-repeat="student in currentClass.students">
-                    	<input class="form-control" type="text" name="student" ng-model="student.firstName">
-                    	<input class="form-control" type="text" name="student" ng-model="student.lastName">
-                    	<input class="form-control" type="text" name="student" ng-model="student.primaryPhone">
-                    </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>
             </div>
             <div class="col-lg-6">
-                    <h3>Students<span ng-show="classroom.name.length"> in {{ classroom.name }}</span>:</h3>
+                    <h3>Edit students: in {{ currentClass.name }}</h3>
                     <span ng-show="!classroom.students.length">None yet!</span>
                 <accordion close-others="true">
-                    <accordion-group ng-repeat="student in classroom.students" heading="{{ student.firstName }} {{ student.lastName }}" ng-click="setStudentBeingEdited(student)">
+                    <accordion-group ng-repeat="student in currentClass.students" heading="{{ student.firstName }} {{ student.lastName }}" ng-click="setStudentBeingEdited(student)">
                         <edit-student-form curr="student"></edit-student-form>
                     </accordion-group>
                 </accordion>
