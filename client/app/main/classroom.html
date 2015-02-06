@@ -14,7 +14,7 @@
         <div class="panel-body">
           <div>
             <ul class="list-group">
-              <li ng-repeat= 'message in messages'class="list-group-item list-group-item-success">{{message.body}}</li>
+              <li ng-repeat= 'message in messages' ng-class="isSent(message) ? 'list-group-item-info' : 'list-group-item-success'" class="list-group-item">{{message.body}}</li>
             </ul>
           </div>
           <div class="input-group">

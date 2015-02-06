@@ -30,6 +30,10 @@ angular.module('textbookApp')
       $scope.getConvo();
     }
 
+    $scope.isSent = function(message){
+      return message.type === 'sent';
+    }
+
     $scope.msgToSend;
     $scope.sendMsg = function(message){
       console.log(message);
