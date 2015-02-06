@@ -37,8 +37,9 @@ angular.module('textbookApp')
     $scope.msgToSend;
     $scope.sendMsg = function(message){
       console.log(message);
+      console.log("Conversation = ", $scope.conversation);
       var reqBody = {
-        _id: $scope.conversation.data[0]._id,
+        _id: $scope.conversation._id,
         message: message,
         to: $scope.activeContact.phone,
         from: $scope.user.phone,
