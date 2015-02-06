@@ -29,7 +29,7 @@ exports.sendMsg = function(req, res) {
   console.log(req.body);
   client.messages.create({
       body: req.body.message,
-      to: "+1" + req.body.to,
+      to: req.body.to,
       from: req.body.from
   }, function(err, message) {
       console.log(message);
