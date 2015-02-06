@@ -17,7 +17,7 @@
 			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
 			<div class="btn-group">
 				<button class="btn btn-default btn-xs" ng-click="addShowEdit(contact._id)"><i class="fa fa-pencil"></i></button>
-				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button>
+				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)"><i class="fa fa-times"></i></button>
 			</div>
 			</span>
 			<div ng-show="contact._id === addEditView">
