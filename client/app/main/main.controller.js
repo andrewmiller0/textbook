@@ -10,4 +10,17 @@ angular.module('textbookApp')
       	$location.path('/classrooms');
       }
     });
+
+    $http.post('/api/contacts', {
+    	name: "helhello",
+    	relationship: "heloo",
+    	phone: "324"
+    }).success(function(result) {
+    	socket.socket.on('contact:save', function(a, b, c, d) {
+    		console.log(a);
+    		console.log(b);
+    		console.log(c);
+    		console.log(d);
+    	});
+    });
   });
