@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, socket) {
     User.get().$promise.then(function(user) {
     	$scope.user = user;
       	setcurrentClassroom($stateParams.className);
@@ -34,7 +34,7 @@ angular.module('textbookApp')
     $scope.sendMsg = function(message){
       console.log(message);
       var reqBody = {
-        _id: $scope.conversation.data[0]._id,
+        _id: $scope.conversation._id,
         message: message,
         to: $scope.activeContact.phone,
         from: $scope.user.phone,
@@ -74,5 +74,9 @@ angular.module('textbookApp')
 		Classroom.get({id: id}, function(classroom) {
     			$scope.currentClass = classroom;
     	});
-	}
+  	}
+
+    socket.socket.on('conversation:save', function(data){
+      console.log(data);
+    });
   });
