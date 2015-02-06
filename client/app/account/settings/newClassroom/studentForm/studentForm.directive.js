@@ -63,19 +63,19 @@ angular.module('textbookApp')
         })
       };
       
-      $scope.$on('close editview', function(event, data) {
-        $scope.editView = '';
-      });
 
-    $scope.editView;
-    $scope.showEdit = function(contactId) {
-      if($scope.editView === contactId) {
-        $scope.editView = '';
+    $scope.addEditView;
+    $scope.addShowEdit = function(contactId) {
+      if($scope.addEditView === contactId) {
+        $scope.addEditView = '';
       } else {
-        $scope.editView = contactId;  
+        $scope.addEditView = contactId;  
       }
     };
 
+      $scope.$on('close addeditview', function(event, data) {
+        $scope.addEditView = '';
+      });
 
   })
 
