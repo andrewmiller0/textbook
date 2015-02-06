@@ -53,4 +53,33 @@ angular.module('textbookApp')
 
       }
     };
+
+    $scope.deleteContact = function(contactId) {
+        $scope.currentStudent.contacts.forEach(function(contact, i) {
+          if(contact._id === contactId) {
+            Contact.delete({id: contact._id});
+            $scope.currentStudent.contacts.splice(i, 1);
+          } 
+        });
+        if($scope.addEditView) $scope.addEditView = '';
+      };
+      
+
+    $scope.addEditView;
+    $scope.addShowEdit = function(contactId) {
+      if($scope.addEditView === contactId) {
+        $scope.addEditView = '';
+      } else {
+        $scope.addEditView = contactId;  
+      }
+    };
+
+      $scope.$on('close editview', function(event, data) {
+        $scope.addEditView = '';
+      });
+
   })
+
+
+
+
