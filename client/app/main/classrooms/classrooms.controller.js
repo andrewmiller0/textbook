@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state, $http) {
+  .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state, socket, $http) {
   	User.get().$promise.then(function(user) {
       $scope.user = user;
       $scope.classrooms = user.classrooms;
@@ -30,5 +30,13 @@ angular.module('textbookApp')
           $state.go('classrooms.classroom', {className: user.classrooms[0]._id});
         }
       });
+    });
+
+    socket.socket.on('conversation:save', function(data){
+      $scope.classrooms.forEach(function(classroom) {
+        classroom.students.forEach(function(student) {
+          console.log(student.contacts);
+        })
+      })
     });
 });
