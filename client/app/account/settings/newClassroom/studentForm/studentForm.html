@@ -12,18 +12,18 @@
 			</div>
 		</div>
 		<h4>Contacts</h4>
-		<div ng-repeat="contact in currentStudent.contacts">
-			<span ng-hide="contact._id === editView">
+		<ul class="list-group">
+		<li class="list-group-item" ng-repeat="contact in currentStudent.contacts" ng-hide="contact._id === editView">
 			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
 			<div class="btn-group">
 				<button class="btn btn-default btn-xs" ng-click="showEdit(contact._id)"><i class="fa fa-pencil"></i></button>
 				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button>
 			</div>
-			</span>
 			<div ng-show="contact._id === editView">
 				<edit-contact></edit-contact>
 			</div>
-		</div>
+		</li>
+		</ul>
 	<div class="contact-add-form" ng-hide="editView">
 		<h5>Add a contact for this student:</h5>
 			<div class="form-group">

@@ -5,8 +5,8 @@
                    		<accordion-heading>
                    		<i class="fa fa-circle-o pull-left"></i>{{ student.firstName }} {{ student.lastName }}
                    	</accordion-heading>
-            <ul class="nav nav-pills">
-  						<li role="presentation" ng-repeat="contact in contacts" class="list-unstyled" ng-click='setActive(contact)'>
+            <ul class="list-group">
+  						<li ng-repeat="contact in contacts" class="list-group-item" ng-click='setActive(contact)'>
   						{{contact.name}} --<span>{{conversation.messages.snippit}} Message Snippet Here</span>
   						</li>
             </ul>
