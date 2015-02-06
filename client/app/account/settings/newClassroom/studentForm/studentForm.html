@@ -11,11 +11,20 @@
 				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
 			</div>
 		</div>
-	<ul>
 		<h4>Contacts</h4>
-		<li ng-repeat="contact in currentStudent.contacts">{{ contact.name }} ({{ contact.relationship }}): {{contact.phone}}</li>
-	</ul>
-	<div class="contact-add-form">
+		<div ng-repeat="contact in currentStudent.contacts">
+			<span ng-hide="addEditView">
+			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
+			<div class="btn-group">
+				<button class="btn btn-default btn-xs" ng-click="addShowEdit(contact._id)"><i class="fa fa-pencil"></i></button>
+				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)"><i class="fa fa-times"></i></button>
+			</div>
+			</span>
+			<div ng-show="contact._id === addEditView">
+				<edit-contact></edit-contact>
+			</div>
+		</div>
+	<div class="contact-add-form" ng-hide="addEditView">
 		<h5>Add a contact for this student:</h5>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Contact's name</label>

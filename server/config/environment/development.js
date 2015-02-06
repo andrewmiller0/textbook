@@ -13,5 +13,5 @@ module.exports = {
     clientToken: localENV.TWILIO_AUTH_TOKEN
   },
 
-  seedDB: true
+  seedDB: false
 };

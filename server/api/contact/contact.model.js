@@ -10,11 +10,13 @@ var ContactSchema = new Schema({
   phone: String
 });
 
-ContactSchema.methods.createConversation = function(userId, contactId) {
+ContactSchema.methods.createConversation = function(userId, contactId, message) {
+		var arr = [];
+		if (message) arr.push(message);
 		Conversation.create({
 		  userId: userId,
 		  contactId: contactId,
-		  messages: [],
+		  messages: arr,
 		  unreadMessages: false
 		}, function(err, conversation) {
 			if(err) { return err; }

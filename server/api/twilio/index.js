@@ -22,13 +22,26 @@ module.exports = function(req, res) {
 	};
 	User.findOne({phone: text.To}, function(err, user) {
 		Contact.findOne({phone: text.From}, function(err, contact) {
-			Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
-				conversation.messages.push(newMessage);
-				conversation.unreadMessages = true;
-				conversation.save(function(err, conversation2) {
-					res.send(200);
+			if (err) return err;
+			if (!contact) {
+				Contact.create({
+					phone: text.From
+				}, function(err, contact) {
+					if (err) return err;
+					contact.createConversation(user._id, contact._id, newMessage);
+					return contact;
 				});
-			});
+			}
+			else {
+				Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
+					if (err) return err;
+					conversation.messages.push(newMessage);
+					conversation.unreadMessages = true;
+					conversation.save(function(err, conversation2) {
+						return conversation2;
+					});
+				});
+			}
 		});
 	});
 };

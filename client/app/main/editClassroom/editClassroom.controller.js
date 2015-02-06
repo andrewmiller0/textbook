@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, socket, $state) {
+  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Contact, $state) {
   		User.get().$promise.then(function(user) {
     		$scope.user = user;
       		setcurrentClassroom($stateParams.className);
@@ -25,6 +25,20 @@ angular.module('textbookApp')
         User.update($scope.user);
         $scope.$emit('updated user', $scope.user);
         $state.go('classrooms.classroom', {className: $stateParams.className});
+      });
+    };
+
+    $scope.deleteStudent = function(studentId) {
+      $scope.classroom.students.forEach(function(student, i) {
+        if(student._id === studentId) {
+          Student.get({id: student._id}, function(student) {
+            student.contacts.forEach(function(contact) {
+              Contact.delete({id: contact._id});
+            });
+          });
+          Student.delete({id: student._id});
+          $scope.classroom.students.splice(i,1);
+        }
       });
     };
   });
