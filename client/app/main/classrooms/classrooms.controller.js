@@ -20,7 +20,6 @@ angular.module('textbookApp')
       });
     });
 
-
     socket.socket.on('conversation:save', function(data){
       console.log(data);
     });
