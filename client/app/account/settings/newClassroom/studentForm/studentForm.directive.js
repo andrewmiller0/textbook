@@ -25,9 +25,10 @@ angular.module('textbookApp')
 
     $scope.addContact = function() {
       $scope.currentStudent.primaryPhone = $scope.currentContact.phone;
-      Contact.save($scope.currentContact, function(contact) {
-          $scope.currentStudent.contacts.push(contact);
-      });
+      $scope.currentStudent.contacts.push($scope.currentContact);
+      // Contact.save($scope.currentContact, function(contact) {
+      //     $scope.currentStudent.contacts.push(contact);
+      // });
       $scope.currentContact = {
         name: "",
         relationship: "",
@@ -38,18 +39,18 @@ angular.module('textbookApp')
     $scope.addStudent = function() {
       if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
          $scope.classroom.students.push($scope.currentStudent);
-         var studentToSave = _.clone($scope.currentStudent);
-         studentToSave.contacts = studentToSave.contacts.map(function(contact) {return contact._id});
-         Student.save(studentToSave, function(student) {
-          $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
-          console.log($scope.classroom);
+         // var studentToSave = _.clone($scope.currentStudent);
+         // studentToSave.contacts = studentToSave.contacts.map(function(contact) {return contact._id});
+         // Student.save(studentToSave, function(student) {
+         //  $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
+         //  console.log($scope.classroom);
+         // });
           $scope.currentStudent = {
             firstName: "",
             lastName: "",
             primaryPhone: "",
             contacts: []
            };
-         });
 
       }
     };
@@ -57,7 +58,7 @@ angular.module('textbookApp')
     $scope.deleteContact = function(contactId) {
         $scope.currentStudent.contacts.forEach(function(contact, i) {
           if(contact._id === contactId) {
-            Contact.delete({id: contact._id});
+            // Contact.delete({id: contact._id});
             $scope.currentStudent.contacts.splice(i, 1);
           } 
         });

@@ -10,15 +10,15 @@ angular.module('textbookApp')
     };
   })
   .controller('editContactController', function($scope, Contact) {
-  	$scope.editContact = function(contactId) {
-  		Contact.update({id: contactId}, $scope.contact, function(contactSaved) {
-  			console.log(contactSaved);
-  			$scope.addEditView = false;
-  			$scope.$emit('close addeditview');
-        $scope.$emit('close editview');
+  	// $scope.editContact = function(contactId) {
+  	// 	Contact.update({id: contactId}, $scope.contact, function(contactSaved) {
+  	// 		console.log(contactSaved);
+  	// 		$scope.addEditView = false;
+  	// 		$scope.$emit('close addeditview');
+   //      $scope.$emit('close editview');
 
-  		});
-  	}
+  	// 	});
+  	// }
 
 
   });
