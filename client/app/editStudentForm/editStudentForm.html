@@ -1,4 +1,4 @@
-<div class="student-add-form">
+<div class="student-add-form" ng-controller="editStudentFormCtrl">
 		<div class="form-group">
 			<label class="control-label col-lg-4">First name</label>
 			<div class="col-lg-8">
@@ -13,7 +13,7 @@
 		</div>
 		<h4>Contacts</h4>
 		<div ng-repeat="contact in currentStudent.contacts">
-			<span ng-hide="contact._id === addEditView">
+			<span ng-hide="addEditView">
 			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
 			<div class="btn-group">
 				<button class="btn btn-default btn-xs" ng-click="addShowEdit(contact._id)"><i class="fa fa-pencil"></i></button>

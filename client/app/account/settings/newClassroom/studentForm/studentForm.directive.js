@@ -60,7 +60,8 @@ angular.module('textbookApp')
             Contact.delete({id: contact._id});
             $scope.currentStudent.contacts.splice(i, 1);
           } 
-        })
+        });
+        if($scope.addEditView) $scope.addEditView = '';
       };
       
 
@@ -73,7 +74,7 @@ angular.module('textbookApp')
       }
     };
 
-      $scope.$on('close addeditview', function(event, data) {
+      $scope.$on('close editview', function(event, data) {
         $scope.addEditView = '';
       });
 

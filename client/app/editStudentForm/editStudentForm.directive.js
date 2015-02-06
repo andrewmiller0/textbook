@@ -21,16 +21,11 @@ angular.module('textbookApp')
 	      };
 	      scope.show = false;
 	    };
-	},
-	controller: function($scope, Contact, Student) {
-		$scope.addEditView;
-		$scope.addShowEdit = function(contactId) {
-			if($scope.addEditView === contactId) {
-				$scope.addEditView = '';
-			} else {
-				$scope.addEditView = contactId;	
-			}
-		};
+		}
+	}
+	  })
+	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
+		
 	    $scope.saveStudent = function() {
 	      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
 	         var studentToUpdate = _.clone($scope.currentStudent);
@@ -50,9 +45,16 @@ angular.module('textbookApp')
 	    	})
 	    };
 
-	    $scope.$on('close addeditview', function(event, data) {
-	    	$scope.addEditView = '';
-	    });
-      }
-	}
-  })
+	    $scope.addEditView;
+	    $scope.addShowEdit = function(contactId) {
+	      if($scope.addEditView === contactId) {
+	        $scope.addEditView = '';
+	      } else {
+	        $scope.addEditView = contactId;  
+	      }
+	    };
+
+	      // $scope.$on('close addeditview', function(event, data) {
+	      //   $scope.addEditView = '';
+	      // });
+	});
