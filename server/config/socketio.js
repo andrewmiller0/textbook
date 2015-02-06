@@ -20,10 +20,7 @@ function onConnect(socket) {
 
   // Insert sockets below
   require('../api/contact/contact.socket').register(socket);
-  require('../api/schedMsg/schedMsg.socket').register(socket);
   require('../api/conversation/conversation.socket').register(socket);
-  require('../api/classroom/classroom.socket').register(socket);
-  require('../api/student/student.socket').register(socket);
 }
 
 module.exports = function (socketio) {
@@ -37,13 +34,12 @@ module.exports = function (socketio) {
   // 1. You will need to send the token in `client/components/socket/socket.service.js`
   //
   // 2. Require authentication here:
-  // socketio.use(require('socketio-jwt').authorize({
-  //   secret: config.secrets.session,
-  //   handshake: true
-  // }));
+  socketio.use(require('socketio-jwt').authorize({
+    secret: config.secrets.session,
+    handshake: true
+  }));
 
   socketio.on('connection', function (socket) {
-    console.log(socket);
     socket.address = socket.handshake.address !== null ?
             socket.handshake.address.address + ':' + socket.handshake.address.port :
             process.env.DOMAIN;
