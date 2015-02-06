@@ -16,7 +16,7 @@
 			<span ng-hide="contact._id === editView">
 			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
 			<div class="btn-group">
-				<button class="btn btn-default btn-xs" ng-click="showEdit(contact._id)">edit</button>
+				<button class="btn btn-default btn-xs" ng-click="showEdit(contact._id)"><i class="fa fa-pencil"></i></button>
 				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)">x</button>
 			</div>
 			</span>

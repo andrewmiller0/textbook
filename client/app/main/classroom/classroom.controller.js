@@ -45,6 +45,16 @@ angular.module('textbookApp')
       // console.log($scope.user);
     };
 
+    $scope.deleteClassroom = function(classroomId) {
+      Classroom.delete({id: classroomId});
+      $scope.user.classrooms.forEach(function(classroom, i) {
+        if(classroom._id === classroomId) {
+          $scope.user.classrooms.splice(i, 1);
+          $scope.$emit('delete classroom', classroom);
+        }
+      })
+    }
+
 
     var setcurrentClassroom = function(id) {
 		Classroom.get({id: id}, function(classroom) {

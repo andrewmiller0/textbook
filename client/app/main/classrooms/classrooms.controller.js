@@ -18,4 +18,11 @@ angular.module('textbookApp')
         $scope.classrooms = user.classrooms;
       });
     });
+    $scope.$on('delete classroom', function(event, data) {
+      User.get().$promise.then(function(user) {
+        $scope.user = user;
+        $scope.classrooms = user.classrooms;
+        $state.go('classrooms.classroom', {className: user.classrooms[0]._id});
+      });
+    });
   });
