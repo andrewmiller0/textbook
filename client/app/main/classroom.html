@@ -10,14 +10,11 @@
           </div>
       <!-- Start Message View -->
       <div class="panel panel-default">
-        <div class="panel-heading">Contact Name</div>
+        <div class="panel-heading">{{activeContact.name}}</div>
         <div class="panel-body">
           <div>
             <ul class="list-group">
-              <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
-              <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
-              <li class="list-group-item list-group-item">Porta ac consectetur ac</li>
-              <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+              <li ng-repeat= 'message in messages'class="list-group-item list-group-item-success">{{message.body}}</li>
             </ul>
           </div>
           <div class="input-group">
