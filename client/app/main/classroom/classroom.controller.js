@@ -52,8 +52,9 @@ angular.module('textbookApp')
         .$promise
         .then(function(conversation){
           console.log(conversation);
-          $scope.conversation = conversation;
-          $scope.messages = conversation.messages;
+          $scope.conversation = conversation.data[0];
+          $scope.messages = conversation.data[0].messages;
+          console.log($scope.messages);
         });
     }
 
