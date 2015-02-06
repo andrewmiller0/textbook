@@ -3,7 +3,7 @@
 	<accordion close-others="true">
                    <accordion-group ng-repeat="student in currentClass.students" ng-click="toggleContacts(student._id)">
                    		<accordion-heading>
-                   		<i class="fa fa-circle-o pull-left"></i>{{ student.firstName }} {{ student.lastName }}
+                   		{{ student.firstName }} {{ student.lastName }} <span class="badge">42</span></a>
                    	</accordion-heading>
             <ul class="list-group">
   						<li ng-repeat="contact in contacts" class="list-group-item" ng-click='setActive(contact)'>
