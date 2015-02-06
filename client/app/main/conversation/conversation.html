@@ -5,9 +5,11 @@
                    		<accordion-heading>
                    		<i class="fa fa-circle-o pull-left"></i>{{ student.firstName }} {{ student.lastName }}
                    	</accordion-heading>
-						<li ng-repeat="contact in contacts" class="list-unstyled" ng-click='setActive(contact)'>
-						{{contact.name}} --<span>{{conversation.messages.snippit}} Message Snippet Here</span>
-						</li>
+            <ul class="nav nav-pills">
+  						<li role="presentation" ng-repeat="contact in contacts" class="list-unstyled" ng-click='setActive(contact)'>
+  						{{contact.name}} --<span>{{conversation.messages.snippit}} Message Snippet Here</span>
+  						</li>
+            </ul>
                    </accordion-group>
                </accordion>
 </div>

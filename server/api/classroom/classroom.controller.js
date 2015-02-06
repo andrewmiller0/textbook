@@ -14,14 +14,12 @@ exports.index = function(req, res) {
 // Get a single classroom
 exports.show = function(req, res, next) {
   Classroom.findById(req.params.id, function (err, classroom) {
-    console.log(classroom);
     if(err) { return handleError(res, err); }
     if(!classroom) { return res.send(404); }
   })
   .populate('students')
   .exec(function(err, classroom) {
     if (err) return next(err);
-      console.log(classroom);
       res.json(classroom);
     });
 };
