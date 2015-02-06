@@ -24,6 +24,7 @@ angular.module('textbookApp')
     };
 
     $scope.addContact = function() {
+      $scope.currentContact.phone = '+1' + $scope.currentContact.phone;
       $scope.currentStudent.primaryPhone = $scope.currentContact.phone;
       Contact.save($scope.currentContact, function(contact) {
           $scope.currentStudent.contacts.push(contact);
@@ -53,4 +54,31 @@ angular.module('textbookApp')
 
       }
     };
+
+  })
+
+    $scope.deleteContact = function(contactId) {
+        $scope.currentStudent.contacts.forEach(function(contact, i) {
+          if(contact._id === contactId) {
+            Contact.delete({id: contact._id});
+            $scope.currentStudent.contacts.splice(i, 1);
+          }
+        });
+        if($scope.addEditView) $scope.addEditView = '';
+      };
+
+
+    $scope.addEditView;
+    $scope.addShowEdit = function(contactId) {
+      if($scope.addEditView === contactId) {
+        $scope.addEditView = '';
+      } else {
+        $scope.addEditView = contactId;
+      }
+    };
+
+      $scope.$on('close editview', function(event, data) {
+        $scope.addEditView = '';
+      });
+
   })
