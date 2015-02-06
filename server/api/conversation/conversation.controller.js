@@ -26,7 +26,7 @@ exports.sendMsg = function(req, res) {
   var accountSid = config.twilio.clientID;
   var authToken = config.twilio.clientToken;
   var client = require('twilio')(accountSid, authToken);
-
+  console.log(req.body);
   client.messages.create({
       body: req.body.message,
       to: "+1" + req.body.to,

@@ -27,18 +27,35 @@ angular.module('textbookApp')
     $scope.setActive = function(contact){
       $scope.activeContact = contact;
       console.log ($scope.activeContact);
+      $scope.getConvo();
     }
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
+      console.log(message);
+      var reqBody = {
+        _id: $scope.conversation.data[0]._id,
+        message: message,
+        to: $scope.activeContact.phone,
+        from: $scope.user.phone,
+        userId: $scope.user._id,
+        contactId: $scope.activeContact._id
+      };
+      console.log(reqBody)
+      Conversation.sendMsg(reqBody);
+      $scope.msgToSend = "";
+    };
+
+    $scope.messages;
+    $scope.getConvo = function(){
       Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
         .$promise
         .then(function(conversation){
-          Conversation.sendMsg({_id: conversation.data[0]._id, message: message, to: $scope.activeContact.phone, from: $scope.user.phone, userId: $scope.user._id, contactId: $scope.activeContact._id})
+          console.log(conversation);
+          $scope.conversation = conversation;
+          $scope.messages = conversation.messages;
         });
-
-      $scope.msgToSend = "";
-    };
+    }
 
 
     var setcurrentClassroom = function(id) {
