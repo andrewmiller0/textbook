@@ -22,7 +22,11 @@ angular.module('textbookApp')
       User.get().$promise.then(function(user) {
         $scope.user = user;
         $scope.classrooms = user.classrooms;
-        $state.go('classrooms.classroom', {className: user.classrooms[0]._id});
+        if(user.classrooms.length === 0) {
+          $state.go('main');
+        } else {
+          $state.go('classrooms.classroom', {className: user.classrooms[0]._id});
+        }
       });
     });
   });

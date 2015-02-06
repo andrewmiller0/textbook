@@ -21,6 +21,8 @@ angular.module('textbookApp')
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom._id);
         User.update($scope.user);
+        $scope.classroom.name = '';
+        $scope.classroom.students = [];
       });
     };
 

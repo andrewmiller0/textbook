@@ -12,7 +12,7 @@
             <div class="col-lg-6">
                     <h3>Students<span ng-show="classroom.name.length"> in {{ classroom.name }}</span>:</h3>
                     <span ng-show="!classroom.students.length">None yet!</span>
-                <accordion close-others="true">
+                <accordion close-others="true" ng-show="classroom.students.length">
                     <accordion-group ng-repeat="student in classroom.students" ng-click="setStudentBeingEdited(student)">
                     <accordion-heading>
                         {{ student.firstName }} {{ student.lastName }} <button class="btn btn-danger btn-xs pull-right" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteStudent(student._id)">x</button>
