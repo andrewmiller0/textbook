@@ -9,6 +9,7 @@ angular.module('textbookApp')
         $scope.user = user;
       })
     }
+    console.log($scope.user);
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.classroom = classroom;

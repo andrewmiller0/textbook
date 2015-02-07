@@ -45,7 +45,7 @@ angular.module('textbookApp')
 	    	})
 	    };
 
-	    $scope.addEditView;
+	    $scope.addEditView = '';
 	    $scope.addShowEdit = function(contactId) {
 	      if($scope.addEditView === contactId) {
 	        $scope.addEditView = '';
@@ -54,7 +54,7 @@ angular.module('textbookApp')
 	      }
 	    };
 
-	      // $scope.$on('close addeditview', function(event, data) {
-	      //   $scope.addEditView = '';
-	      // });
+	      $scope.$on('close addeditview', function(event, data) {
+	        $scope.addEditView = '';
+	      });
 	});
