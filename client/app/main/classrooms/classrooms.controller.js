@@ -7,7 +7,7 @@ angular.module('textbookApp')
       console.log(user);
       $scope.classrooms = user.classrooms;
       if($scope.user.classrooms.length === 0) {
-      	$state.go('main');
+      	// $state.go('main');
       } else {
       	// $location.path('/classrooms');
       	// $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
