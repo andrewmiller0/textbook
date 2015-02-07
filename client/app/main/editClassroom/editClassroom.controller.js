@@ -4,7 +4,7 @@ angular.module('textbookApp')
   .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Contact, $state) {
   		User.get().$promise.then(function(user) {
     		$scope.user = user;
-      		setcurrentClassroom($stateParams.className);
+      		setcurrentClassroom($stateParams.classId);
     	});
     	var setcurrentClassroom = function(id) {
     		var contacts = [];
@@ -24,7 +24,7 @@ angular.module('textbookApp')
       	$scope.user.classrooms = $scope.user.classrooms.map(function(classroom2) {return classroom2._id});
         User.update($scope.user);
         $scope.$emit('updated user', $scope.user);
-        $state.go('classrooms.classroom', {className: $stateParams.className});
+        $state.go('classrooms.classroom', {classId: $stateParams.classId});
       });
     };
 

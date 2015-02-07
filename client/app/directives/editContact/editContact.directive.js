@@ -3,7 +3,7 @@
 angular.module('textbookApp')
   .directive('editContact', function () {
     return {
-      templateUrl: 'app/account/settings/newClassroom/editContact/editContact.html',
+      templateUrl: 'app/directives/editContact/editContact.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }

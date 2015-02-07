@@ -10,7 +10,7 @@ angular.module('textbookApp')
       	$state.go('main');
       } else {
       	// $location.path('/classrooms');
-      	$state.go('classrooms.classroom', {className: user.classrooms[0]._id});
+      	// $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
       }
     });
 
@@ -27,7 +27,7 @@ angular.module('textbookApp')
         if(user.classrooms.length === 0) {
           $state.go('main');
         } else {
-          $state.go('classrooms.classroom', {className: user.classrooms[0]._id});
+          $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
         }
       });
     });

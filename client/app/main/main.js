@@ -13,18 +13,18 @@ angular.module('textbookApp')
         templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl'
       })
-      .state('addClassroom', {
+      .state('classrooms.addClassroom', {
       	url: '/classroom/add',
       	templateUrl: 'app/main/newClassroom/newclassroom.html',
       	controller: 'NewClassCtrl'
       })
       .state('classrooms.classroom', {
-        url: '/:className',
+        url: '/:classId',
         templateUrl: 'app/main/classroom/classroom.html',
         controller: 'ClassroomCtrl'
       })
       .state('classrooms.edit', {
-        url: '/:className/edit',
+        url: '/:classId/edit',
         templateUrl: 'app/main/editClassroom.html',
         controller: 'EditClassroomCtrl'
       });

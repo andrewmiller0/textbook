@@ -6,7 +6,7 @@ angular.module('textbookApp')
    $scope.toggleClassrooms = function(name) {
       $scope.user.classrooms.forEach(function(classroom) {
         if(classroom.name === name) {
-          $scope.currentClass = classroom
+          $scope.currentClass = classroom;
         }
       });
     };
@@ -14,12 +14,6 @@ angular.module('textbookApp')
     $scope.toggleContacts = function(student) {
       $scope.contacts = student.contacts;
       $scope.id = student._id;
-      // Student.get({id: argId}, function(student) {
-      //  $scope.contacts = student.contacts;
-      //  $scope.id = argId;
-      // });
-      
-
     };
 
     $scope.gotoBottom = function() {
@@ -84,10 +78,4 @@ angular.module('textbookApp')
         }
       })
     };
-
-   //  var setcurrentClassroom = function(id) {
-    //  Classroom.get({id: id}, function(classroom) {
-   //         $scope.currentClass = classroom;
-   //     });
-    // }
   });

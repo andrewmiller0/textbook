@@ -3,7 +3,7 @@
 angular.module('textbookApp')
   .directive('editStudentForm', function (Contact, Student) {
     return {
-      templateUrl: 'app/editStudentForm/editStudentForm.html',
+      templateUrl: 'app/directives/editStudentForm/editStudentForm.html',
       restrict: 'EA',
       scope: {
       	currentStudent: '=curr'
