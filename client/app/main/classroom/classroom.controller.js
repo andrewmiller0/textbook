@@ -71,12 +71,15 @@ angular.module('textbookApp')
 
 
     var setcurrentClassroom = function(id) {
-		Classroom.get({id: id}, function(classroom) {
-    			$scope.currentClass = classroom;
+    Classroom.get({id: id}, function(classroom) {
+          $scope.currentClass = classroom;
+          angular.element("#"+classroom._id).text(classroom.name);
     	});
   	}
 
-    socket.socket.on('conversation:save', function(data){
-      console.log(data);
+    socket.socket.on('conversation:save', function(convo){
+      if ($scope.conversation && $scope.conversation._id == convo._id) {
+        $scope.getConvo();
+      }
     });
   });
