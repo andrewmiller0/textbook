@@ -55,8 +55,6 @@ angular.module('textbookApp')
       }
     };
 
-  })
-
     $scope.deleteContact = function(contactId) {
         $scope.currentStudent.contacts.forEach(function(contact, i) {
           if(contact._id === contactId) {
@@ -81,4 +79,4 @@ angular.module('textbookApp')
         $scope.addEditView = '';
       });
 
-  })
+  });

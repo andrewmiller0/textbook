@@ -12,9 +12,10 @@
       <div class="panel panel-default">
         <div class="panel-heading">{{activeContact.name}}</div>
         <div class="panel-body">
-          <div>
-            <ul class="list-group">
-              <li ng-repeat= 'message in messages'class="list-group-item list-group-item-success">{{message.body}}</li>
+          <div class="chat-panel">
+            <ol class="discussion">
+              <li ng-repeat= 'message in messages' ng-class="!isSent(message) ? 'other' : 'self'" class="discussion"><div class = "messages"><p>{{message.body}}</p></div></li>
+              <a id="bottom"></a>
             </ul>
           </div>
           <div class="input-group">
