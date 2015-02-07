@@ -66,10 +66,10 @@ body {
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
-@import 'account/settings/newClassroom/editContact/editContact.scss';
-@import 'account/settings/newClassroom/studentForm/studentForm.scss';
 @import 'admin/admin.scss';
-@import 'editStudentForm/editStudentForm.scss';
-@import 'main/conversation/conversation.scss';
+@import 'directives/conversation/conversation.scss';
+@import 'directives/editContact/editContact.scss';
+@import 'directives/editStudentForm/editStudentForm.scss';
+@import 'directives/studentForm/studentForm.scss';
 @import 'main/main.scss';
 // endinjector
