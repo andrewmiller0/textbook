@@ -1,25 +1,24 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, $location, $anchorScroll) {
-    User.get().$promise.then(function(user) {
-    	$scope.user = user;
-      	setcurrentClassroom($stateParams.className);
-    });
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll) {
 
    $scope.toggleClassrooms = function(name) {
-    	$scope.user.classrooms.forEach(function(classroom) {
-    		if(classroom.name === name) {
-    			setcurrentClassroom(classroom._id);
-    		}
-    	});
+      $scope.user.classrooms.forEach(function(classroom) {
+        if(classroom.name === name) {
+          $scope.currentClass = classroom
+        }
+      });
     };
 
-    $scope.toggleContacts = function(argId) {
-			Student.get({id: argId}, function(student) {
-				$scope.contacts = student.contacts;
-				$scope.id = argId;
-			});
+    $scope.toggleContacts = function(student) {
+      $scope.contacts = student.contacts;
+      $scope.id = student._id;
+      // Student.get({id: argId}, function(student) {
+      //  $scope.contacts = student.contacts;
+      //  $scope.id = argId;
+      // });
+      
 
     };
 
@@ -86,10 +85,9 @@ angular.module('textbookApp')
       })
     };
 
-
-    var setcurrentClassroom = function(id) {
-		Classroom.get({id: id}, function(classroom) {
-    			$scope.currentClass = classroom;
-    	});
-	}
+   //  var setcurrentClassroom = function(id) {
+    //  Classroom.get({id: id}, function(classroom) {
+   //         $scope.currentClass = classroom;
+   //     });
+    // }
   });
