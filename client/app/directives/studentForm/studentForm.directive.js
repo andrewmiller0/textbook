@@ -9,14 +9,18 @@ angular.module('textbookApp')
       }
     };
   })
-  .controller('studentFormController', function($scope, Student, Contact) {
+  .controller('studentFormController', function($scope, Student, Contact, Classroom) {
   	$scope.currentStudent = {
       firstName: "",
       lastName: "",
       primaryPhone: "",
-      contacts: []
+      contacts: [{
+        name: "",
+        relationship: "",
+        phone: ""
+      }]
     };
-
+    console.log($scope.currentStudent);
     $scope.currentContact = {
       name: "",
       relationship: "",
@@ -25,7 +29,6 @@ angular.module('textbookApp')
 
     $scope.addContact = function() {
       $scope.currentContact.phone = '+1' + $scope.currentContact.phone;
-      $scope.currentStudent.primaryPhone = $scope.currentContact.phone;
       Contact.save($scope.currentContact, function(contact) {
           $scope.currentStudent.contacts.push(contact);
       });
@@ -37,23 +40,37 @@ angular.module('textbookApp')
     };
 
     $scope.addStudent = function() {
-      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
-         $scope.classroom.students.push($scope.currentStudent);
-         var studentToSave = _.clone($scope.currentStudent);
-         studentToSave.contacts = studentToSave.contacts.map(function(contact) {return contact._id});
-         Student.save(studentToSave, function(student) {
-          $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
-          console.log($scope.classroom);
-          $scope.currentStudent = {
-            firstName: "",
-            lastName: "",
-            primaryPhone: "",
-            contacts: []
-           };
-         });
+         $scope.studentAdded = true;
+         $scope.currentStudent.primaryPhone = $scope.currentStudent.contacts[0].phone;
+         var studentToSave = angular.copy($scope.currentStudent);
+         Contact.save($scope.currentStudent.contacts[0], function(contact) {
+           $scope.currentStudent.contacts[0]._id = contact._id;
+           $scope.classroom.students.push($scope.currentStudent);
+           studentToSave.contacts[0] = contact._id;
+           console.log($scope.currentStudent, studentToSave);
 
-      }
+           Student.save(studentToSave, function(student) {
+              $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
+           });
+        });
     };
+
+    $scope.resetStudent = function() {
+      var classroomToSave = angular.copy($scope.classroom);
+      classroomToSave.students = classroomToSave.students.map(function(student){return student._id});
+      Classroom.update(classroomToSave);
+      $scope.currentStudent = {
+        firstName: "",
+        lastName: "",
+        primaryPhone: "",
+        contacts: [{
+          name: "",
+          relationship: "",
+          phone: ""
+        }]
+       };
+      $scope.studentAdded = false;
+    }
 
     $scope.deleteContact = function(contactId) {
         $scope.currentStudent.contacts.forEach(function(contact, i) {
@@ -66,7 +83,7 @@ angular.module('textbookApp')
       };
 
 
-    $scope.addEditView;
+    $scope.addEditView = "";
     $scope.addShowEdit = function(contactId) {
       if($scope.addEditView === contactId) {
         $scope.addEditView = '';

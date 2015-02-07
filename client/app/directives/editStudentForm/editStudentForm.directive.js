@@ -9,23 +9,23 @@ angular.module('textbookApp')
       	currentStudent: '=curr'
       },
       link: function (scope, element, attrs) {
-	  	scope.addContact = function() {
-	      scope.currentStudent.primaryPhone = scope.currentContact.phone;
-	      Contact.save(scope.currentContact, function(contact) {
-	          scope.currentStudent.contacts.push(contact);
+	  }
+	}
+	  })
+	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
+		$scope.addContact = function() {
+	  	  console.log($scope.currentContact);
+	      Contact.save($scope.currentContact, function(contact) {
+	          $scope.currentStudent.contacts.push(contact);
 	      });
-	      scope.currentContact = {
+	      $scope.currentContact = {
 	        name: "",
 	        relationship: "",
 	        phone: ""
 	      };
-	      scope.show = false;
+	      $scope.show = false;
 	    };
-		}
-	}
-	  })
-	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
-		
+
 	    $scope.saveStudent = function() {
 	      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
 	         var studentToUpdate = _.clone($scope.currentStudent);

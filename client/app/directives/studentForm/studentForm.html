@@ -1,38 +1,42 @@
 <div class="student-add-form" ng-controller="studentFormController">
 		<h4>Student</h4>
-		<div class="form-group">
-			<label class="control-label col-lg-4">First name</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" />
+		{{ currentStudent }}
+		<div ng-hide="studentAdded">
+			<div class="form-group">
+				<label class="control-label col-lg-4">First name</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" />
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-lg-4">Last name</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
+			<div class="form-group">
+				<label class="control-label col-lg-4">Last name</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
+				</div>
 			</div>
-		</div>
-		<h4>Primary Contact</h4>
-		<div class="form-group">
-			<label class="control-label col-lg-4">Name</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="primaryContact" ng-model="primaryContact.name" />
+			<h4>Primary Contact</h4>
+			<div class="form-group">
+				<label class="control-label col-lg-4">Name</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="primaryContactName" ng-model="currentStudent.contacts[0].name" />
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-lg-4">Relationship</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="lastName" ng-model="primaryContact.relationship" />
+			<div class="form-group">
+				<label class="control-label col-lg-4">Relationship</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="primaryContactRelationship" ng-model="currentStudent.contacts[0].relationship" />
+				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-lg-4">Phone</label>
-			<div class="col-lg-8">
-				<input class="form-control" type="text" name="lastName" ng-model="primaryContact.phone" />
+			<div class="form-group">
+				<label class="control-label col-lg-4">Phone</label>
+				<div class="col-lg-8">
+					<input class="form-control" type="text" name="primaryContactPhone" ng-model="currentStudent.contacts[0].phone" />
+				</div>
 			</div>
+			<button class="btn btn-default center-block" type="button" ng-click="addStudent()">Add student</button>
 		</div>
-		<button class="btn btn-default center-block" type="button" ng-click="addStudent()">Add student</button>
-
+	<div class="contact-add-form" ng-show="studentAdded">
+		<h4>{{ currentStudent.firstName }} {{ currentStudent.lastName }}</h4>
 		<h4>Contacts</h4>
 		<div ng-repeat="contact in currentStudent.contacts">
 			<span ng-hide="addEditView">
@@ -46,7 +50,6 @@
 				<edit-contact></edit-contact>
 			</div>
 		</div>
-	<div class="contact-add-form" ng-hide="addEditView">
 		<h5>Add a contact for this student:</h5>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Contact's name</label>
@@ -67,5 +70,6 @@
 				</div>
 			</div>
 		<button class="btn btn-default center-block" type="button" ng-click="addContact()">Save contact</button>
+		<button class="btn btn-success center-block" type="button" ng-click="resetStudent()">Done adding contacts</button>
 	</div><br />
 </div>

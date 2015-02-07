@@ -2,7 +2,6 @@
 
 angular.module('textbookApp')
   .factory('User', function ($resource) {
-    var finalUser;
     var User = $resource('/api/users/:id/:controller', {
       id: '@_id'
     },
@@ -29,15 +28,5 @@ angular.module('textbookApp')
         }
       }
 	  });
-
-    User.getFinalUser = function() {
-      return finalUser;
-    }
-
-    User.setFactoryUser = function(user) {
-      finalUser = user;
-    }
-
     return User;
-
   });
