@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('MainCtrl', function ($scope, $http, socket, Auth, Classroom, User, $location, Student, Conversation) {
+  .controller('MainCtrl', function ($scope, $http, User, $state, Auth) {
 
-  	User.get().$promise.then(function(user) {
-      $scope.user = user;
-      $scope.classrooms = user.classrooms;
-      if($scope.user.classrooms.length !== 0) {
-      	$location.path('/classrooms');
+  $scope.user = Auth.getCurrentUser();
+    if ($scope.user.$promise) {
+      $scope.user.$promise.then(function(user) {
+        $scope.user = user;
+      });
+    }
+  	if($scope.user.classrooms.length !== 0) {
+      	$state.go('classrooms.classroom');
       }
-    });
   });

@@ -7,6 +7,7 @@ var Classroom = require('../classroom/classroom.model');
 var config = require('../../config/environment');
 var localENV = require('../../config/local.env.js')
 var client = require('twilio')(config.twilio.clientID, config.twilio.clientToken);
+var deepPopulate = require('mongoose-deep-populate');
 
 var UserSchema = new Schema({
   name: String,
@@ -158,5 +159,7 @@ UserSchema.methods = {
   this.phone = localENV.phoneNumber
   }
 };
+
+UserSchema.plugin(deepPopulate, {});
 
 module.exports = mongoose.model('User', UserSchema);

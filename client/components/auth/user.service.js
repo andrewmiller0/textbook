@@ -2,7 +2,7 @@
 
 angular.module('textbookApp')
   .factory('User', function ($resource) {
-    return $resource('/api/users/:id/:controller', {
+    var User = $resource('/api/users/:id/:controller', {
       id: '@_id'
     },
     {
@@ -28,4 +28,5 @@ angular.module('textbookApp')
         }
       }
 	  });
+    return User;
   });

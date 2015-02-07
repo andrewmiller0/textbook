@@ -32,7 +32,10 @@ exports.create = function(req, res) {
 
 // Updates an existing contact in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  if(req.body._id) { 
+    delete req.body._id;
+    delete req.body.__v; 
+  }
   Contact.findById(req.params.id, function (err, contact) {
     if (err) { return handleError(res, err); }
     if(!contact) { return res.send(404); }
