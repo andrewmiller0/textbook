@@ -17,6 +17,11 @@ angular.module('textbookApp')
 	  	  console.log($scope.currentContact);
 	      Contact.save($scope.currentContact, function(contact) {
 	          $scope.currentStudent.contacts.push(contact);
+	          var studentToUpdate = _.clone($scope.currentStudent);
+	          studentToUpdate.contacts = studentToUpdate.contacts.map(function(contact) {return contact._id});
+	          Student.update(studentToUpdate, function(student) {
+	         	console.log(student);
+	         });
 	      });
 	      $scope.currentContact = {
 	        name: "",
