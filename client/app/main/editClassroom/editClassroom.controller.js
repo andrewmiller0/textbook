@@ -33,8 +33,6 @@ angular.module('textbookApp')
       console.log($scope.classroom);
       // $scope.classroom.students = $scope.classroom.students.map(function(student) {return student._id});
       Classroom.update($scope.classroom, function(classroom) {
-        console.log(classroom);
-        console.log($scope.user.classrooms);
         Auth.updateUser($scope.user);
         $scope.$emit('updated user', $scope.user);
         // $state.go('classrooms.classroom', {classId: $stateParams.classId});

@@ -33,7 +33,7 @@ angular.module('textbookApp')
           $scope.currentStudent.contacts.push(contact);
           var studentToSave = angular.copy($scope.currentStudent);
           studentToSave.contacts = studentToSave.contacts.map(function(contact) { return contact._id; });
-          Student.save(studentToSave);
+          Student.update(studentToSave);
       });
       $scope.currentContact = {
         name: "",
