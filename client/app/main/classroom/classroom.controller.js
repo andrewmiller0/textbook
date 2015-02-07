@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, $location, $anchorScroll) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, socket, $location, $anchorScroll) {
     User.get().$promise.then(function(user) {
     	$scope.user = user;
       	setcurrentClassroom($stateParams.className);
@@ -88,8 +88,15 @@ angular.module('textbookApp')
 
 
     var setcurrentClassroom = function(id) {
-		Classroom.get({id: id}, function(classroom) {
-    			$scope.currentClass = classroom;
+    Classroom.get({id: id}, function(classroom) {
+          $scope.currentClass = classroom;
+          angular.element("#"+classroom._id).text(classroom.name);
     	});
-	}
+  	}
+
+    socket.socket.on('conversation:save', function(convo){
+      if ($scope.conversation && $scope.conversation._id == convo._id) {
+        $scope.getConvo();
+      }
+    });
   });
