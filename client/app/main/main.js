@@ -25,7 +25,7 @@ angular.module('textbookApp')
       })
       .state('classrooms.edit', {
         url: '/:classId/edit',
-        templateUrl: 'app/main/editClassroom.html',
+        templateUrl: 'app/main/editClassroom/editClassroom.html',
         controller: 'EditClassroomCtrl'
       });
   });

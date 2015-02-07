@@ -1,15 +1,14 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User) {
+    $scope.user = User.getFinalUser();
 
-   $scope.toggleClassrooms = function(name) {
-      $scope.user.classrooms.forEach(function(classroom) {
-        if(classroom.name === name) {
-          $scope.currentClass = classroom;
-        }
-      });
-    };
+    $scope.user.classrooms.forEach(function(classroom) {
+      if(classroom._id === $stateParams.classId) {
+        $scope.currentClass = classroom;
+      }
+    });
 
     $scope.toggleContacts = function(student) {
       $scope.contacts = student.contacts;
