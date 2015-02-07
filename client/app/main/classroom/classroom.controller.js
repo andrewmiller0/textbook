@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, socket) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, socket, $location, $anchorScroll) {
     User.get().$promise.then(function(user) {
     	$scope.user = user;
       	setcurrentClassroom($stateParams.className);
@@ -23,16 +23,27 @@ angular.module('textbookApp')
 
     };
 
+    $scope.gotoBottom = function() {
+      console.log('anchorscroll');
+      $location.hash('bottom');
+      $anchorScroll();
+    };
+
     $scope.activeContact;
     $scope.setActive = function(contact){
       $scope.activeContact = contact;
       console.log ($scope.activeContact);
-      $scope.getConvo();
+      $scope.getConvo($scope.gotoBottom);
+    }
+
+    $scope.isSent = function(message){
+      return message.type === 'sent';
     }
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
       console.log(message);
+      console.log("Conversation = ", $scope.conversation);
       var reqBody = {
         _id: $scope.conversation._id,
         message: message,
@@ -42,19 +53,25 @@ angular.module('textbookApp')
         contactId: $scope.activeContact._id
       };
       console.log(reqBody)
-      Conversation.sendMsg(reqBody);
+      Conversation.sendMsg(reqBody).$promise.then(function(message){
+        console.log(message);
+        $scope.messages.push(message);
+      })
+
       $scope.msgToSend = "";
+
     };
 
     $scope.messages;
-    $scope.getConvo = function(){
+    $scope.getConvo = function(cb){
       Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
         .$promise
         .then(function(conversation){
           console.log(conversation);
           $scope.conversation = conversation.data[0];
           $scope.messages = conversation.data[0].messages;
-          console.log($scope.messages);
+          setTimeout(function(){ cb() }, 0);
+
         });
     }
 

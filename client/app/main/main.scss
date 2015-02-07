@@ -48,3 +48,49 @@ select {
     border-radius: 8px;
     padding: 10px;
 }
+
+.sent {
+  background-color: #1976D2;
+  color: #FFF;
+  text-align: right;
+}
+
+.discussion {
+  list-style: none;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 0 0 50px 0; // finality
+  li {
+    padding: 0.5rem;
+    overflow: hidden;
+    display: flex;
+  }
+}
+
+.self {
+  justify-content: flex-end;
+  align-items: flex-end;
+  .messages {
+    border-bottom-right-radius: 0; // weird shadow fix
+  }
+}
+
+.messages {
+  background: white;
+  padding: 10px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(black, 0.2);
+  p {
+    font-size: 1.4rem;
+    margin: 0 0 0.2rem 0;
+  }
+  time {
+    font-size: 0.7rem;
+    color: #ccc;
+  }
+}
+
+.chat-panel {
+  max-height: 350px;
+  overflow-y: auto;
+}
