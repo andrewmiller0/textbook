@@ -11,7 +11,7 @@ angular.module('textbookApp')
     console.log($scope.user);
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
-        $scope.classroom = classroom;
+        $scope.currentClass = classroom;
       }
     });
 
