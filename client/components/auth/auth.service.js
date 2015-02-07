@@ -141,6 +141,9 @@ angular.module('textbookApp')
        */
       getToken: function() {
         return $cookieStore.get('token');
+      }, 
+      updateUser: function(user) {
+        currentUser = user;
       }
     };
   });

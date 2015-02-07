@@ -16,6 +16,7 @@ angular.module('textbookApp')
         .then( function() {
           // Logged in, redirect to home
           User.get().$promise.then(function(user) {
+            User.setFactoryUser(user);
             if(user.classrooms.length === 0) {
               $location.path('/');
             } else {

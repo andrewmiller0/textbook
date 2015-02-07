@@ -10,22 +10,22 @@ angular.module('textbookApp')
       })
       .state('classrooms', {
         url: '/classrooms',
-        templateUrl: 'app/main/classrooms.html',
+        templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl'
       })
-      .state('addClassroom', {
+      .state('classrooms.addClassroom', {
       	url: '/classroom/add',
-      	templateUrl: 'app/account/settings/newClassroom/newclassroom.html',
+      	templateUrl: 'app/main/newClassroom/newclassroom.html',
       	controller: 'NewClassCtrl'
       })
       .state('classrooms.classroom', {
-        url: '/:className',
-        templateUrl: 'app/main/classroom.html',
+        url: '/:classId',
+        templateUrl: 'app/main/classroom/classroom.html',
         controller: 'ClassroomCtrl'
       })
       .state('classrooms.edit', {
-        url: '/:className/edit',
-        templateUrl: 'app/main/editClassroom.html',
+        url: '/:classId/edit',
+        templateUrl: 'app/main/editClassroom/editClassroom.html',
         controller: 'EditClassroomCtrl'
       });
   });
