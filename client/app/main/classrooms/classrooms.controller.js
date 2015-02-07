@@ -4,6 +4,7 @@ angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state) {
   	User.get().$promise.then(function(user) {
       $scope.user = user;
+      console.log(user);
       $scope.classrooms = user.classrooms;
       if($scope.user.classrooms.length === 0) {
       	$state.go('main');
