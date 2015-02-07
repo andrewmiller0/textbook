@@ -3,7 +3,7 @@
 angular.module('textbookApp')
   .directive('studentForm', function () {
     return {
-      templateUrl: 'app/directives/studentForm/studentForm.html',
+      templateUrl: 'app/directives/addStudentForm/addStudentForm.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }

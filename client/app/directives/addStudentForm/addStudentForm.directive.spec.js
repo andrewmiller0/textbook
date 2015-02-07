@@ -4,7 +4,7 @@ describe('Directive: studentForm', function () {
 
   // load the directive's module and view
   beforeEach(module('textbookApp'));
-  beforeEach(module('app/account/settings/newClassroom/studentForm/studentForm.html'));
+  beforeEach(module('app/account/settings/newClassroom/addStudentForm/addStudentForm.html'));
 
   var element, scope;
 
@@ -16,6 +16,6 @@ describe('Directive: studentForm', function () {
     element = angular.element('<student-form></student-form>');
     element = $compile(element)(scope);
     scope.$apply();
-    expect(element.text()).toBe('this is the studentForm directive');
+    expect(element.text()).toBe('this is the addStudentForm directive');
   }));
 });
