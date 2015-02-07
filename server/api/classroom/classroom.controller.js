@@ -49,9 +49,9 @@ exports.update = function(req, res) {
   Classroom.findById(req.params.id, function (err, classroom) {
     if (err) { return handleError(res, err); }
     if(!classroom) { return res.send(404); }
-    var updated = _.merge(classroom, req.body);
-    updated.markModified('students');
-    updated.save(function (err) {
+    _.assign(classroom, req.body);
+    classroom.markModified('students');
+    classroom.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, classroom);
     });
