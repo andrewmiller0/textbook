@@ -32,14 +32,16 @@ exports.create = function(req, res) {
 
 // Updates an existing student in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { delete req.body._id; }
+  if(req.body._id) { 
+    delete req.body._id;
+    delete req.body.__v 
+  }
   Student.findById(req.params.id, function (err, student) {
     if (err) { return handleError(res, err); }
     if(!student) { return res.send(404); }
-    var updated = _.merge(student, req.body);
-    updated.markModified('contacts');
-    console.log(updated);
-    updated.save(function (err) {
+    _.assign(student, req.body);
+    student.markModified('contacts');
+    student.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, student);
     });

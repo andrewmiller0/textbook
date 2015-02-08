@@ -5,6 +5,7 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
+
 var validationError = function(res, err) {
   return res.json(422, err);
 };
@@ -107,12 +108,14 @@ exports.me = function(req, res, next) {
     if (err) return next(err);
     if (!user) return res.json(401);
   })
-  .populate('classrooms')
+  // .populate('classrooms')
   .exec(function(err, user) {
     if (err) return next(err);
-      console.log(user);
+    user.deepPopulate('classrooms.students.contacts', function(err) {
+      if (err) return next(err);
       res.json(user);
     });
+  });
 };
 
 exports.getUnpopulated = function(req, res) {

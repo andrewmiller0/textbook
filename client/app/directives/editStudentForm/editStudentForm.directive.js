@@ -3,29 +3,34 @@
 angular.module('textbookApp')
   .directive('editStudentForm', function (Contact, Student) {
     return {
-      templateUrl: 'app/editStudentForm/editStudentForm.html',
+      templateUrl: 'app/directives/editStudentForm/editStudentForm.html',
       restrict: 'EA',
       scope: {
       	currentStudent: '=curr'
       },
       link: function (scope, element, attrs) {
-	  	scope.addContact = function() {
-	      scope.currentStudent.primaryPhone = scope.currentContact.phone;
-	      Contact.save(scope.currentContact, function(contact) {
-	          scope.currentStudent.contacts.push(contact);
+	  }
+	}
+	  })
+	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
+		$scope.addContact = function() {
+	  	  console.log($scope.currentContact);
+	      Contact.save($scope.currentContact, function(contact) {
+	          $scope.currentStudent.contacts.push(contact);
+	          var studentToUpdate = _.clone($scope.currentStudent);
+	          studentToUpdate.contacts = studentToUpdate.contacts.map(function(contact) {return contact._id});
+	          Student.update(studentToUpdate, function(student) {
+	         	console.log(student);
+	         });
 	      });
-	      scope.currentContact = {
+	      $scope.currentContact = {
 	        name: "",
 	        relationship: "",
 	        phone: ""
 	      };
-	      scope.show = false;
+	      $scope.show = false;
 	    };
-		}
-	}
-	  })
-	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
-		
+
 	    $scope.saveStudent = function() {
 	      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
 	         var studentToUpdate = _.clone($scope.currentStudent);
@@ -45,7 +50,7 @@ angular.module('textbookApp')
 	    	})
 	    };
 
-	    $scope.addEditView;
+	    $scope.addEditView = '';
 	    $scope.addShowEdit = function(contactId) {
 	      if($scope.addEditView === contactId) {
 	        $scope.addEditView = '';
@@ -54,7 +59,7 @@ angular.module('textbookApp')
 	      }
 	    };
 
-	      // $scope.$on('close addeditview', function(event, data) {
-	      //   $scope.addEditView = '';
-	      // });
+	      $scope.$on('close addeditview', function(event, data) {
+	        $scope.addEditView = '';
+	      });
 	});

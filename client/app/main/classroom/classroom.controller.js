@@ -1,26 +1,17 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Conversation, Contact, $location, $anchorScroll) {
-    User.get().$promise.then(function(user) {
-    	$scope.user = user;
-      	setcurrentClassroom($stateParams.className);
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth) {
+   
+   $scope.user.classrooms.forEach(function(classroom) {
+      if(classroom._id === $stateParams.classId) {
+        $scope.currentClass = classroom;
+      }
     });
 
-   $scope.toggleClassrooms = function(name) {
-    	$scope.user.classrooms.forEach(function(classroom) {
-    		if(classroom.name === name) {
-    			setcurrentClassroom(classroom._id);
-    		}
-    	});
-    };
-
-    $scope.toggleContacts = function(argId) {
-			Student.get({id: argId}, function(student) {
-				$scope.contacts = student.contacts;
-				$scope.id = argId;
-			});
-
+    $scope.toggleContacts = function(student) {
+      $scope.contacts = student.contacts;
+      $scope.id = student._id;
     };
 
     $scope.gotoBottom = function() {
@@ -85,11 +76,4 @@ angular.module('textbookApp')
         }
       })
     };
-
-
-    var setcurrentClassroom = function(id) {
-		Classroom.get({id: id}, function(classroom) {
-    			$scope.currentClass = classroom;
-    	});
-	}
   });
