@@ -6,6 +6,18 @@
                         <input class="form-control" type="text" name="name" ng-model="classroom.name" />
                     <button type="submit" class="btn btn-default">Next</button>
                 </form>
+                <form class="form-horizontal" name="upload" ng-submit="uploadFile()">
+                    <label><h3>Or Upload a Roster</h3></label>
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Browse&hellip; <input type="file" multiple onchange="angular.element(this).scope().setFile(this)">
+                            </span>
+                        </span>
+                        <input type="text" class="form-control" readonly ng-model="uploadFile">
+                    </div>
+                    <button type="submit" class="btn btn-default">Upload</button>
+                </form>
             </div>
         </div>
     </div>
