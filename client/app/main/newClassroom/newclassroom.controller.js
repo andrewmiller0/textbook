@@ -3,6 +3,7 @@
 angular.module('textbookApp')
   .controller('NewClassCtrl', function ($scope, $location, $state, Auth, Classroom, User, socket, Student) {
     $scope.user = Auth.getCurrentUser();
+    $scope.file = {};
     $scope.addClassroom = function() {
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom);
@@ -14,16 +15,7 @@ angular.module('textbookApp')
         $state.go('classrooms.edit', {classId: classroom._id});
       });
     };
-    $scope.setFile = function(element, otherthing) {
-      console.log(arguments);
-      console.log(otherthing);
-      otherthing.$apply(function(scope) {
-         var photofile = element.files[0];
-         var reader = new FileReader();
-         reader.onload = function(e) {
-
-         };
-         reader.readAsDataURL(photofile);
-     });
-    };
+    $scope.uploadFile = function() {
+      console.log($scope.file);
+    }
   });
