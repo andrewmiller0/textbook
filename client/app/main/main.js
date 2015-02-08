@@ -3,28 +3,23 @@
 angular.module('textbookApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
-      })
       .state('classrooms', {
-        url: '/classrooms',
+        url: '/',
         templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl'
       })
-      .state('classrooms.addClassroom', {
-      	url: '/classroom/add',
+      .state('addClassroom', {
+      	url: 'classroom/add',
       	templateUrl: 'app/main/newClassroom/newclassroom.html',
       	controller: 'NewClassCtrl'
       })
       .state('classrooms.classroom', {
-        url: '/:classId',
+        url: ':classId',
         templateUrl: 'app/main/classroom/classroom.html',
         controller: 'ClassroomCtrl'
       })
       .state('classrooms.edit', {
-        url: '/:classId/edit',
+        url: ':classId/edit',
         templateUrl: 'app/main/editClassroom/editClassroom.html',
         controller: 'EditClassroomCtrl'
       });

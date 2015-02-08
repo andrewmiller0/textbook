@@ -3,39 +3,18 @@
 angular.module('textbookApp')
   .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Contact, $state, Auth) {
     
-    $scope.user = Auth.getCurrentUser();
-    if ($scope.user.$promise) {
-      $scope.user.$promise.then(function(user) {
-        $scope.user = user;
-      })
-    }
-    console.log($scope.user);
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.classroom = classroom;
       }
     });
 
-
-  //   	var setcurrentClassroom = function(id) {
-  //   		var contacts = [];
-		// 	Classroom.get({id: id}, function(classroom) {
-		// 		classroom.students.forEach(function(student) {
-		// 			Student.get({id: student._id}, function(popStudent) {
-		// 				student.contacts = popStudent.contacts;
-		// 			});
-		// 		});
-		// 		$scope.classroom = classroom;
-	 //    	});
-		// };
-
     $scope.updateClassroom = function() {
       console.log($scope.classroom);
-      // $scope.classroom.students = $scope.classroom.students.map(function(student) {return student._id});
-      Classroom.update($scope.classroom, function(classroom) {
-        Auth.updateUser($scope.user);
+      var unpopulated = angular.copy($scope.classroom);
+      unpopulated.students = unpopulated.students.map(function(student) {return student._id});
+      Classroom.update(unpopulated, function(classroom) {
         $scope.$emit('updated user', $scope.user);
-        // $state.go('classrooms.classroom', {classId: $stateParams.classId});
       });
     };
 
