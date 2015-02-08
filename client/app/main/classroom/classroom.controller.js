@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, socket, $location, $anchorScroll) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, $location, $anchorScroll, User, Auth, socket, Classroom, Student, Conversation, Contact) {
      $scope.user = Auth.getCurrentUser();
     if ($scope.user.$promise) {
       $scope.user.$promise.then(function(user) {
@@ -67,7 +67,7 @@ angular.module('textbookApp')
           console.log(conversation);
           $scope.conversation = conversation.data[0];
           $scope.messages = conversation.data[0].messages;
-          setTimeout(function(){ cb() }, 0);
+          if(cb) setTimeout(function(){ cb() }, 0);
 
         });
     }
