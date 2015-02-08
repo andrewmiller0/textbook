@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location) {
+  .controller('SignupCtrl', function ($scope, Auth, $location, $state) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -16,7 +16,7 @@ angular.module('textbookApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $state.go('classrooms');
         })
         .catch( function(err) {
           err = err.data;

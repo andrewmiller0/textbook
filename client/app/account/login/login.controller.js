@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, User) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, User, $state) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -15,14 +15,7 @@ angular.module('textbookApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          User.get().$promise.then(function(user) {
-            User.setFactoryUser(user);
-            if(user.classrooms.length === 0) {
-              $location.path('/');
-            } else {
-              $location.path('/classrooms');
-            }
-    });
+          $state.go('classrooms');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

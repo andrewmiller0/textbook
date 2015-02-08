@@ -1,8 +1,14 @@
 <div class="container">
+	<div ng-show="user.classrooms.length === 0">
+		<h2>You don't have any classrooms!  Create one to get started!</h2>
+		<a ui-sref="addClassroom"><button class="btn btn-primary">Create a Class</button></a>
+	</div>
+	<div ng-show="user.classrooms.length > 0">
 	<div class="btn-group" role="group">
 	            <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})">
 	            {{classroom.name}}
 	           </button>
 	        </div>
 	    <div ui-view></div>
+	</div>
 </div>
