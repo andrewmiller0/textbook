@@ -2,14 +2,8 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth) {
-     $scope.user = Auth.getCurrentUser();
-    if ($scope.user.$promise) {
-      $scope.user.$promise.then(function(user) {
-        $scope.user = user;
-      })
-    }
-    console.log($scope.user);
-    $scope.user.classrooms.forEach(function(classroom) {
+   
+   $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
       }
