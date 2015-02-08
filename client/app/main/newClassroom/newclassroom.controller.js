@@ -14,4 +14,16 @@ angular.module('textbookApp')
         $state.go('classrooms.edit', {classId: classroom._id});
       });
     };
+    $scope.setFile = function(element, otherthing) {
+      console.log(arguments);
+      console.log(otherthing);
+      otherthing.$apply(function(scope) {
+         var photofile = element.files[0];
+         var reader = new FileReader();
+         reader.onload = function(e) {
+
+         };
+         reader.readAsDataURL(photofile);
+     });
+    };
   });
