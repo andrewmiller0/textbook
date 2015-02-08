@@ -26,7 +26,8 @@
     "socket.io": "^1.0.6",
     "socket.io-client": "^1.0.6",
     "socketio-jwt": "^2.0.2",
-    "twilio": "^1.10.0"
+    "twilio": "^1.10.0",
+    "xlsx": "^0.7.12"
   },
   "devDependencies": {
     "grunt": "~0.4.4",

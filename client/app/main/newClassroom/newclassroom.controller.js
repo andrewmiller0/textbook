@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NewClassCtrl', function ($scope, $location, $state, Auth, Classroom, User, socket, Student) {
+  .controller('NewClassCtrl', function ($scope, $state, Auth, Classroom, User, $http) {
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
     $scope.addClassroom = function() {
@@ -17,5 +17,9 @@ angular.module('textbookApp')
     };
     $scope.uploadFile = function() {
       console.log($scope.file);
+      $http.post('/api/fileuploads', $scope.file, function(uploadedFile) {
+        console.log(uploadedFile);
+      });
+      
     }
   });
