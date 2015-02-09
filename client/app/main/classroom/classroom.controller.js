@@ -9,9 +9,15 @@ angular.module('textbookApp')
       }
     });
 
+   $scope.ids = {};
+
     $scope.toggleContacts = function(student) {
-      $scope.contacts = student.contacts;
-      $scope.id = student._id;
+      if ($scope.ids[student._id]) {
+        delete $scope.ids[student._id];
+      }
+      else {
+        $scope.ids[student._id] = true;
+      }
     };
 
     $scope.gotoBottom = function() {
