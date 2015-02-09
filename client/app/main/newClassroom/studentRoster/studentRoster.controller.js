@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, Student, Contact, Classroom, $state) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http) {
   	$scope.newClass = {
   		students: []
   	}
@@ -29,32 +29,21 @@ angular.module('textbookApp')
     };
 
     $scope.createClass = function() {
-    	Classroom.save(newClass, function(classroom) {
-    		$scope.newClass._id = classroom._id;
+    	User.getUnpopulated({id: $scope.user._id}, function(user) {
+	    	Classroom.save($scope.newClass, function(classroom) {
+	    		$scope.newClass._id = classroom._id;
+	    		user.classrooms.push(classroom._id);
+	    		User.update(user);
+	    	});
     	});
     }
 
     $scope.saveData = function() {
-    	angular.forEach($scope.studentRoster, function(obj) {
-    		var newStudent = {
-    			firstName: obj.firstName,
-    			lastName: obj.lastName,
-    			primaryPhone: obj.phone,
-    			contacts: []
-    		};
-    		var newContact = {
-    			name: obj.name,
-    			phone: obj.phone
-    		};
-
-    		Contact.save(newContact, function(contact) {
-    			newStudent.contacts.push(contact._id);
-    			Student.save(newStudent, function(student) {
-    				$scope.newClass.students.push(student._id)
-    				Classroom.update($scope.newClass);
-    			})
-    		})
+    	$http.post('/api/classrooms/'+ $scope.newClass._id +'/saveSpreadsheet', $scope.studentRoster)
+    	.success(function(classroom) {
+    		console.log(classroom);
+    		$scope.$emit('updated user');
+    		$state.go('classrooms');
     	});
-    	$state.go('classrooms.classroom');
-    }
+    };
   });
