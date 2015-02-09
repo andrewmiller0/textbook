@@ -1,16 +1,16 @@
 <div class="row">
-	<div class="col-8-md">
-		<hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500" width="700">
+	<div class="col-md-8">
+		<hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500">
 			<span ng-repeat="column in columnNames">
 				<hot-column data="{{column}}" title="'{{column}}'" value="'{{column}}'"></hot-column>
 			</span>
 		</hot-table>
-	<div class="col-4-md">
-		<div ng-repeat="model in modelNames">
-		<p>Select the column with the student's first name<p>
-			<select class="form-control" ng-model="columnSelected[model]" ng-options="column as column for column in columnNames">
+	<div class="col-md-4">
+		<div ng-repeat="(key, value) in modelNames">
+		<p>Select the column with the student's {{value}}<p>
+			<select class="form-control" ng-model="columnSelected[key]" ng-options="column as column for column in columnNames">
 			</select>
-		<button type="submit" class="btn btn-primary" ng-click="changeDataKey(model)">Next</button>
+		<button type="submit" class="btn btn-primary" ng-click="changeDataKey(key)">Next</button>
 			</div>
 	</div>
 </div>

@@ -4,7 +4,7 @@ angular.module('textbookApp')
   .controller('StudentRosterCtrl', function ($scope) {
   	$scope.rows = [];
   	$scope.columnNames = Object.keys($scope.studentRoster[0]);
-  	$scope.modelNames = ['firstName', 'lastName', 'name', 'phone'];
+  	$scope.modelNames = {'firstName':'first name', 'lastName': 'last name', 'name': 'primary contact\'s name', 'phone': 'primary contact\'s phone number', 'relationship': 'relation to primary contact'};
   	$scope.columnSelected = {};
   	console.log($scope.columnNames);
     angular.forEach($scope.studentRoster, function(column) {
