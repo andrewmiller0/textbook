@@ -19,7 +19,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
-  require('../api/conversation/conversation.socket').register(socket);
+  // require('../api/conversation/conversation.socket').register(socket);
 }
 
 module.exports = function (socketio) {

@@ -1,14 +1,13 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, $state, User, Classroom, Student, Auth, Conversation) {
+  .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation) {
 
     // we still get occasional async problems with this.  i'd say 10-20% of the time.
     $scope.user = Auth.getCurrentUser();
 
     $scope.unread = {};
 
-    // I want this to happen on login, but what if you're already logged in and you navigate away and back?
     $scope.user.$promise.then(function(user){
       user.classrooms.forEach(function(classroom) {
         classroom.students.forEach(function(student) {
@@ -23,7 +22,16 @@ angular.module('textbookApp')
           })
         });
       });
+      applyFlag();
     });
+
+    var applyFlag = function() {
+      for (var key in $scope.unread) {
+        if (!$stateParams.classId || $stateParams.classId !== key) {
+          angular.element('#'+key).html(' <i class="fa fa-comment"></i>');
+        }
+      }
+    };
 
     $scope.$on('updated user', function(event, data) {
       User.get().$promise.then(function(user) {
@@ -42,5 +50,10 @@ angular.module('textbookApp')
           $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
         }
       });
+    });
+
+    $scope.$on('unread', function(event, data, thing) {
+      $scope.unread = data;
+      applyFlag();
     });
 });

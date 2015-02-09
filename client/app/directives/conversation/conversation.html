@@ -2,11 +2,11 @@
 	<accordion close-others="true">
    <accordion-group ng-repeat="student in currentClass.students" ng-click="toggleContacts(student)">
    		<accordion-heading>
-   		 {{ student.firstName }} {{ student.lastName }}<span id="{{ student._id }}"></span>
+   		 {{ student.firstName }} {{ student.lastName }}<span id="{{ student._id }}">&nbsp;</span>
    	  </accordion-heading>
     <ul class="list-group">
 			<li ng-repeat="contact in contacts" class="list-group-item" ng-click='setActive(contact)'>
-			{{contact.name}} <span id="{{ contact._id }}"></span> --<div>{{conversation.messages.snippit}} Message Snippet Here</div>
+			{{contact.name}} <span id="{{ contact._id }}">&nbsp;</span> --<div>{{conversation.messages.snippit}} Message Snippet Here</div>
 			</li>
     </ul>
    </accordion-group>

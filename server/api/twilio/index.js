@@ -1,11 +1,14 @@
-	var express = require('express'),
+var express = require('express'),
 	twilio = require('twilio'),
 	config = require('../../config/environment'),
 	Conversation = require('../conversation/conversation.model'),
 	User = require('../user/user.model'),
-	Contact = require('../contact/contact.model')
+	Contact = require('../contact/contact.model'),
+	router = express.Router();
 
-module.exports = function(req, res) {
+module.exports = function(socket) {
+
+var getMessage = function(req, res) {
 	console.log(req.body);
 	var text = req.body;
 	// if (twilio.validateExpressRequest(req, config.twilio.clientToken, {url: config.twilio.smsWebhook})) {
@@ -20,6 +23,7 @@ module.exports = function(req, res) {
 		dateSent: new Date(),
 		type: 'received'
 	};
+
 	User.findOne({phone: text.To}, function(err, user) {
 		Contact.findOne({phone: text.From}, function(err, contact) {
 			if (err) return err;
@@ -38,6 +42,10 @@ module.exports = function(req, res) {
 					conversation.messages.push(newMessage);
 					conversation.unreadMessages++;
 					conversation.save(function(err, conversation2) {
+						socket.emit('new message', {
+							convo: conversation2,
+							message: newMessage
+						});
 						return conversation2;
 					});
 				});
@@ -45,3 +53,9 @@ module.exports = function(req, res) {
 		});
 	});
 };
+
+
+	router.post("/", getMessage);
+	return router;
+};
+
