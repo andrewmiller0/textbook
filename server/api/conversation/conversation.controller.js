@@ -43,7 +43,7 @@ exports.sendMsg = function(req, res) {
         Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
           conversation.messages.push(newMessage);
           conversation.save(function(err, conversation2) {
-            res.send(200);
+            res.json(200, newMessage)
           });
         });
       }

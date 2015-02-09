@@ -1,9 +1,27 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state, Auth) {
+  .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state, Auth, $modal) {
 
     $scope.user = Auth.getCurrentUser();
+
+    $scope.open = function () {
+        console.log('open');
+        $modal.open({
+            templateUrl: 'app/main/classrooms/homeworkmodal.html',
+            backdrop: true,
+            windowClass: 'modal',
+            scope: $scope
+        });
+    };
+
+    $scope.assignment;
+    $scope.addAssignment = function(assignment){
+      console.log(assignment);
+      Classroom.addHomework({id: $scope.currentClass, homework: assignment}).$promise.then(function(homework){
+        console.log(homework);
+      });      
+    }
 
     $scope.$on('updated user', function(event, data) {
       User.get().$promise.then(function(user) {

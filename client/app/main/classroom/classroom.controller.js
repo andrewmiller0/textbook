@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth) {
-   
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, $modal) {
+
    $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
@@ -34,7 +34,7 @@ angular.module('textbookApp')
     $scope.msgToSend;
     $scope.sendMsg = function(message){
       console.log(message);
-      console.log("Conversation = ", $scope.conversation);
+      console.log('Conversation = ', $scope.conversation);
       var reqBody = {
         _id: $scope.conversation._id,
         message: message,
@@ -45,7 +45,7 @@ angular.module('textbookApp')
       };
       console.log(reqBody)
       Conversation.sendMsg(reqBody).$promise.then(function(message){
-        console.log(message);
+        console.log('Message = ', message);
         $scope.messages.push(message);
       })
 
@@ -74,6 +74,7 @@ angular.module('textbookApp')
           User.update({id: $scope.user._id}, $scope.user);
           $scope.$emit('delete classroom', classroom);
         }
-      })
+      });
     };
+
   });
