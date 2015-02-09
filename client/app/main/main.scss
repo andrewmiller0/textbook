@@ -95,6 +95,20 @@ select {
   overflow-y: auto;
 }
 
+.list-group-item {
+  padding: 0;
+}
+
+.item-heading {
+  padding: 10px;
+}
+
+.contact {
+  width: 90%;
+  margin-left: 5%;
+  padding-left: 10px;
+}
+
 .toggle.ng-hide-add, .toggle.ng-hide-remove {
   /* this is required as of 1.3x to properly
      apply all styling in a show/hide animation */
