@@ -24,10 +24,16 @@ angular.module('textbookApp')
       }
     });
 
+   $scope.ids = {};
+
     $scope.toggleContacts = function(student) {
+      if ($scope.ids[student._id]) {
+        delete $scope.ids[student._id];
+      }
+      else {
+        $scope.ids[student._id] = true;
+      }
       console.log("this is happening now, not later");
-      $scope.contacts = student.contacts;
-      $scope.id = student._id;
       if ($scope.unread[$scope.currentClass._id] && $scope.unread[$scope.currentClass._id][student._id]) {
         console.log("am i being called?");
         for (var contactKey in $scope.unread[$scope.currentClass._id][student._id]) {
