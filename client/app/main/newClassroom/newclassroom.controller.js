@@ -16,10 +16,42 @@ angular.module('textbookApp')
       });
     };
     $scope.uploadFile = function() {
-      console.log($scope.file);
-      $http.post('/api/fileuploads', $scope.file, function(uploadedFile) {
-        console.log(uploadedFile);
-      });
+     
+          var reader = new FileReader();
+          var name = $scope.file.name;
+          var json;
+          var csv;
+          reader.onload = function(e) {
+            var data = e.target.result;
+            if(name.indexOf('.xlsx') > -1) {
+              console.log('this is a xlsx');
+              var workbook = XLSX.read(data, {type:'binary'});
+              json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+              console.log(json);
+            } else if(name.indexOf('.xls') > -1) {
+              console.log('this is xls');
+              var workbook = XLS.read(data, {type:'binary'});
+              json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+              console.log(json);
+            } else if (name.indexOf('.csv') > -1) {
+              console.log('this is a csv');
+              csv = data;
+            }
+
+          /* DO SOMETHING WITH workbook HERE */
+          console.log(workbook);
+      };
+      reader.readAsBinaryString($scope.file);
+
+    // input_dom_element.addEventListener('change', handleFile, false);
+      // console.log($scope.file);
+      // $http.post('/api/fileuploads', $scope.file, {
+      //   transformRequest:angular.identity(),
+      //   headers:{'Content-Type':undefined}
+      // })
+      // .success(function(d) {
+      //   console.log(d);
+      // });
       
-    }
+    };
   });

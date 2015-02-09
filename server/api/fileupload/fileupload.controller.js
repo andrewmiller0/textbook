@@ -2,12 +2,12 @@
 
 var _ = require('lodash');
 var Fileupload = require('./fileupload.model');
-var xlsx = require('xlsx');
+var XLSX = require('xlsx');
 
 // Get list of fileuploads
 exports.readXlsx = function(req, res, next) {
-  if(req.body.name.indexOf('.xlsx') === -1) next();
-  var newFile = xlsx.readFile(req.body);
+  console.log(req);
+  var newFile = XLSX.readFile(req.body.name);
 };
 
 // Get a single fileupload

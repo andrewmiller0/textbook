@@ -1,23 +1,15 @@
 'use strict';
 
 angular.module('textbookApp')
-  .directive('fileread', function () {
+  .directive('fileread',[ '$parse', function ($parse) {
     return {
-      scope: {
-      	fileread: '='
-      },
+      restrict: 'A',
       link: function (scope, element, attrs) {
         element.bind('change', function(changeEvent) {
-        	console.log(changeEvent);
-        	var reader = new FileReader();
-        	reader.onload = function(loadEvent) {
-        		console.log(loadEvent.target.result);
-        		scope.$apply(function() {
-        			scope.fileread = loadEvent.target.result;
-        		});
-        	}
-        	reader.readAsDataURL(changeEvent.target.files[0]);
-        })
+        	$parse(attrs.fileread)
+        	.assign(scope, element[0].files[0])
+        	scope.$apply();
+        });
       }
     };
-  });
+  }]);
