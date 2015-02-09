@@ -90,6 +90,7 @@ exports.saveSpreadsheet = function(req, res) {
     }
     Contact.create(newContact, function(err, contact) {
       if (err) { return handleError(res, err); }
+      contact.createConversation(req.user._id, contact._id);
       newStudent.contacts.push(contact._id);
       Student.create(newStudent, function(err, student) {
         if (err) { return handleError(res, err); }
