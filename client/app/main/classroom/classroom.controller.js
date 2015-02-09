@@ -2,10 +2,19 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth) {
-   
    $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
+         for (classKey in $scope.unread) {
+            if (classroom._id === classKey) {
+              for (studentKey in $scope.unread[classKey]) {
+                angular.element("#" + studentKey).append("hello")
+                for (contactKey in $scope.unread[classKey][studentKey]) {
+
+                }
+              }
+            }
+         }
       }
     });
 
@@ -45,8 +54,8 @@ angular.module('textbookApp')
       };
       console.log(reqBody)
       Conversation.sendMsg(reqBody).$promise.then(function(message){
-        console.log(message);
         $scope.messages.push(message);
+        console.log($scope.messages);
       })
 
       $scope.msgToSend = "";
@@ -62,7 +71,9 @@ angular.module('textbookApp')
           $scope.conversation = conversation.data[0];
           $scope.messages = conversation.data[0].messages;
           setTimeout(function(){ cb() }, 0);
-
+          $scope.conversation.unreadMessages = 0;
+          console.log(conversation.data[0]);
+          Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
     }
 

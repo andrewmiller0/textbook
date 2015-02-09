@@ -22,7 +22,6 @@ exports.show = function(req, res) {
 };
 
 exports.sendMsg = function(req, res) {
-
   var accountSid = config.twilio.clientID;
   var authToken = config.twilio.clientToken;
   var client = require('twilio')(accountSid, authToken);
@@ -43,7 +42,7 @@ exports.sendMsg = function(req, res) {
         Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
           conversation.messages.push(newMessage);
           conversation.save(function(err, conversation2) {
-            res.send(200);
+            res.json(200, newMessage);
           });
         });
       }
@@ -70,7 +69,7 @@ exports.update = function(req, res) {
   Conversation.findById(req.params.id, function (err, conversation) {
     if (err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
-    var updated = _.merge(conversation, req.body);
+    var updated = _.assign(conversation, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, conversation);

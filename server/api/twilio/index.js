@@ -36,7 +36,7 @@ module.exports = function(req, res) {
 				Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
 					if (err) return err;
 					conversation.messages.push(newMessage);
-					conversation.unreadMessages = true;
+					conversation.unreadMessages++;
 					conversation.save(function(err, conversation2) {
 						return conversation2;
 					});
