@@ -113,3 +113,52 @@ select {
   cursor: inherit;
   display: block;
 }
+=======
+.list-group-item {
+  padding: 0;
+}
+
+.item-heading {
+  padding: 10px;
+}
+
+.contact {
+  width: 90%;
+  margin-left: 5%;
+  padding-left: 10px;
+}
+
+.toggle.ng-hide-add, .toggle.ng-hide-remove {
+  /* this is required as of 1.3x to properly
+     apply all styling in a show/hide animation */
+  transition: 0s linear all;
+}
+
+.toggle.ng-hide-add-active,
+.toggle.ng-hide-remove-active {
+  /* the transition is defined in the active class */
+  transition: 1s linear all;
+}
+
+.toggle.ng-hide-add { 
+  animation-duration: 1s;
+  animation-name: slide-down;
+}
+
+@keyframes slide-down {
+  from {
+    display: none;
+  }
+  to {
+    display: block;
+  }
+}
+.toggle.ng-hide-add.ng-hide-add-active {
+
+}
+.toggle.ng-hide-remove {
+
+}
+.toggle.ng-hide-remove.ng-hide-remove-active {
+
+}
