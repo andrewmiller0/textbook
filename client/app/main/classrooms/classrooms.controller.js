@@ -31,6 +31,7 @@ angular.module('textbookApp')
         $scope.classrooms = user.classrooms;
       });
     });
+
     $scope.$on('delete classroom', function(event, data) {
       User.get().$promise.then(function(user) {
         $scope.user = user;
@@ -42,4 +43,4 @@ angular.module('textbookApp')
         }
       });
     });
-  });
+});

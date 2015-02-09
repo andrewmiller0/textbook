@@ -87,4 +87,10 @@ angular.module('textbookApp')
         }
       })
     };
+
+    socket.socket.on('conversation:save', function(convo){
+      if ($scope.conversation && $scope.conversation._id == convo._id) {
+        $scope.getConvo();
+      }
+    });
   });
