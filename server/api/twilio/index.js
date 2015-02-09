@@ -1,4 +1,4 @@
-var express = require('express'),
+	var express = require('express'),
 	twilio = require('twilio'),
 	config = require('../../config/environment'),
 	Conversation = require('../conversation/conversation.model'),

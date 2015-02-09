@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, socket) {
    $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
@@ -10,21 +10,19 @@ angular.module('textbookApp')
               for (studentKey in $scope.unread[classKey]) {
                 angular.element("#" + studentKey).append("hello")
                 for (contactKey in $scope.unread[classKey][studentKey]) {
-
+                  angular.element("#" + studentKey).append("9999")
                 }
               }
             }
          }
       }
     });
-
     $scope.toggleContacts = function(student) {
       $scope.contacts = student.contacts;
       $scope.id = student._id;
     };
 
     $scope.gotoBottom = function() {
-      console.log('anchorscroll');
       $location.hash('bottom');
       $anchorScroll();
     };
@@ -70,10 +68,10 @@ angular.module('textbookApp')
           console.log(conversation);
           $scope.conversation = conversation.data[0];
           $scope.messages = conversation.data[0].messages;
-          setTimeout(function(){ cb() }, 0);
+          if (cb) setTimeout(function(){ cb() }, 0);
           $scope.conversation.unreadMessages = 0;
-          console.log(conversation.data[0]);
-          Conversation.update({id: $scope.conversation._id}, $scope.conversation);
+          $scope.unread
+          // Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
     }
 
@@ -91,6 +89,29 @@ angular.module('textbookApp')
     socket.socket.on('conversation:save', function(convo){
       if ($scope.conversation && $scope.conversation._id == convo._id) {
         $scope.getConvo();
+      }
+      else {
+        $scope.user.classrooms.forEach(function(classroom) {
+          classroom.students.forEach(function(student) {
+            student.contacts.forEach(function(contact) {
+              if (convo.contactId == contact._id) {
+                if ($scope.unread[classroom._id] && $scope.unread[classroom._id][student._id] && $scope.unread[classroom._id][student._id][contact._id]) {
+                  $scope.unread[classroom._id][student._id][contact._id]++;
+                }
+                else {
+                  // THIS IS SO BAD I AM SO SORRY
+                  var additionToUnread = {};
+                  additionToUnread[classroom._id] = {};
+                  additionToUnread[classroom._id][student._id] = {};
+                  additionToUnread[classroom._id][student._id][contact._id] = 1;
+                  _.merge($scope.unread, additionToUnread);
+                }
+                console.log($scope.unread);
+                return;
+              }
+            })
+          });
+        });
       }
     });
   });

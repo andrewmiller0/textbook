@@ -6,7 +6,7 @@ angular.module('textbookApp')
     // we still get occasional async problems with this.  i'd say 10-20% of the time.
     $scope.user = Auth.getCurrentUser();
 
-    $scope.unread;
+    $scope.unread = {};
 
     // I want this to happen on login, but what if you're already logged in and you navigate away and back?
     $scope.user.$promise.then(function(user){
