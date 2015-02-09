@@ -2,12 +2,15 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, socket) {
-
+    $scope.activeContact = "";
+    $scope.id = "";
    var applyFlags = function() {
-      // console.log($scope.unread);
+      console.log($scope.unread);
       for (var classKey in $scope.unread) {
         if ($scope.currentClass._id === classKey) {
           for (var studentKey in $scope.unread[classKey]) {
+            console.log("applying flag to student", studentKey);
+            console.log(angular.element("#" + studentKey))
             angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
           }
         }
@@ -26,9 +29,9 @@ angular.module('textbookApp')
       $scope.contacts = student.contacts;
       $scope.id = student._id;
       if ($scope.unread[$scope.currentClass._id] && $scope.unread[$scope.currentClass._id][student._id]) {
+        console.log("am i being called?");
         for (var contactKey in $scope.unread[$scope.currentClass._id][student._id]) {
-          console.log(contactKey, student.contacts[0]._id);
-          angular.element("#" + contactKey).html('<span class="badge">hello'+ $scope.unread[$scope.currentClass._id][student._id][contactKey] +'</span>');
+          angular.element("#" + contactKey).html('<span class="badge">'+ $scope.unread[$scope.currentClass._id][student._id][contactKey] +'</span>');
         }
       }
     };
@@ -38,8 +41,8 @@ angular.module('textbookApp')
       $anchorScroll();
     };
 
-    $scope.activeContact;
     $scope.setActive = function(contact){
+      console.log($scope.activeContact);
       $scope.activeContact = contact;
       $scope.getConvo($scope.gotoBottom);
     }
@@ -78,15 +81,20 @@ angular.module('textbookApp')
           $scope.conversation = conversation.data[0];
           $scope.messages = conversation.data[0].messages;
           if (cb) setTimeout(function(){ cb() }, 0);
+
           $scope.conversation.unreadMessages = 0;
           for (var studentKey in $scope.unread[$scope.currentClass._id]) {
             for (var contactKey in $scope.unread[$scope.currentClass._id][studentKey]) {
               if (contactKey == $scope.activeContact._id) {
                 delete $scope.unread[$scope.currentClass._id][studentKey][contactKey]
+                console.log("deleted contactKey");
+                angular.element("#"+contactKey).html('&nbsp;');
                 if (!Object.keys($scope.unread[$scope.currentClass._id][studentKey]).length) {
+                  console.log("Deleted studentKey")
                   delete $scope.unread[$scope.currentClass._id][studentKey];
                   angular.element('#'+studentKey).html('&nbsp;');
                   if (!Object.keys($scope.unread[$scope.currentClass._id]).length) {
+                    console.log("deleted classroom key")
                     delete $scope.unread[$scope.currentClass._id];
                     angular.element('#'+$scope.currentClass._id).html('&nbsp;');
                   }
@@ -94,7 +102,7 @@ angular.module('textbookApp')
               }
             }
           }
-          // Conversation.update({id: $scope.conversation._id}, $scope.conversation);
+          Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
     }
 

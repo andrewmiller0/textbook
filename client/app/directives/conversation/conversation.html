@@ -1,8 +1,8 @@
 <div>
 	<accordion close-others="true">
-   <accordion-group ng-repeat="student in currentClass.students" ng-click="toggleContacts(student)">
+   <accordion-group ng-repeat="student in currentClass.students">
    		<accordion-heading>
-   		 {{ student.firstName }} {{ student.lastName }}<span id="{{ student._id }}">&nbsp;</span>
+   		 <span ng-click="toggleContacts(student)">{{ student.firstName }} {{ student.lastName }}<span id="{{ student._id }}">&nbsp;</span></span>
    	  </accordion-heading>
     <ul class="list-group">
 			<li ng-repeat="contact in contacts" class="list-group-item" ng-click='setActive(contact)'>
