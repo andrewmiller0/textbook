@@ -1,0 +1,10 @@
+<hot-table settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange }" rowHeaders="false" datarows="studentRoster" height="500" width="1000">
+
+
+<span ng-repeat="column in columnNames">
+	<hot-column data="{{column}}" title="'{{column}}'"></hot-column>
+	<!-- <div ng-repeat="val in rows">
+	</div> -->
+</span>
+
+</hot-table>

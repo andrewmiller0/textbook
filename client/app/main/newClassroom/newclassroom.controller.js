@@ -37,21 +37,10 @@ angular.module('textbookApp')
               console.log('this is a csv');
               csv = data;
             }
-
-          /* DO SOMETHING WITH workbook HERE */
-          console.log(workbook);
+            $scope.studentRoster = json;
+            $state.go('.studentRoster');
       };
       reader.readAsBinaryString($scope.file);
-
-    // input_dom_element.addEventListener('change', handleFile, false);
-      // console.log($scope.file);
-      // $http.post('/api/fileuploads', $scope.file, {
-      //   transformRequest:angular.identity(),
-      //   headers:{'Content-Type':undefined}
-      // })
-      // .success(function(d) {
-      //   console.log(d);
-      // });
       
     };
   });
