@@ -13,6 +13,11 @@ angular.module('textbookApp')
       	templateUrl: 'app/main/newClassroom/newclassroom.html',
       	controller: 'NewClassCtrl'
       })
+      .state('addClassroom.studentRoster', {
+        url: 'classroom/add/roster',
+        templateUrl: 'app/main/newClassroom/studentRoster/studentRoster.html',
+        controller: 'StudentRosterCtrl'
+      })
       .state('classrooms.classroom', {
         url: ':classId',
         templateUrl: 'app/main/classroom/classroom.html',

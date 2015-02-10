@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/fileupload/fileupload.socket').register(socket);
   require('../api/contact/contact.socket').register(socket);
   require('../api/schedMsg/schedMsg.socket').register(socket);
   require('../api/conversation/conversation.socket').register(socket);

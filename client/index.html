@@ -13,6 +13,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -47,6 +48,12 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/js-xlsx/dist/jszip.js"></script>
+      <script src="bower_components/js-xlsx/dist/xlsx.js"></script>
+      <script src="bower_components/js-xls/dist/xls.js"></script>
+      <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
+      <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
+      <script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -64,6 +71,7 @@
           <script src="app/directives/conversation/conversation.directive.js"></script>
           <script src="app/directives/editContact/editContact.directive.js"></script>
           <script src="app/directives/editStudentForm/editStudentForm.directive.js"></script>
+          <script src="app/directives/fileread/fileread.directive.js"></script>
           <script src="app/factories/classroom.service.js"></script>
           <script src="app/factories/contact.service.js"></script>
           <script src="app/factories/conversation.service.js"></script>
@@ -75,6 +83,7 @@
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="app/main/newClassroom/newclassroom.controller.js"></script>
+          <script src="app/main/newClassroom/studentRoster/studentRoster.controller.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/mongoose-error/mongoose-error.directive.js"></script>
