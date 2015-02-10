@@ -83,7 +83,8 @@ exports.saveSpreadsheet = function(req, res) {
   req.body.forEach(function(obj) {
     var newContact = {
       name: obj.name,
-      phone: obj.phone
+      phone: obj.phone,
+      relationship: obj.relationship
     };
     var newStudent = {
       firstName: obj.firstName,
