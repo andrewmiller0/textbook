@@ -19,7 +19,7 @@ angular.module('textbookApp')
      
           var reader = new FileReader();
           var name = $scope.file.name;
-          var json;
+          var json = [];
           var csv;
           reader.onload = function(e) {
             var data = e.target.result;
@@ -36,11 +36,22 @@ angular.module('textbookApp')
             } else if (name.indexOf('.csv') > -1) {
               console.log('this is a csv');
               csv = data;
+              var result = Papa.parse(csv);
+              var columns = result.data.shift()
+              result.data.forEach(function(student) {
+                var studentObj = {};
+                student.forEach(function(val, i) {
+                  studentObj[columns[i]] = val;
+                });
+                json.push(studentObj);
+              });
+            } else {
+              alert('you need to upload the correct file');
             }
             $scope.studentRoster = json;
             $state.go('.studentRoster');
       };
       reader.readAsBinaryString($scope.file);
-      
+
     };
   });
