@@ -80,7 +80,6 @@ exports.saveSpreadsheet = function(req, res) {
     delete req.body.__v; 
   }
   var studentArr = [];
-  console.log(req.body.length);
   req.body.forEach(function(obj) {
     var newContact = {
       name: obj.name,
@@ -119,10 +118,7 @@ exports.saveSpreadsheet = function(req, res) {
             classroom.markModified('students');
             classroom.save(function(err) {
               if(err) { return handleError(res, err); }
-              User.findById(req.user._id, function(err, user) {
-                if(err) { return handleError(res, err); }
-                return res.json(200, user);
-              });
+                return res.json(200, classroom);
           });
         });
         }

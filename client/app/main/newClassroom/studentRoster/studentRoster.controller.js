@@ -43,7 +43,7 @@ angular.module('textbookApp')
     	.success(function(classroom) {
     		console.log(classroom);
     		$scope.$emit('updated user');
-    		$state.go('classrooms');
+    		$state.go('classrooms.classroom', {classId: classroom._id});
     	});
     };
   });
