@@ -4,7 +4,7 @@ angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, User, Classroom, Student, $state, Auth) {
 
     $scope.user = Auth.getCurrentUser();
-
+    console.log($scope.user);
     $scope.$on('updated user', function(event, data) {
       $scope.user = Auth.getCurrentUser();  
     });

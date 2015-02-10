@@ -70,7 +70,7 @@ exports.update = function(req, res, next) {
       user.classrooms = req.body.classrooms;
       user.save(function(err) {
         if (err) return validationError(res, err);
-        res.send(200);
+        res.send(200, user);
       });
   });
 };

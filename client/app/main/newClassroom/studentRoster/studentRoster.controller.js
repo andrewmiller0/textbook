@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth) {
   	$scope.newClass = {
   		students: []
   	}
@@ -40,10 +40,11 @@ angular.module('textbookApp')
 
     $scope.saveData = function() {
     	$http.post('/api/classrooms/'+ $scope.newClass._id +'/saveSpreadsheet', $scope.studentRoster)
-    	.success(function(classroom) {
-    		console.log(classroom);
+    	.success(function(user) {
+    		console.log(user);
+        Auth.updateUser(user);
     		$scope.$emit('updated user');
-    		$state.go('classrooms.classroom', {classId: classroom._id});
+    		$state.go('classrooms.classroom', {classId: user.classrooms[user.classrooms.length-1]._id});
     	});
     };
   });

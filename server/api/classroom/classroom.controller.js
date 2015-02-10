@@ -118,7 +118,13 @@ exports.saveSpreadsheet = function(req, res) {
             classroom.markModified('students');
             classroom.save(function(err) {
               if(err) { return handleError(res, err); }
-                return res.json(200, classroom);
+              User.findById(req.user._id, function(err, user) {
+                if(err) { return handleError(res, err); }
+                user.deepPopulate('classrooms.students.contacts', function(err) {
+                  if(err) { return handleError(res, err); }
+                  return res.json(200, user);
+                });
+              });
           });
         });
         }
