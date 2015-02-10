@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col-md-8">
+		<h3 class="text-center">{{newClass.name}}</h3>
 		<hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500">
 			<span ng-repeat="column in columnNames">
 				<hot-column data="{{column}}" title="'{{column}}'" value="'{{column}}'"></hot-column>
