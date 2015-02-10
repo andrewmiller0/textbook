@@ -34,10 +34,12 @@ exports.sendMsg = function(req, res, next) {
 
     message.send(function(message){
       Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation){
-        console.log(conversation);
+        if (err) console.log(err);
+        console.log('Save ', conversation);
         conversation.messages.push(message);
         conversation.save(function(err,conversation2){
           if (err) console.log('Save Error ', err);
+          console.log(conversation2);
           res.json(200, message);
         });
       });

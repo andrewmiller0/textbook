@@ -33,10 +33,7 @@ angular.module('textbookApp')
               }
             }
           }
-          $scope.$emit('flag change', {
-            unread: $scope.unread,
-            type: 'read'
-          });
+          $scope.$emit('read', $scope.unread);
           Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
 
