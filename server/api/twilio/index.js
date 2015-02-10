@@ -41,9 +41,12 @@ module.exports = function(socket) {
 				else {
 					Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
 						if (err) console.log(err);
+						console.log(newMessage);
 						conversation.messages.push(newMessage);
 						conversation.unreadMessages++;
+
 						conversation.save(function(err, conversation2) {
+							console.log(conversation2);
 							if(newMessage.body.toLowerCase() === 'homework'){
 								user.deepPopulate('classrooms.students.contacts', function(err) {
 									if (err) console.log(err);
