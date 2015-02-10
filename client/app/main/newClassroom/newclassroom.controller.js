@@ -4,6 +4,7 @@ angular.module('textbookApp')
   .controller('NewClassCtrl', function ($scope, $state, Auth, Classroom, User, $http) {
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
+    $scope.error = {};
     $scope.addClassroom = function() {
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom);
@@ -16,7 +17,6 @@ angular.module('textbookApp')
       });
     };
     $scope.uploadFile = function() {
-     
           var reader = new FileReader();
           var name = $scope.file.name;
           var json = [];
@@ -46,7 +46,9 @@ angular.module('textbookApp')
                 json.push(studentObj);
               });
             } else {
-              alert('you need to upload the correct file');
+              $scope.error.message = true;
+              $scope.$apply();
+              return;
             }
             $scope.studentRoster = json;
             $state.go('.studentRoster');

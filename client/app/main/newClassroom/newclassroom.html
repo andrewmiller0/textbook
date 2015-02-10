@@ -16,6 +16,7 @@
                         </span>
                         <input type="text" class="form-control" readonly ng-model="file.name">
                     </div>
+                        <span class="help-block" ng-show="error.message">Your file is unsupported!  Try uploading a different file</span>
                     <button type="submit" class="btn btn-default">Upload</button>
                 </form>
             </div>
