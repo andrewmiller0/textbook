@@ -73,7 +73,7 @@ exports.destroy = function(req, res) {
 exports.addHomework = function(req, res) {
   var assignment = req.body.homework;
   console.log(req.body);
-  Classroom.findById(req.body.id, function(err, classroom){
+  Classroom.findById(req.body.classId, function(err, classroom){
     classroom.homework.push(assignment);
     classroom.save(function(classroom){
       res.json(200, assignment);

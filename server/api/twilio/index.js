@@ -35,7 +35,6 @@ module.exports = function(req, res) {
 				});
 			}
 			else {
-
 				Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
 					if (err) return err;
 					conversation.messages.push(newMessage);
@@ -72,7 +71,7 @@ module.exports = function(req, res) {
 							});
 						});
 					}
-					});
+				});
 			}
 		});
 	});

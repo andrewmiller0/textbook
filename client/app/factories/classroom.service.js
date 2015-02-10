@@ -13,7 +13,10 @@ angular.module('textbookApp')
         method: 'PUT'
       },
       addHomework:{
-        method: 'POST'
+        method: 'POST',
+        params: {
+          controller: 'homework'
+        }
       }
     });
 
