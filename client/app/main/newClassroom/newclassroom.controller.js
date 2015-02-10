@@ -4,6 +4,7 @@ angular.module('textbookApp')
   .controller('NewClassCtrl', function ($scope, $state, Auth, Classroom, User, $http) {
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
+    $scope.error = {};
     $scope.addClassroom = function() {
       Classroom.save($scope.classroom, function(classroom) {
         $scope.user.classrooms.push(classroom);
@@ -16,10 +17,9 @@ angular.module('textbookApp')
       });
     };
     $scope.uploadFile = function() {
-     
           var reader = new FileReader();
           var name = $scope.file.name;
-          var json;
+          var json = [];
           var csv;
           reader.onload = function(e) {
             var data = e.target.result;
@@ -36,11 +36,24 @@ angular.module('textbookApp')
             } else if (name.indexOf('.csv') > -1) {
               console.log('this is a csv');
               csv = data;
+              var result = Papa.parse(csv);
+              var columns = result.data.shift()
+              result.data.forEach(function(student) {
+                var studentObj = {};
+                student.forEach(function(val, i) {
+                  studentObj[columns[i]] = val;
+                });
+                json.push(studentObj);
+              });
+            } else {
+              $scope.error.message = true;
+              $scope.$apply();
+              return;
             }
             $scope.studentRoster = json;
             $state.go('.studentRoster');
       };
       reader.readAsBinaryString($scope.file);
-      
+
     };
   });
