@@ -48,10 +48,10 @@ angular.module('textbookApp')
     $scope.sendMsg = function(message){
       console.log(message);
       console.log("Conversation = ", $scope.conversation);
+      console.log($scope.activeContact);
       var reqBody = {
         _id: $scope.conversation._id,
         message: message,
-        to: $scope.activeContact.phone,
         from: $scope.user.phone,
         userId: $scope.user._id,
         contactId: contactId

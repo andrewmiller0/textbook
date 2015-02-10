@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Conversation = require('./conversation.model');
 var config = require('../../config/environment');
 var Sms = require('../../remotes/sms');
+var Contact = require('../contact/contact.model');
 
 // Get list of conversations
 exports.index = function(req, res) {
@@ -23,18 +24,22 @@ exports.show = function(req, res) {
 };
 
 exports.sendMsg = function(req, res, next) {
+  Contact.findById(req.body.contactId, function(err, contact){
+    if (err) console.log(err);
+    var message = new Sms({
+        body: req.body.message,
+        to: contact.phone,
+        from: req.body.from
+    });
 
-  var message = new Sms({
-      body: req.body.message,
-      to: req.body.to,
-      from: req.body.from
-  });
-
-  message.send(function(message){
-    Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation){
-      conversation.messages.push(message);
-      conversation.save(function(err,conversation2){
-        res.json(200, message);
+    message.send(function(message){
+      Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation){
+        console.log(conversation);
+        conversation.messages.push(message);
+        conversation.save(function(err,conversation2){
+          if (err) console.log('Save Error ', err);
+          res.json(200, message);
+        });
       });
     });
   });

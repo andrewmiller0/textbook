@@ -25,10 +25,6 @@ angular.module('textbookApp')
       });
     }
 
-    $scope.$on('updated user', function(event, data) {
-      User.get().$promise.then(function(user) {
-        $scope.user = user;
-        $scope.classrooms = user.classrooms;
     $scope.user.$promise.then(function(user){
       user.classrooms.forEach(function(classroom) {
         classroom.students.forEach(function(student) {

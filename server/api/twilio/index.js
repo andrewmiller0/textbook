@@ -40,13 +40,13 @@ module.exports = function(socket) {
 				}
 				else {
 					Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
-						if (err) return err;
+						if (err) console.log(err);
 						conversation.messages.push(newMessage);
 						conversation.unreadMessages++;
 						conversation.save(function(err, conversation2) {
 							if(newMessage.body.toLowerCase() === 'homework'){
 								user.deepPopulate('classrooms.students.contacts', function(err) {
-									if (err) return (err);
+									if (err) console.log(err);
 									var retArr = [];
 									user.classrooms.forEach(function(classroom){
 										classroom.students.forEach(function(student){
