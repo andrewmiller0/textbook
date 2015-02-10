@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation) {
+  .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket) {
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
 
@@ -24,10 +24,7 @@ angular.module('textbookApp')
 
     var applyFlag = function() {
       for (var key in $scope.unread) {
-        if (!$stateParams.classId || $stateParams.classId !== key) {
-          console.log("applying flag");
-          angular.element('#'+key).html(' <i class="fa fa-comment"></i>');
-        }
+        
       }
     };
 
@@ -46,8 +43,50 @@ angular.module('textbookApp')
       });
     });
 
-    $scope.$on('flag change', function(event, data) {
-      $scope.unread = data.unread;
-      if (data.type == 'unread') applyFlag();
+    $scope.$on('read', function(event, data) {
+      $scope.unread = data;
     });
+
+    $scope.applyFlags = function() {
+      angular.element('#'+classKey).html(' <i class="fa fa-comment"></i>');
+      for (var classKey in $scope.unread) {
+        if ($state.params.classId === classKey) {
+          for (var studentKey in $scope.unread[classKey]) {
+            console.log("applying flag to student", studentKey);
+            angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
+            for (var contactKey in $scope.unread[classKey][studentKey]) {
+              console.log("applying flag to contact");
+              angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[classKey][studentKey][contactKey] +'</span>');
+            }
+          }
+        }
+      }
+    };
+
+    socket.socket.on('new message', function(res){
+      if (!$stateParams.contactId || $stateParams.contactId !== res.convo.contactId) {
+        $scope.user.classrooms.forEach(function(classroom) {
+          classroom.students.forEach(function(student) {
+            var contact = _.find(student.contacts, function(c) { return c._id == res.convo.contactId});
+              if (contact) {
+                if ($scope.unread[classroom._id] && $scope.unread[classroom._id][student._id] && $scope.unread[classroom._id][student._id][contact._id]) {
+                  console.log("this shouldn't be running");
+                  $scope.unread[classroom._id][student._id][contact._id]++;
+                }
+                else {
+                  // i am so sorry for this
+                  var additionToUnread = {};
+                  additionToUnread[classroom._id] = {};
+                  additionToUnread[classroom._id][student._id] = {};
+                  additionToUnread[classroom._id][student._id][contact._id] = 1;
+                  _.merge($scope.unread, additionToUnread);
+                }
+                applyFlag();
+                $scope.applyFlags();
+                return;
+              }
+            });
+          })
+          }
+        });
 });
