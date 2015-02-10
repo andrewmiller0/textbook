@@ -2,6 +2,10 @@
 
 var _ = require('lodash');
 var Classroom = require('./classroom.model');
+var Student = require('../student/student.model');
+var Contact = require('../contact/contact.model');
+var User = require('../user/user.model');
+var async = require('async');
 
 // Get list of classrooms
 exports.index = function(req, res) {
@@ -70,6 +74,7 @@ exports.destroy = function(req, res) {
   });
 };
 
+
 exports.addHomework = function(req, res) {
   var assignment = req.body.homework;
   console.log(req.body);
@@ -80,6 +85,65 @@ exports.addHomework = function(req, res) {
     });
   });
 }
+
+exports.saveSpreadsheet = function(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+    delete req.body.__v;
+  }
+  var studentArr = [];
+  req.body.forEach(function(obj) {
+    var newContact = {
+      name: obj.name,
+      phone: obj.phone
+    };
+    var newStudent = {
+      firstName: obj.firstName,
+      lastName: obj.lastName,
+      primaryPhone: obj.phone,
+      contacts: []
+    }
+
+    async.series([
+        function(callback) {
+          Contact.create(newContact, function(err, contact) {
+            if (err) { return handleError(res, err); }
+            contact.createConversation(req.user._id, contact._id);
+            newStudent.contacts.push(contact._id);
+            callback(null);
+          });
+        },
+        function(callback) {
+          Student.create(newStudent, function(err, student) {
+            if (err) { return handleError(res, err); }
+            callback(null, student._id);
+          });
+        }
+      ], function(err, results) {
+        console.log(studentArr.length);
+        studentArr.push(results[1]);
+        if(studentArr.length === req.body.length) {
+          Classroom.findById(req.params.id, function (err, classroom) {
+            // console.log("these are the students", studentArr);
+            if (err) { return handleError(res, err); }
+            classroom.students = studentArr;
+            classroom.markModified('students');
+            classroom.save(function(err) {
+              if(err) { return handleError(res, err); }
+              User.findById(req.user._id, function(err, user) {
+                if(err) { return handleError(res, err); }
+                user.deepPopulate('classrooms.students.contacts', function(err) {
+                  if(err) { return handleError(res, err); }
+                  return res.json(200, user);
+                });
+              });
+          });
+        });
+        }
+      });
+    });
+};
+>>>>>>> 7607125ad78515974fabc6820ae3bd2f0600bea3
 
 function handleError(res, err) {
   return res.send(500, err);

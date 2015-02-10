@@ -50,7 +50,6 @@ angular.module('textbookApp')
            $scope.currentStudent.contacts[0]._id = contact._id;
            $scope.classroom.students.push($scope.currentStudent);
            studentToSave.contacts[0] = contact._id;
-           console.log($scope.currentStudent, studentToSave);
 
            Student.save(studentToSave, function(student) {
               $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;

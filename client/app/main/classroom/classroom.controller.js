@@ -1,70 +1,41 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, $modal) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
+   var applyFlags = function() {
+    console.log($scope.unread);
+      for (var classKey in $scope.unread) {
+        if ($scope.currentClass._id === classKey) {
+          for (var studentKey in $scope.unread[classKey]) {
+            // console.log("applying flag to student", studentKey);
+            angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
+          }
+        }
+      }
+    };
 
-   $scope.user.classrooms.forEach(function(classroom) {
+    $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
+        setTimeout(function(){ applyFlags(); }, 0);
       }
     });
 
+   $scope.ids = {};
+
     $scope.toggleContacts = function(student) {
-      $scope.contacts = student.contacts;
-      $scope.id = student._id;
+      if ($scope.ids[student._id]) {
+        delete $scope.ids[student._id];
+      }
+      else {
+        $scope.ids[student._id] = true;
+      }
+      if ($scope.unread[$scope.currentClass._id] && $scope.unread[$scope.currentClass._id][student._id]) {
+        for (var contactKey in $scope.unread[$scope.currentClass._id][student._id]) {
+          angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[$scope.currentClass._id][student._id][contactKey] +'</span>');
+        }
+      }
     };
-
-    $scope.gotoBottom = function() {
-      console.log('anchorscroll');
-      $location.hash('bottom');
-      $anchorScroll();
-    };
-
-    $scope.activeContact;
-    $scope.setActive = function(contact){
-      $scope.activeContact = contact;
-      console.log ($scope.activeContact);
-      $scope.getConvo($scope.gotoBottom);
-    }
-
-    $scope.isSent = function(message){
-      return message.type === 'sent';
-    }
-
-    $scope.msgToSend;
-    $scope.sendMsg = function(message){
-      console.log(message);
-      console.log('Conversation = ', $scope.conversation);
-      var reqBody = {
-        _id: $scope.conversation._id,
-        message: message,
-        to: $scope.activeContact.phone,
-        from: $scope.user.phone,
-        userId: $scope.user._id,
-        contactId: $scope.activeContact._id
-      };
-      console.log(reqBody)
-      Conversation.sendMsg(reqBody).$promise.then(function(message){
-        console.log('Message = ', message);
-        $scope.messages.push(message);
-      })
-
-      $scope.msgToSend = "";
-
-    };
-
-    $scope.messages;
-    $scope.getConvo = function(cb){
-      Conversation.getConversation({userId: $scope.user._id, contactId: $scope.activeContact._id})
-        .$promise
-        .then(function(conversation){
-          console.log(conversation);
-          $scope.conversation = conversation.data[0];
-          $scope.messages = conversation.data[0].messages;
-          setTimeout(function(){ cb() }, 0);
-
-        });
-    }
 
     $scope.deleteClassroom = function(classroomId) {
       Classroom.delete({id: classroomId});
@@ -77,4 +48,35 @@ angular.module('textbookApp')
       });
     };
 
+    socket.socket.on('new message', function(res){
+      if (!$stateParams.contactId || $stateParams.contactId !== res.convo.contactId) {
+        $scope.user.classrooms.forEach(function(classroom) {
+          classroom.students.forEach(function(student) {
+            student.contacts.forEach(function(c){ console.log(c._id, res.convo.contactId) });
+            var contact = _.find(student.contacts, function(c) { return c._id == res.convo.contactId});
+              if (contact) {
+                if ($scope.unread[classroom._id] && $scope.unread[classroom._id][student._id] && $scope.unread[classroom._id][student._id][contact._id]) {
+                  console.log("adding 1 to the unread object", $scope.unread);
+                  $scope.unread[classroom._id][student._id][contact._id]++;
+                }
+                else {
+                  // i am so sorry for this
+                  var additionToUnread = {};
+                  additionToUnread[classroom._id] = {};
+                  additionToUnread[classroom._id][student._id] = {};
+                  additionToUnread[classroom._id][student._id][contact._id] = 1;
+                  _.merge($scope.unread, additionToUnread);
+                }
+                // console.log($scope.unread);
+                $scope.$emit('flag change', {
+                  unread: $scope.unread,
+                  type: 'unread'
+                });
+                applyFlags();
+                return;
+              }
+            });
+          })
+          }
+        });
   });

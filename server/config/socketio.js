@@ -13,16 +13,12 @@ function onDisconnect(socket) {
 // When the user connects.. perform this
 function onConnect(socket) {
   // When the client emits 'info', this listens and executes
+  // console.log(socket);
   socket.on('info', function (data) {
     console.info('[%s] %s', socket.address, JSON.stringify(data, null, 2));
   });
 
   // Insert sockets below
-  require('../api/contact/contact.socket').register(socket);
-  require('../api/schedMsg/schedMsg.socket').register(socket);
-  require('../api/conversation/conversation.socket').register(socket);
-  require('../api/classroom/classroom.socket').register(socket);
-  require('../api/student/student.socket').register(socket);
 }
 
 module.exports = function (socketio) {
@@ -36,10 +32,10 @@ module.exports = function (socketio) {
   // 1. You will need to send the token in `client/components/socket/socket.service.js`
   //
   // 2. Require authentication here:
-  // socketio.use(require('socketio-jwt').authorize({
-  //   secret: config.secrets.session,
-  //   handshake: true
-  // }));
+  socketio.use(require('socketio-jwt').authorize({
+    secret: config.secrets.session,
+    handshake: true
+  }));
 
   socketio.on('connection', function (socket) {
     socket.address = socket.handshake.address !== null ?

@@ -60,7 +60,7 @@ exports.update = function(req, res) {
   Conversation.findById(req.params.id, function (err, conversation) {
     if (err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
-    var updated = _.merge(conversation, req.body);
+    var updated = _.assign(conversation, req.body);
     updated.save(function (err) {
       if (err) { return handleError(res, err); }
       return res.json(200, conversation);

@@ -4,21 +4,21 @@
 
 'use strict';
 
-var Contact = require('./contact.model');
+var Fileupload = require('./fileupload.model');
 
 exports.register = function(socket) {
-  Contact.schema.post('save', function (doc) {
+  Fileupload.schema.post('save', function (doc) {
     onSave(socket, doc);
   });
-  Contact.schema.post('remove', function (doc) {
+  Fileupload.schema.post('remove', function (doc) {
     onRemove(socket, doc);
   });
 }
 
 function onSave(socket, doc, cb) {
-  socket.emit('contact:save', doc);
+  socket.emit('fileupload:save', doc);
 }
 
 function onRemove(socket, doc, cb) {
-  socket.emit('contact:remove', doc);
+  socket.emit('fileupload:remove', doc);
 }
