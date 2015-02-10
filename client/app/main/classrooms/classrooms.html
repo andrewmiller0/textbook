@@ -5,10 +5,10 @@
 	</div>
 	<div ng-show="user.classrooms.length > 0">
 	<div class="btn-group" role="group">
-	            <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})">
-	            {{classroom.name}}
-	           </button>
-	        </div>
-	    <div ui-view></div>
+        <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})">
+            {{classroom.name}}<span id="{{ classroom._id }}">&nbsp;</span>
+       </button>
+    </div>
+    <div ui-view></div>
 	</div>
 </div>

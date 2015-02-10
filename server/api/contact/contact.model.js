@@ -17,7 +17,7 @@ ContactSchema.methods.createConversation = function(userId, contactId, message) 
 		  userId: userId,
 		  contactId: contactId,
 		  messages: arr,
-		  unreadMessages: false
+		  unreadMessages: 0
 		}, function(err, conversation) {
 			if(err) { return err; }
 			else {

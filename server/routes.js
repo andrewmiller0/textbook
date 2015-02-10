@@ -6,7 +6,7 @@
 
 var errors = require('./components/errors');
 
-module.exports = function(app) {
+module.exports = function(app, socketio) {
 
   // Insert routes below
   app.use('/api/fileuploads', require('./api/fileupload'));
@@ -18,7 +18,7 @@ module.exports = function(app) {
   app.use('/api/users', require('./api/user'));
 
   app.use('/auth', require('./auth'));
-  app.post('/received/sms', require('./api/twilio'));
+  app.use('/received/sms', require('./api/twilio')(socketio));
   
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')

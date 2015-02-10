@@ -18,7 +18,7 @@ var ConversationSchema = new Schema({
   userId: {type: Schema.Types.ObjectId, ref: 'User'},
   contactId: {type: Schema.Types.ObjectId, ref: 'Contact'},
   messages: {type: [MessageSchema]}, // this is how we did it in stackstore but idk
-  unreadMessages: Boolean
+  unreadMessages: Number
 });
 
 ConversationSchema.virtual('updated').get(function() {
