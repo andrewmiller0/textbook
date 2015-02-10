@@ -24,7 +24,8 @@ angular.module('textbookApp')
         controller: 'ClassroomCtrl'
       })
       .state('classrooms.classroom.conversation', {
-        url: ':classId/conversations/:convoId',
-        templateUrl: 'app/main/classroom/conversation/conversation.html'
+        url: '/conversations/:contactId',
+        templateUrl: 'app/main/classroom/conversation/conversation.html',
+        controller: 'ConversationCtrl'
       })
   });

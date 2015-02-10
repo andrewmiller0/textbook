@@ -2,8 +2,6 @@
 
 angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation) {
-
-    // we still get occasional async problems with this.  i'd say 10-20% of the time.
     $scope.user = Auth.getCurrentUser();
 
     $scope.unread = {};
@@ -55,6 +53,6 @@ angular.module('textbookApp')
 
     $scope.$on('flag change', function(event, data) {
       $scope.unread = data.unread;
-      if (data.type == 'read') applyFlag();
+      if (data.type == 'unread') applyFlag();
     });
 });
