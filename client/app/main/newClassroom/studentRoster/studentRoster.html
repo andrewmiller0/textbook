@@ -8,7 +8,7 @@
 			</span>
 		</hot-table>
 	<div class="col-md-4">
-		<div ng-repeat="(key, value) in modelNames">
+		<div ng-repeat="(key, value) in modelNames" ng-show="$index === progress">
 		<p>Select the column with the student's {{value}}<p>
 			<select class="form-control" ng-model="columnSelected[key]" ng-options="column as column for column in columnNames">
 			</select>

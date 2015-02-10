@@ -8,7 +8,8 @@ angular.module('textbookApp')
   	$scope.rows = [];
   	$scope.columnNames = Object.keys($scope.studentRoster[0]);
   	$scope.modelNames = {'firstName':'first name', 'lastName': 'last name', 'name': 'primary contact\'s name', 'phone': 'primary contact\'s phone number', 'relationship': 'relation to primary contact'};
-  	$scope.columnSelected = {};
+  	$scope.progress = 0;
+    $scope.columnSelected = {};
     angular.forEach($scope.studentRoster, function(column) {
     	$scope.rows.push(column);
     });
@@ -22,6 +23,7 @@ angular.module('textbookApp')
     			}
     		}
     	});
+      $scope.progress = $scope.progress + 1;
     };
 
     $scope.createClass = function() {
