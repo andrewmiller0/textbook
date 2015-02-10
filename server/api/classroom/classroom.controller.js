@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Classroom = require('./classroom.model');
 var Student = require('../student/student.model');
 var Contact = require('../contact/contact.model');
+var async = require('async');
 
 // Get list of classrooms
 exports.index = function(req, res) {
@@ -77,6 +78,7 @@ exports.saveSpreadsheet = function(req, res) {
     delete req.body._id;
     delete req.body.__v; 
   }
+  var studentArr = [];
   req.body.forEach(function(obj) {
     var newContact = {
       name: obj.name,
@@ -88,24 +90,36 @@ exports.saveSpreadsheet = function(req, res) {
       primaryPhone: obj.phone,
       contacts: []
     }
-    Contact.create(newContact, function(err, contact) {
-      if (err) { return handleError(res, err); }
-      contact.createConversation(req.user._id, contact._id);
-      newStudent.contacts.push(contact._id);
-      Student.create(newStudent, function(err, student) {
-        if (err) { return handleError(res, err); }
+
+    async.series([
+        function(callback) {
+          Contact.create(newContact, function(err, contact) {
+            if (err) { return handleError(res, err); }
+            contact.createConversation(req.user._id, contact._id);
+            newStudent.contacts.push(contact._id);
+            callback(null);
+          });
+        },
+        function(callback) {
+          Student.create(newStudent, function(err, student) {
+            if (err) { return handleError(res, err); }
+            callback(null, student._id);
+          });
+        }
+      ], function(err, results) {
+        studentArr.push(results[1]);
+      });
+    });
         Classroom.findById(req.params.id, function (err, classroom) {
+          console.log("these are the students", studentArr);
           if (err) { return handleError(res, err); }
-          classroom.students.push(student._id);
+          classroom.students = studentArr;
           classroom.markModified('students');
           classroom.save(function(err) {
             if(err) { return handleError(res, err); }
-          });
+            return res.json(200, classroom);
         });
       });
-    });
-  });
-  return res.json(200);
 };
 
 function handleError(res, err) {
