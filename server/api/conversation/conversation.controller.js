@@ -38,41 +38,6 @@ exports.sendMsg = function(req, res, next) {
       });
     });
   });
-  //
-  // message.send(function(err) {
-  //   if(err) return next(err)Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
-  //   conversation.messages.push(newMessage);
-  //     conversation.save(function(err, conversation2) {
-  //       res.json(200, newMessage)
-  //     });
-  //   });
-  // })
-
-  // var accountSid = config.twilio.clientID;
-  // var authToken = config.twilio.clientToken;
-  // var client = require('twilio')(accountSid, authToken);
-  // console.log(req.body);
-  // client.messages.create({
-  //     body: req.body.message,
-  //     to: req.body.to,
-  //     from: req.body.from
-  // }, function(err, message) {
-  //     console.log(message);
-  //     if(err) console.log(err);
-  //     if(message.errorMessage === null){
-  //       var newMessage = {
-  //         body: req.body.message,
-  //         dateSent: new Date(),
-  //         type: 'sent'
-  //       };
-//         Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
-//           conversation.messages.push(newMessage);
-//           conversation.save(function(err, conversation2) {
-//             res.json(200, newMessage)
-//           });
-//         });
-//       }
-//   });
 }
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {

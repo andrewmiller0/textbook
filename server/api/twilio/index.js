@@ -4,6 +4,7 @@ var express = require('express'),
 	Conversation = require('../conversation/conversation.model'),
 	User = require('../user/user.model'),
 	Contact = require('../contact/contact.model'),
+	Sms = require('../../remotes/sms'),
 	Student = require('../student/student.model');
 
 module.exports = function(req, res) {
@@ -60,18 +61,18 @@ module.exports = function(req, res) {
 							});
 							retArr.forEach(function(homework){
 								var messageBody = homework.class + " Homework: %0a" + homework.homework.join('%0a');
-								console.log(messageBody);
-								Conversation.sendMsg({body: messageBody, to: text.From, from:text.To}, function(message){
-									res.json(200, message);
+								var message = new Sms({
+									body: messageBody,
+									to: text.From,
+									from: text.To
 								});
-
+								message.send(function(message){
+									console.log("Message send", message);
+								});
 							});
 						});
 					}
-					conversation.save(function(err, conversation2) {
-						return conversation2;
 					});
-				});
 			}
 		});
 	});
