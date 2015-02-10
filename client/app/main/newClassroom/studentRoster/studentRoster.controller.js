@@ -34,7 +34,8 @@ angular.module('textbookApp')
 	    		User.update(user);
 	    	});
     	});
-    }
+      $scope.progress = $scope.progress + 1;
+    };
 
     $scope.saveData = function() {
     	$http.post('/api/classrooms/'+ $scope.newClass._id +'/saveSpreadsheet', $scope.studentRoster)
