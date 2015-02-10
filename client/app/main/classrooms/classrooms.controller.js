@@ -19,8 +19,9 @@ angular.module('textbookApp')
     $scope.addAssignment = function(assignment){
       console.log(assignment);
       Classroom.addHomework({id: $scope.currentClass, homework: assignment}).$promise.then(function(homework){
+        
         console.log(homework);
-      });      
+      });
     }
 
     $scope.$on('updated user', function(event, data) {

@@ -43,10 +43,10 @@ module.exports = function(req, res) {
 						user.deepPopulate('classrooms.students.contacts', function(err) {
 							if (err) return next(err);
 							var retArr = [];
-							console.log("", user.classrooms[0].students); //[{"_id":"54d4f047f5d3e3b305d17944","firstName":"Tom","lastName":"Tom","primaryPhone":"+15514043092","__v":0,"contacts":[{"_id":"54d4f046f5d3e3b305d17942","name":"mom","relationship":"mom","phone":"+15514043092","__v":0}]}]
 							user.classrooms.forEach(function(classroom){
 								classroom.students.forEach(function(student){
 									student.contacts.forEach(function(contact){
+										console.log(classroom);
 										if(contact.phone === text.From){
 											var homework = {
 												class:classroom.name,

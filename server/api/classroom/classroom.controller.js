@@ -75,7 +75,9 @@ exports.addHomework = function(req, res) {
   console.log(req.body);
   Classroom.findById(req.body.id, function(err, classroom){
     classroom.homework.push(assignment);
-    res.json(200, assignment);
+    classroom.save(function(classroom){
+      res.json(200, assignment);
+    });
   });
 }
 
