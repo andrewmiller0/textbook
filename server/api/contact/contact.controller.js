@@ -24,7 +24,6 @@ exports.show = function(req, res) {
 exports.create = function(req, res) {
   Contact.create(req.body, function(err, contact) {
     if(err) { return handleError(res, err); }
-    console.log(contact._id);
     contact.createConversation(req.user._id, contact._id);
     return res.json(201, contact);
   });

@@ -4,6 +4,7 @@ var _ = require('lodash');
 var Classroom = require('./classroom.model');
 var Student = require('../student/student.model');
 var Contact = require('../contact/contact.model');
+var User = require('../user/user.model');
 var async = require('async');
 
 // Get list of classrooms
@@ -79,6 +80,7 @@ exports.saveSpreadsheet = function(req, res) {
     delete req.body.__v; 
   }
   var studentArr = [];
+  console.log(req.body.length);
   req.body.forEach(function(obj) {
     var newContact = {
       name: obj.name,
@@ -107,19 +109,25 @@ exports.saveSpreadsheet = function(req, res) {
           });
         }
       ], function(err, results) {
+        console.log(studentArr.length);
         studentArr.push(results[1]);
+        if(studentArr.length === req.body.length) {
+          Classroom.findById(req.params.id, function (err, classroom) {
+            // console.log("these are the students", studentArr);
+            if (err) { return handleError(res, err); }
+            classroom.students = studentArr;
+            classroom.markModified('students');
+            classroom.save(function(err) {
+              if(err) { return handleError(res, err); }
+              User.findById(req.user._id, function(err, user) {
+                if(err) { return handleError(res, err); }
+                return res.json(200, user);
+              });
+          });
+        });
+        }
       });
     });
-        Classroom.findById(req.params.id, function (err, classroom) {
-          console.log("these are the students", studentArr);
-          if (err) { return handleError(res, err); }
-          classroom.students = studentArr;
-          classroom.markModified('students');
-          classroom.save(function(err) {
-            if(err) { return handleError(res, err); }
-            return res.json(200, classroom);
-        });
-      });
 };
 
 function handleError(res, err) {

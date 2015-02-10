@@ -6,10 +6,7 @@ angular.module('textbookApp')
     $scope.user = Auth.getCurrentUser();
 
     $scope.$on('updated user', function(event, data) {
-      User.get().$promise.then(function(user) {
-        $scope.user = user;
-        $scope.classrooms = user.classrooms;
-      });
+      $scope.user = Auth.getCurrentUser();
     });
     $scope.$on('delete classroom', function(event, data) {
       User.get().$promise.then(function(user) {
