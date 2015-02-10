@@ -28,6 +28,7 @@ angular.module('textbookApp')
     var applyFlag = function() {
       for (var key in $scope.unread) {
         if (!$stateParams.classId || $stateParams.classId !== key) {
+          console.log("applying flag");
           angular.element('#'+key).html(' <i class="fa fa-comment"></i>');
         }
       }
@@ -52,8 +53,8 @@ angular.module('textbookApp')
       });
     });
 
-    $scope.$on('unread', function(event, data, thing) {
-      $scope.unread = data;
-      applyFlag();
+    $scope.$on('flag change', function(event, data) {
+      $scope.unread = data.unread;
+      if (data.type == 'read') applyFlag();
     });
 });

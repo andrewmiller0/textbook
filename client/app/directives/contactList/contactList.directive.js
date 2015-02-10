@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('textbookApp')
-  .directive('conversation', function () {
+  .directive('contactList', function () {
     return {
-      templateUrl: 'app/directives/conversation/conversation.html',
+      templateUrl: 'app/directives/contactList/contactList.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }

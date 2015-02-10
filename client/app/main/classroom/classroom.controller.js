@@ -2,15 +2,13 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, User, Auth, socket) {
-    $scope.activeContact = "";
-    $scope.id = "";
    var applyFlags = function() {
-      console.log($scope.unread);
+    console.log($scope.unread);
       for (var classKey in $scope.unread) {
+        console.log(classKey, $scope.currentClass._id);
         if ($scope.currentClass._id === classKey) {
           for (var studentKey in $scope.unread[classKey]) {
             console.log("applying flag to student", studentKey);
-            console.log(angular.element("#" + studentKey))
             angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
           }
         }
@@ -20,7 +18,7 @@ angular.module('textbookApp')
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
-        applyFlags();
+        setTimeout(function(){ applyFlags(); }, 0);
       }
     });
 
@@ -33,11 +31,9 @@ angular.module('textbookApp')
       else {
         $scope.ids[student._id] = true;
       }
-      console.log("this is happening now, not later");
       if ($scope.unread[$scope.currentClass._id] && $scope.unread[$scope.currentClass._id][student._id]) {
-        console.log("am i being called?");
         for (var contactKey in $scope.unread[$scope.currentClass._id][student._id]) {
-          angular.element("#" + contactKey).html('<span class="badge">'+ $scope.unread[$scope.currentClass._id][student._id][contactKey] +'</span>');
+          angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[$scope.currentClass._id][student._id][contactKey] +'</span>');
         }
       }
     };
@@ -48,7 +44,6 @@ angular.module('textbookApp')
     };
 
     $scope.setActive = function(contact){
-      console.log($scope.activeContact);
       $scope.activeContact = contact;
       $scope.getConvo($scope.gotoBottom);
     }
@@ -93,14 +88,11 @@ angular.module('textbookApp')
             for (var contactKey in $scope.unread[$scope.currentClass._id][studentKey]) {
               if (contactKey == $scope.activeContact._id) {
                 delete $scope.unread[$scope.currentClass._id][studentKey][contactKey]
-                console.log("deleted contactKey");
                 angular.element("#"+contactKey).html('&nbsp;');
                 if (!Object.keys($scope.unread[$scope.currentClass._id][studentKey]).length) {
-                  console.log("Deleted studentKey")
                   delete $scope.unread[$scope.currentClass._id][studentKey];
                   angular.element('#'+studentKey).html('&nbsp;');
                   if (!Object.keys($scope.unread[$scope.currentClass._id]).length) {
-                    console.log("deleted classroom key")
                     delete $scope.unread[$scope.currentClass._id];
                     angular.element('#'+$scope.currentClass._id).html('&nbsp;');
                   }
@@ -108,6 +100,10 @@ angular.module('textbookApp')
               }
             }
           }
+          $scope.$emit('flag change', {
+            unread: $scope.unread,
+            type: 'read'
+          });
           Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
     }
@@ -124,9 +120,9 @@ angular.module('textbookApp')
     };
 
     socket.socket.on('new message', function(res){
-      console.log(_.last(res.convo.messages));
+      // console.log(_.last(res.convo.messages));
       if ($scope.conversation && $scope.conversation._id == res.convo._id) {
-        $scope.getConvo();
+        $scope.messages.push(_.last(res.convo.messages));
       }
       else {
         $scope.user.classrooms.forEach(function(classroom) {
@@ -146,9 +142,11 @@ angular.module('textbookApp')
                   _.merge($scope.unread, additionToUnread);
                 }
                 // console.log($scope.unread);
-                $scope.$emit('unread', $scope.unread);
+                $scope.$emit('flag change', {
+                  unread: $scope.unread,
+                  type: 'unread'
+                });
                 applyFlags();
-                console.log($scope.unread);
                 return;
               }
             })
