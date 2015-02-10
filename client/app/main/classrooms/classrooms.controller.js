@@ -24,9 +24,7 @@ angular.module('textbookApp')
 
     var applyFlag = function() {
       for (var key in $scope.unread) {
-        if (!$stateParams.classId || $stateParams.classId !== key) {
-          angular.element('#'+key).html(' <i class="fa fa-comment"></i>');
-        }
+        
       }
     };
 
@@ -49,9 +47,10 @@ angular.module('textbookApp')
       $scope.unread = data;
     });
 
-    $scope.applyFlags = function(classId) {
+    $scope.applyFlags = function() {
+      angular.element('#'+classKey).html(' <i class="fa fa-comment"></i>');
       for (var classKey in $scope.unread) {
-        if (classId === classKey) {
+        if ($state.params.classId === classKey) {
           for (var studentKey in $scope.unread[classKey]) {
             console.log("applying flag to student", studentKey);
             angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
@@ -83,7 +82,7 @@ angular.module('textbookApp')
                   _.merge($scope.unread, additionToUnread);
                 }
                 applyFlag();
-                $scope.applyFlags($state.params.classId);
+                $scope.applyFlags();
                 return;
               }
             });

@@ -9,7 +9,7 @@ angular.module('textbookApp')
         $scope.currentClass = classroom;
 
         setTimeout(function(){
-          $scope.applyFlags($stateParams.classId);
+          $scope.applyFlags();
         }, 0);
       }
     });
