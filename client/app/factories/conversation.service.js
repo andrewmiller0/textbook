@@ -10,8 +10,11 @@ angular.module('textbookApp')
         method:'POST'
       },
       getConversation: {
-        method: 'POST'
+        method: 'GET'
       }
     });
+
+    Conversation.unread = {};
+    
     return Conversation;
   });

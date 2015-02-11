@@ -5,22 +5,49 @@ angular.module('textbookApp')
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
 
-    $scope.user.$promise.then(function(user){
+    // $scope.user.$promise.then(function(user){
+    //   user.classrooms.forEach(function(classroom) {
+    //     classroom.students.forEach(function(student) {
+    //       student.contacts.forEach(function(contact) {
+    //         Conversation.getConversation({userId: user._id, contactId: contact._id})
+    //         .$promise
+    //         .then(function(conversation){
+    //           if (conversation.unreadMessages > 0) {
+    //             $scope.unread[classroom._id][student._id][contact._id] = conversation.unreadMessages;
+    //           }
+    //         });
+    //       })
+    //     });
+    //   });
+    //   applyFlags();
+    // });
+
+    var convArray = Conversation.query().$promise.then(function(conversations) {
+        console.log (_(conversations).filter(function(convo) {
+          convo.unreadMessages > 0;
+        }).value());
+      });
+
+    $scope.user.$promise.then(function(user) {
       user.classrooms.forEach(function(classroom) {
         classroom.students.forEach(function(student) {
           student.contacts.forEach(function(contact) {
-            Conversation.getConversation({userId: user._id, contactId: contact._id})
-            .$promise
-            .then(function(conversation){
-              if (conversation.unreadMessages > 0) {
-                $scope.unread[classroom._id][student._id][contact._id] = conversation.unreadMessages;
-              }
-            });
+            if (_.find(convArray, function(convo) {
+              return convo.contactId == contact._id
+            })) {
+              // for now.  i know this is so bad
+              var additionToUnread = {};
+              additionToUnread[classroom._id] = {};
+              additionToUnread[classroom._id][student._id] = {};
+              additionToUnread[classroom._id][student._id][contact._id] = 1;
+              _.merge($scope.unread, additionToUnread);
+            }
           })
-        });
-      });
-      applyFlags();
-    });
+        })
+      })
+      Conversation.unread = $scope.unread;
+      $scope.applyFlags();
+    })
 
 
     $scope.$on('updated user', function(event, data) {
