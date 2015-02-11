@@ -39,7 +39,7 @@ angular.module('textbookApp')
         authenticate: true
       })
       .state('classrooms.classroom.conversation', {
-        url: '/conversations/:contactId',
+        url: '/student/:studentId/conversation/:contactId',
         templateUrl: 'app/main/classroom/conversation/conversation.html',
         controller: 'ConversationCtrl',
         authenticate: true
