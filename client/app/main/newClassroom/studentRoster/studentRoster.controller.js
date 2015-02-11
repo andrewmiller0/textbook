@@ -1,28 +1,29 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth, $q, $rootScope) {
   	$scope.newClass = {
   		students: []
-  	}
-  	$scope.rows = [];
+  	};
   	$scope.columnNames = Object.keys($scope.studentRoster[0]);
   	$scope.modelNames = {'firstName':'first name', 'lastName': 'last name', 'name': 'primary contact\'s name', 'phone': 'primary contact\'s phone number', 'relationship': 'relation to primary contact'};
   	$scope.progress = 0;
     $scope.columnSelected = {};
-    angular.forEach($scope.studentRoster, function(column) {
-    	$scope.rows.push(column);
-    });
+    console.log($scope.studentRoster);
 
     $scope.changeDataKey = function(model) {
-    	$scope.studentRoster.forEach(function(column) {
-    		for(var key in column) {
+      var i;
+    	$scope.studentRoster.forEach(function(student) {
+    		for(var key in student) {
     			if(key === $scope.columnSelected[model]) {
-    				column[model] = column[key];
-    				delete column[key]; 
+    				student[model] = student[key];
+    				delete student[key]; 
     			}
     		}
     	});
+      i = $scope.columnNames.indexOf($scope.columnSelected[model]);
+      $scope.columnNames.splice(i, 1, model);
+      console.log($scope.columnNames);
       $scope.progress = $scope.progress + 1;
     };
 
@@ -40,9 +41,10 @@ angular.module('textbookApp')
     $scope.saveData = function() {
     	$http.post('/api/classrooms/'+ $scope.newClass._id +'/saveSpreadsheet', $scope.studentRoster)
     	.success(function(user) {
-        Auth.updateUser(user);
-    		$scope.$emit('updated user');
-    		$state.go('classrooms.classroom', {classId: user.classrooms[user.classrooms.length-1]._id});
+        User.get().$promise.then(function(user) {
+          Auth.updateUser(user);
+      		$state.go('classrooms.classroom', {classId: user.classrooms[user.classrooms.length-1]._id});
+        });
     	});
     };
   });

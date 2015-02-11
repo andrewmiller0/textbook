@@ -143,7 +143,9 @@ angular.module('textbookApp')
         return $cookieStore.get('token');
       }, 
       updateUser: function(user) {
+        console.log(user);
         currentUser = user;
+        console.log(currentUser);
       }
     };
   });
