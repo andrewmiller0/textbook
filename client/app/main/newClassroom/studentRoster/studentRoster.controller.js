@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth, $q, $rootScope) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth) {
   	$scope.newClass = {
   		students: []
   	};
