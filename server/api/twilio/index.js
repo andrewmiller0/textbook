@@ -44,7 +44,7 @@ module.exports = function(socket) {
 						conversation.messages.push(newMessage);
 						conversation.unreadMessages++;
 						conversation.save(function(err, conversation2) {
-							console.log('Saved Convo ', conversation2);
+
 							if(newMessage.body.toLowerCase() === 'homework'){
 								user.deepPopulate('classrooms.students.contacts', function(err) {
 									if (err) console.log(err);
@@ -71,7 +71,6 @@ module.exports = function(socket) {
 											from: text.To
 										});
 										message.send(function(message){
-											console.log("Message send", message);
 										});
 									});
 								});

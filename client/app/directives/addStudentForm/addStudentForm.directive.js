@@ -45,6 +45,7 @@ angular.module('textbookApp')
     $scope.addStudent = function() {
          $scope.studentAdded = true;
          $scope.currentStudent.primaryPhone = $scope.currentStudent.contacts[0].phone;
+         $scope.currentStudent.contacts[0].phone = '+1' + $scope.currentStudent.contacts[0].phone;
          var studentToSave = angular.copy($scope.currentStudent);
          Contact.save($scope.currentStudent.contacts[0], function(contact) {
            $scope.currentStudent.contacts[0]._id = contact._id;

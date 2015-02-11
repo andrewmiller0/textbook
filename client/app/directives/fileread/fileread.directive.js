@@ -8,6 +8,7 @@ angular.module('textbookApp')
         element.bind('change', function(changeEvent) {
         	$parse(attrs.fileread)
         	.assign(scope, element[0].files[0])
+          scope.error = {};
         	scope.$apply();
         });
       }

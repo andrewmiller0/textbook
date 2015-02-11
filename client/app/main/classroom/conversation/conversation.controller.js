@@ -43,9 +43,6 @@ angular.module('textbookApp')
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
-      console.log(message);
-      console.log("Conversation = ", $scope.conversation);
-      console.log($scope.activeContact);
       var reqBody = {
         _id: $scope.conversation._id,
         message: message,
@@ -53,11 +50,9 @@ angular.module('textbookApp')
         userId: $scope.user._id,
         contactId: contactId
       };
-      console.log(reqBody)
       Conversation.sendMsg(reqBody).$promise.then(function(message){
         $scope.messages.push(message);
-        console.log($scope.messages);
-      })
+      });
 
       $scope.msgToSend = "";
 

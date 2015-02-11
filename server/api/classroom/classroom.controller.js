@@ -77,8 +77,9 @@ exports.destroy = function(req, res) {
 
 exports.addHomework = function(req, res) {
   var assignment = req.body.homework;
-  console.log(req.body);
   Classroom.findById(req.body.classId, function(err, classroom){
+    console.log(req.body.classId);
+    console.log(classroom);
     classroom.homework.push(assignment);
     classroom.save(function(classroom){
       res.json(200, assignment);
@@ -95,7 +96,8 @@ exports.saveSpreadsheet = function(req, res) {
   req.body.forEach(function(obj) {
     var newContact = {
       name: obj.name,
-      phone: obj.phone
+      phone: obj.phone,
+      relationship: obj.relationship
     };
     var newStudent = {
       firstName: obj.firstName,
@@ -120,11 +122,9 @@ exports.saveSpreadsheet = function(req, res) {
           });
         }
       ], function(err, results) {
-        console.log(studentArr.length);
         studentArr.push(results[1]);
         if(studentArr.length === req.body.length) {
           Classroom.findById(req.params.id, function (err, classroom) {
-            // console.log("these are the students", studentArr);
             if (err) { return handleError(res, err); }
             classroom.students = studentArr;
             classroom.markModified('students');
