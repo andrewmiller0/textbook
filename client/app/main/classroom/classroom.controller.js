@@ -21,6 +21,7 @@ angular.module('textbookApp')
         delete $scope.ids[student._id];
       }
       else {
+        $scope.ids = {};
         $scope.ids[student._id] = true;
       }
     };
