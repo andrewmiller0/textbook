@@ -4,7 +4,7 @@ angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket) {
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
-
+    console.log($scope.user);
     $scope.user.$promise.then(function(user){
       user.classrooms.forEach(function(classroom) {
         classroom.students.forEach(function(student) {
@@ -19,12 +19,7 @@ angular.module('textbookApp')
           })
         });
       });
-      applyFlags();
-    });
-
-
-    $scope.$on('updated user', function(event, data) {
-      $scope.user = Auth.getCurrentUser();  
+      $scope.applyFlags();
     });
 
     $scope.$on('delete classroom', function(event, data) {
