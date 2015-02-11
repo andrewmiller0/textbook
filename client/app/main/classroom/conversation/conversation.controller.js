@@ -3,11 +3,12 @@
 angular.module('textbookApp')
   .controller('ConversationCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, socket) {
   	var classId = $stateParams.classId,
-  		contactId = $stateParams.contactId;
+  		contactId = $stateParams.contactId,
+      studentId = $stateParams.studentId;
+      $scope.$emit('activestudent', studentId);
 
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
-        
       })
 
    $scope.gotoBottom = function() {
