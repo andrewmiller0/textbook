@@ -9,7 +9,7 @@ angular.module('textbookApp')
 
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
-      })
+      });
 
    $scope.gotoBottom = function() {
       $location.hash('bottom');
@@ -51,21 +51,17 @@ angular.module('textbookApp')
 
     $scope.msgToSend;
     $scope.sendMsg = function(message){
-      console.log(message);
-      console.log("Conversation = ", $scope.conversation);
       var reqBody = {
         _id: $scope.conversation._id,
         message: message,
-        to: $scope.activeContact.phone,
         from: $scope.user.phone,
+        to: $scope.activeContact.phone,
         userId: $scope.user._id,
         contactId: contactId
       };
-      console.log(reqBody)
       Conversation.sendMsg(reqBody).$promise.then(function(message){
         $scope.messages.push(message);
-        console.log($scope.messages);
-      })
+      });
 
       $scope.msgToSend = "";
 
