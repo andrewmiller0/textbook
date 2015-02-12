@@ -1,38 +1,40 @@
 <div class="student-add-form" ng-controller="studentFormController">
+	<form ng-submit="addStudent()" name="studentForm"novalidate>
 		<h4>Student</h4>
 		<div ng-hide="studentAdded">
 			<div class="form-group">
 				<label class="control-label col-lg-4">First name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" />
+					<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" ng-required="true" ng-minlength="2"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Last name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
+					<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" ng-required="true" ng-minlength="2" />
 				</div>
 			</div>
 			<h4>Primary Contact</h4>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="primaryContactName" ng-model="currentStudent.contacts[0].name" />
+					<input class="form-control" type="text" name="primaryContactName" ng-model="currentStudent.contacts[0].name" ng-required="true" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Relationship</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="primaryContactRelationship" ng-model="currentStudent.contacts[0].relationship" />
+					<input class="form-control" type="text" name="primaryContactRelationship" ng-model="currentStudent.contacts[0].relationship" ng-required="true" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Phone</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="primaryContactPhone" ng-model="currentStudent.contacts[0].phone" />
+					<input class="form-control" type="text" name="primaryContactPhone" ng-model="currentStudent.contacts[0].phone" ng-required="true" ng-minlength="10" ng-maxlength="10" />
 				</div>
 			</div>
-			<button class="btn btn-default center-block" type="button" ng-click="addStudent()">Add student</button>
+			<button class="btn btn-default center-block" type="submit" ng-disabled="studentForm.$invalid">Add student</button>
+		</form>
 		</div>
 	<div class="contact-add-form" ng-show="studentAdded">
 		<h4>{{ currentStudent.firstName }} {{ currentStudent.lastName }}</h4>
