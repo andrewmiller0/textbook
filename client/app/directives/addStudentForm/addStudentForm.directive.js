@@ -28,7 +28,6 @@ angular.module('textbookApp')
     };
 
     $scope.addContact = function() {
-      $scope.currentContact.phone = '+1' + $scope.currentContact.phone;
       Contact.save($scope.currentContact, function(contact) {
           $scope.currentStudent.contacts.push(contact);
           var studentToSave = angular.copy($scope.currentStudent);
