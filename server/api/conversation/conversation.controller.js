@@ -8,7 +8,8 @@ var Contact = require('../contact/contact.model');
 
 // Get list of conversations
 exports.index = function(req, res) {
-  Conversation.find(function (err, conversations) {
+  console.log("is this route being hit");
+  Conversation.find({userId: req.user._id}, function (err, conversations) {
     if(err) { return handleError(res, err); }
     return res.json(200, conversations);
   });
@@ -16,7 +17,7 @@ exports.index = function(req, res) {
 
 // Get a single conversation
 exports.show = function(req, res) {
-  Conversation.findById(req.params.id, function (err, conversation) {
+  Conversation.findOne({userId: req.params.userId, contactId: req.params.contactId}, function (err, conversation) {
     if(err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
     return res.json(conversation);
@@ -53,6 +54,7 @@ exports.create = function(req, res) {
 };
 
 exports.getOne = function(req, res) {
+  console.log("get one route");
   Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
     if(err) console.log(err);
     res.send({data: data});

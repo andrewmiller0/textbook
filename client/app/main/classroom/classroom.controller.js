@@ -2,7 +2,6 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
-    console.log($scope.unread);
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
       console.log($scope.activeStudent)

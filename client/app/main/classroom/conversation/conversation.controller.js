@@ -17,11 +17,13 @@ angular.module('textbookApp')
       $anchorScroll();
     };
 
+    $scope.unread = Conversation.getUnread()
+
 	Conversation.getConversation({userId: $scope.user._id, contactId: contactId})
         .$promise
         .then(function(conversation){
-          $scope.conversation = conversation.data[0];
-          $scope.messages = conversation.data[0].messages;
+          $scope.conversation = conversation;
+          $scope.messages = conversation.messages;
 
           $scope.conversation.unreadMessages = 0;
           for (var studentKey in $scope.unread[classId]) {
@@ -40,7 +42,7 @@ angular.module('textbookApp')
               }
             }
           }
-          $scope.$emit('read', $scope.unread);
+          Conversation.setUnread($scope.unread);
           Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
 
