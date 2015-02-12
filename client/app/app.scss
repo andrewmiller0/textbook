@@ -38,9 +38,13 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 }
 
 
-h1, h2, h3, h4, h5, p, button, a {
+h1, h2, h3, h4, p, button {
 	font-family: $body-font;
 	color: $font-color;
+}
+
+h5 {
+	font-family: $body-font;
 }
 
 body {
