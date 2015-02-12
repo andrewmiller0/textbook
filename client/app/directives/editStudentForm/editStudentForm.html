@@ -1,16 +1,24 @@
 <div class="student-add-form" ng-controller="editStudentFormCtrl">
+		<form name="editStudent" ng-submit="saveStudent()" novalidate>
 		<div class="form-group">
 			<label class="control-label col-lg-4">First name</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" />
+				<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" ng-required="true" ng-minlength="2"/>
+				<p class="help-block" ng-show="editStudent.firstName.$invalid && editStudentSubmit">Student first name needs to be at least 2 characters long</p>
 			</div>
 		</div>
 		<div class="form-group">
 			<label class="control-label col-lg-4">Last name</label>
 			<div class="col-lg-8">
-				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" />
+				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" ng-required="true" ng-minlength="2"/>
+				<p class="help-block" ng-show="editStudent.lastName.$invalid && editStudentSubmit">Student last name needs to be at least 2 characters long</p>
 			</div>
+			firstName: {{editStudent.firstName.$valid}}
+			lastName: {{editStudent.lastName.$valid}}
+			whole form: {{editStudent.$valid}}
 		</div>
+		<button class="btn btn-default center-block" type="submit">Save student name</button>
+	</form>
 		<h4>Contacts</h4>
 		<div ng-repeat="contact in currentStudent.contacts">
 			<span ng-hide="addEditView">
@@ -28,5 +36,4 @@
 	<div class="contact-add-form" ng-show="show">
 		<add-contact></add-contact>
 	</div><br />
-	<button class="btn btn-default center-block" type="button" ng-click="saveStudent()">Save student</button>
 </div>

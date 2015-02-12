@@ -43,8 +43,7 @@ angular.module('textbookApp')
               $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
            });
         });
-       } else {
-        console.log('not valid yet!');
+         $scope.studentFormSubmit = false;
        }
     };
 
