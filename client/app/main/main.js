@@ -7,7 +7,13 @@ angular.module('textbookApp')
         url: '/',
         templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl',
-        authenticate: true
+        authenticate: true,
+        abstract: true,
+        resolve: {
+          resolvedUser: function(User) {
+            return User.get();
+          }
+        }
       })
       .state('about', {
         url: '/about',
