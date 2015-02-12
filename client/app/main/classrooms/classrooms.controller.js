@@ -4,7 +4,6 @@ angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket) {
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
-
     var convArray = [];
 
     Conversation.query().$promise.then(function(conversations) {
@@ -32,7 +31,6 @@ angular.module('textbookApp')
           $scope.applyFlags();
         });
       });
-
 
     $scope.$on('updated user', function(event, data) {
       $scope.user = Auth.getCurrentUser();  
