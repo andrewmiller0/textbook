@@ -10,12 +10,19 @@ h4.about {
 
 .topabout {
 	margin-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .aboutcontain {
-	margin: 100px 20px 300px 20px;
+	padding: 100px 40px 200px 40px;
 }
 .containp {
+	margin-top: 20px;
 	width: 80%;
 	margin: auto;
+}
+
+.altbgcolor {
+	background-color:  $second-background;
 }
