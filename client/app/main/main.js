@@ -10,7 +10,7 @@ angular.module('textbookApp')
         authenticate: true
       })
       .state('about', {
-        url: '/',
+        url: '/about',
         templateUrl: 'app/about/about.html',
         controller: 'AboutCtrl'
       })
