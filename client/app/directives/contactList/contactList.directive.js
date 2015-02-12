@@ -7,5 +7,5 @@ angular.module('textbookApp')
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }
-    };
+  	};
   });
