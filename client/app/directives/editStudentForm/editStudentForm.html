@@ -26,30 +26,7 @@
 		</div>
 	<button class="btn" type="button" ng-click="show=true">Add a contact for this student</button>
 	<div class="contact-add-form" ng-show="show">
-		<form name="contactForm" ng-submit="addContact()" novalidate>
-			<div class="form-group">
-				<label class="control-label col-lg-4">Contact's name</label>
-				<div class="col-lg-8">
-					<input class="form-control" type="text" name="contactName" ng-model="currentContact.name" ng-required="true" ng-minlength="5"/> <br />
-					<p class="help-block" ng-show="contactForm.contactName.$invalid && contactFormSubmit">Please enter a valid contact name.</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-lg-4">Relationship to student</label>
-				<div class="col-lg-8">
-					<input class="form-control" type="text" name="relationship" ng-model="currentContact.relationship" ng-required="true" ng-minlength="3"/><br />
-					<p class="help-block" ng-show="contactForm.relationship.$invalid && contactFormSubmit">Please enter a valid contact relationship to student.</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-lg-4">Cell phone number</label>
-				<div class="col-lg-8">
-					<input class="form-control" type="text" name="contactPhone" ng-model="currentContact.phone" / ng-required="true" ui-mask="{{'(999) 999-9999'}}"><br />
-					<p class="help-block" ng-show="contactForm.contactPhone.$invalid && contactFormSubmit">Please enter a valid contact phone number.</p>
-				</div>
-			</div>
-		<button class="btn btn-default center-block" type="submit">Save contact</button>
-		</form>
+		<add-contact></add-contact>
 	</div><br />
 	<button class="btn btn-default center-block" type="button" ng-click="saveStudent()">Save student</button>
 </div>

@@ -27,23 +27,6 @@ angular.module('textbookApp')
       phone: ""
     };
 
-    $scope.addContact = function() {
-      $scope.contactFormSubmit = true;
-      if($scope.contactForm.$valid) {
-        Contact.save($scope.currentContact, function(contact) {
-            $scope.currentStudent.contacts.push(contact);
-            var studentToSave = angular.copy($scope.currentStudent);
-            studentToSave.contacts = studentToSave.contacts.map(function(contact) { return contact._id; });
-            Student.update(studentToSave);
-        });
-        $scope.currentContact = {
-          name: "",
-          relationship: "",
-          phone: ""
-        };
-      }
-    };
-
     $scope.addStudent = function() {
         $scope.studentFormSubmit = true;
         if($scope.studentForm.$valid) {
