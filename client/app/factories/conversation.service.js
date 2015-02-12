@@ -10,6 +10,7 @@ angular.module('textbookApp')
         method:'POST'
       },
       getConversation: {
+        url: '/api/conversations/:userId/:contactId',
         method: 'GET'
       }
     });

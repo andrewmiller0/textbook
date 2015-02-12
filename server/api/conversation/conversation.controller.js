@@ -15,7 +15,7 @@ exports.index = function(req, res) {
 
 // Get a single conversation
 exports.show = function(req, res) {
-  Conversation.findById(req.params.id, function (err, conversation) {
+  Conversation.findOne({userId: req.params.userId, contactId: req.params.contactId}, function (err, conversation) {
     if(err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
     return res.json(conversation);

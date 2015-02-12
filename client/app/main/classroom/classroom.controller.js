@@ -2,7 +2,9 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
-    console.log($scope.unread);
+    console.log(Conversation.unread);
+
+    $scope.applyFlags();
 
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
