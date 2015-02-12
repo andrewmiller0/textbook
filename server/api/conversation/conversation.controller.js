@@ -3,10 +3,13 @@
 var _ = require('lodash');
 var Conversation = require('./conversation.model');
 var config = require('../../config/environment');
+var Sms = require('../../remotes/sms');
+var Contact = require('../contact/contact.model');
 
 // Get list of conversations
 exports.index = function(req, res) {
-  Conversation.find(function (err, conversations) {
+  console.log("is this route being hit");
+  Conversation.find({userId: req.user._id}, function (err, conversations) {
     if(err) { return handleError(res, err); }
     return res.json(200, conversations);
   });
@@ -14,40 +17,34 @@ exports.index = function(req, res) {
 
 // Get a single conversation
 exports.show = function(req, res) {
-  Conversation.findById(req.params.id, function (err, conversation) {
+  Conversation.findOne({userId: req.params.userId, contactId: req.params.contactId}, function (err, conversation) {
     if(err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
     return res.json(conversation);
   });
 };
 
-exports.sendMsg = function(req, res) {
-  var accountSid = config.twilio.clientID;
-  var authToken = config.twilio.clientToken;
-  var client = require('twilio')(accountSid, authToken);
-  console.log(req.body);
-  client.messages.create({
-      body: req.body.message,
-      to: req.body.to,
-      from: req.body.from
-  }, function(err, message) {
-      console.log(message);
-      if(err) console.log(err);
-      if(message.errorMessage === null){
-        var newMessage = {
-          body: req.body.message,
-          dateSent: new Date(),
-          type: 'sent'
-        };
-        Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
-          conversation.messages.push(newMessage);
-          conversation.save(function(err, conversation2) {
-            res.json(200, newMessage);
-          });
+exports.sendMsg = function(req, res, next) {
+    var message = new Sms({
+        body: req.body.message,
+        to: req.body.to,
+        from: req.body.from
+    });
+
+    message.send(function(message){
+      Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation){
+        if (err) console.log(err);
+        console.log('Save ', conversation);
+        conversation.messages.push(message);
+        conversation.save(function(err,conversation2){
+          if (err) console.log('Save Error ', err);
+          console.log(conversation2);
+          res.json(200, message);
         });
-      }
-  });
-}
+      });
+    });
+  }
+
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
   Conversation.create(req.body, function(err, conversation) {
@@ -57,6 +54,7 @@ exports.create = function(req, res) {
 };
 
 exports.getOne = function(req, res) {
+  console.log("get one route");
   Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
     if(err) console.log(err);
     res.send({data: data});

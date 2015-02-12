@@ -2,20 +2,15 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
-    console.log($scope.unread);
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
-      console.log($scope.activeStudent)
     });
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
-
-        setTimeout(function(){
-          $scope.applyFlags();
-        }, 0);
       }
     });
+    
 
    $scope.ids = {};
 
@@ -38,6 +33,6 @@ angular.module('textbookApp')
           User.update({id: $scope.user._id}, $scope.user);
           $scope.$emit('delete classroom', classroom);
         }
-      })
+      });
     };
   });

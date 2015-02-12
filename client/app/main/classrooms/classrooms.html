@@ -6,9 +6,14 @@
 	<div ng-show="user.classrooms.length > 0">
 	<div class="btn-group" role="group">
         <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})" ui-sref-active="active">
-            {{classroom.name}}<span id="{{ classroom._id }}">&nbsp;</span>
+            {{classroom.name}} <i ng-show="unread[classroom._id]" class="fa fa-comment"></i>
        </button>
     </div>
     <div ui-view></div>
 	</div>
+	<!-- homework stuff -->
+	<div>
+		<button type="button" class="btn btn-warning" ng-click="open()">Add Homework Assignment</button>
+	</div>
+	<!-- end homework stuff -->
 </div>

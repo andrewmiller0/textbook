@@ -9,6 +9,7 @@ angular.module('textbookApp')
       $scope.addFormSubmit = true;
       if($scope.addClassForm.$valid) {
         Classroom.save($scope.classroom, function(classroom) {
+          var newClassroom = classroom.toJSON();
           $scope.user.classrooms.push(classroom);
           Auth.updateUser($scope.user);
           User.getUnpopulated({id: $scope.user._id}, function(user) {
