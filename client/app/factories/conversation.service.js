@@ -15,7 +15,14 @@ angular.module('textbookApp')
       }
     });
 
-    Conversation.unread = {};
+    var unread = {};
+
+    Conversation.getUnread = function(){
+      return unread;
+    };
+    Conversation.setUnread = function(obj) {
+      unread = obj;
+    }
     
     return Conversation;
   });

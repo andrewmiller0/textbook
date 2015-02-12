@@ -2,8 +2,6 @@
 
 angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
-    console.log(Conversation.unread);
-
     $scope.applyFlags();
 
     $scope.user.classrooms.forEach(function(classroom) {

@@ -15,7 +15,6 @@ angular.module('textbookApp')
           user.classrooms.forEach(function(classroom) {
             classroom.students.forEach(function(student) {
               student.contacts.forEach(function(contact) {
-                console.log(convArray, contact._id);
                 if (_.find(convArray, function(convo) {
                   return convo.contactId == contact._id
                 })) {
@@ -28,11 +27,10 @@ angular.module('textbookApp')
                 }
               })
             })
-          })
-          Conversation.unread = $scope.unread;
+          });
+          Conversation.setUnread($scope.unread);
           $scope.applyFlags();
-        })
-        
+        });
       });
 
 
@@ -51,25 +49,25 @@ angular.module('textbookApp')
       });
     });
 
-    $scope.$on('read', function(event, data) {
-      $scope.unread = data;
-    });
-
     $scope.applyFlags = function(contactId) {
-      $scope.unread = Conversation.unread;
+      $scope.unread = Conversation.getUnread();
+      console.log($scope.unread);
       if (!contactId || $state.params.contactId !== contactId) {
         for (var classKey in $scope.unread) {
           angular.element('#'+classKey).html(' <i class="fa fa-comment"></i>');
           if ($state.params.classId === classKey) {
             for (var studentKey in $scope.unread[classKey]) {
-              angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>');
-              for (var contactKey in $scope.unread[classKey][studentKey]) {
-                angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[classKey][studentKey][contactKey] +'</span>');
-                }
-              }
+              // i hate this so much i am so sorry
+              setTimeout(function(){
+                angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>')
+                for (var contactKey in $scope.unread[classKey][studentKey]) {
+                  angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[classKey][studentKey][contactKey] +'</span>');
+                  }
+              },0);
             }
           }
-       }
+        }
+      }
     }
 
     socket.socket.on('new message', function(res){

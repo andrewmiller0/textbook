@@ -10,6 +10,8 @@ angular.module('textbookApp')
       $anchorScroll();
     };
 
+    $scope.unread = Conversation.getUnread()
+
 	Conversation.getConversation({userId: $scope.user._id, contactId: contactId})
         .$promise
         .then(function(conversation){
@@ -33,7 +35,7 @@ angular.module('textbookApp')
               }
             }
           }
-          $scope.$emit('read', $scope.unread);
+          Conversation.setUnread($scope.unread);
           Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
 
