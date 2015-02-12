@@ -8,7 +8,6 @@ var Contact = require('../contact/contact.model');
 
 // Get list of conversations
 exports.index = function(req, res) {
-  console.log("is this route being hit");
   Conversation.find({userId: req.user._id}, function (err, conversations) {
     if(err) { return handleError(res, err); }
     return res.json(200, conversations);
