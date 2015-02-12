@@ -95,6 +95,29 @@ select {
   overflow-y: auto;
 }
 
+$primary-color: #ff4848;
+$lighter-primary-color: lighten($primary-color, 5%);
+
+.homework-nav{
+  background-color: $primary-color;
+  a {
+    color: #f2f2f2;
+  }
+  a:hover {
+    background-color: $lighter-primary-color;
+    color: #fff;
+  }
+  li {
+    a:hover, a:active, a:focus {
+      background-color: $lighter-primary-color;
+    }
+  }
+}
+
+.modal-container {
+  padding: 5px;
+}
+
 .btn-file {
   position: relative;
   overflow: hidden;
@@ -140,7 +163,7 @@ select {
   transition: 1s linear all;
 }
 
-.toggle.ng-hide-add { 
+.toggle.ng-hide-add {
   animation-duration: 1s;
   animation-name: slide-down;
 }
@@ -165,4 +188,8 @@ select {
 
 .small {
   margin-left: 10px;
+}
+
+.modal-container {
+  height: 400px;
 }

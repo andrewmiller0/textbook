@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket) {
+  .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket, $modal) {
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
     var convArray = [];
@@ -32,6 +32,44 @@ angular.module('textbookApp')
         });
       });
 
+    $scope.open = function () {
+        console.log($scope.user.classrooms);
+        $modal.open({
+            templateUrl: 'app/main/classrooms/homeworkmodal.html',
+            backdrop: true,
+            windowClass: 'modal',
+            scope: $scope
+        });
+    };
+    $scope.status = {
+      isopen: false
+    };
+
+    $scope.selectedClass = 'Select a Class';
+    $scope.homeworkActiveClass = function(className){
+      $scope.selectedClass = className;
+    }
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
+    $scope.assignment;
+    $scope.addAssignment = function(assignment){
+      $scope.assignment = "";
+      console.log($scope.selectedClass);
+      for(var i = 0 ; i<$scope.user.classrooms.length; i++){
+        if($scope.user.classrooms[i].name == $scope.selectedClass){
+          console.log('hi');
+          var classObj = $scope.user.classrooms[i];
+        }
+      }
+      Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
+        console.log(homework);
+        $scope.selectedClass = 'Select a Class';
+      });
+    };
+ 
     $scope.$on('updated user', function(event, data) {
       $scope.user = Auth.getCurrentUser();  
     });
@@ -66,7 +104,7 @@ angular.module('textbookApp')
           }
         }
       }
-    }
+    };
 
     socket.socket.on('new message', function(res){
       if (!$stateParams.contactId || $stateParams.contactId !== res.convo.contactId) {
@@ -90,6 +128,6 @@ angular.module('textbookApp')
               }
             });
           })
-          }
-        });
+       }
+    });
 });

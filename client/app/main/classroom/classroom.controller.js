@@ -15,6 +15,7 @@ angular.module('textbookApp')
         }, 0);
       }
     });
+    
 
    $scope.ids = {};
 
@@ -37,6 +38,6 @@ angular.module('textbookApp')
           User.update({id: $scope.user._id}, $scope.user);
           $scope.$emit('delete classroom', classroom);
         }
-      })
+      });
     };
   });
