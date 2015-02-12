@@ -6,15 +6,19 @@ angular.module('textbookApp')
     $scope.file = {};
     $scope.error = {};
     $scope.addClassroom = function() {
-      Classroom.save($scope.classroom, function(classroom) {
-        $scope.user.classrooms.push(classroom);
-        Auth.updateUser($scope.user);
-        User.getUnpopulated({id: $scope.user._id}, function(user) {
-          user.classrooms.push(classroom._id);
-          User.update(user);
+      $scope.addFormSubmit = true;
+      if($scope.addClassForm.$valid) {
+        Classroom.save($scope.classroom, function(classroom) {
+          $scope.user.classrooms.push(classroom);
+          Auth.updateUser($scope.user);
+          User.getUnpopulated({id: $scope.user._id}, function(user) {
+            user.classrooms.push(classroom._id);
+            User.update(user);
+          });
+          $scope.addFormSubmit = false;
+          $state.go('classrooms.edit', {classId: classroom._id});
         });
-        $state.go('classrooms.edit', {classId: classroom._id});
-      });
+      }
     };
     $scope.uploadFile = function() {
           var reader = new FileReader();
@@ -26,6 +30,7 @@ angular.module('textbookApp')
             if(name.indexOf('.xlsx') > -1) {
               console.log('this is a xlsx');
               var workbook = XLSX.read(data, {type:'binary'});
+              console.log(typeof workbook);
               json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
               console.log(json);
             } else if(name.indexOf('.xls') > -1) {
@@ -54,6 +59,5 @@ angular.module('textbookApp')
             $state.go('.studentRoster');
       };
       reader.readAsBinaryString($scope.file);
-
     };
   });
