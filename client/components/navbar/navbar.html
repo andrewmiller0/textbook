@@ -1,6 +1,9 @@
 <div class="navbar navbar-static-top" ng-controller="NavbarCtrl">
   <div class="container">
-        <div class="navbar-header"><a href="/" class="logo navbar-brand">Text<strong class="black">Book</strong></a></div>
+        <div class="navbar-header">
+          <a ui-sref="classrooms" ng-show="isLoggedIn()" class="logo navbar-brand">Text<strong class="black">Book</strong></a>
+          <a ui-sref="about" ng-hide="isLoggedIn()" class="logo navbar-brand">Text<strong class="black">Book</strong></a>
+        </div>
         <ul class="nav navbar-nav navbar-right">
           <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
           <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>

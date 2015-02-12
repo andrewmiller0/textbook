@@ -1,11 +1,25 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="text-center">{{newClass.name}}</h3>
-		<hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500">
+		<!-- <hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500">
+			{{ columnNames[0] }}
+			{{ columnNames[1] }}
 			<span ng-repeat="column in columnNames">
 				<hot-column data="{{column}}" title="'{{column}}'" value="'{{column}}'"></hot-column>
 			</span>
-		</hot-table>
+		</hot-table> -->
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th ng-repeat="column in columnNames">{{column}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="student in studentRoster">
+					<td class="cell" ng-repeat="column in columnNames" style="padding:0;"><input type="text" ng-model="student[column]"></td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 	<div class="col-md-4">
 		<div ng-show="progress === 0">
