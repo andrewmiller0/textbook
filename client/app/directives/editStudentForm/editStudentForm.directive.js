@@ -13,31 +13,16 @@ angular.module('textbookApp')
 	}
 	  })
 	.controller('editStudentFormCtrl', function($scope, Contact, Student) {
-		$scope.addContact = function() {
-	  	  console.log($scope.currentContact);
-	      Contact.save($scope.currentContact, function(contact) {
-	          $scope.currentStudent.contacts.push(contact);
-	          var studentToUpdate = _.clone($scope.currentStudent);
-	          studentToUpdate.contacts = studentToUpdate.contacts.map(function(contact) {return contact._id});
-	          Student.update(studentToUpdate, function(student) {
-	         	console.log(student);
-	         });
-	      });
-	      $scope.currentContact = {
-	        name: "",
-	        relationship: "",
-	        phone: ""
-	      };
-	      $scope.show = false;
-	    };
 
 	    $scope.saveStudent = function() {
-	      if ($scope.currentStudent.firstName.length && $scope.currentStudent.lastName.length && $scope.currentStudent.contacts.length) {
+	    	$scope.editStudentSubmit = true;
+	      if ($scope.editStudent.$valid) {
 	         var studentToUpdate = _.clone($scope.currentStudent);
 	         studentToUpdate.contacts = studentToUpdate.contacts.map(function(contact) {return contact._id});
 	         Student.update(studentToUpdate, function(student) {
 	         	console.log(student);
 	         });
+	         $scope.editStudentSubmit = false;
 	      }
 	    };
 

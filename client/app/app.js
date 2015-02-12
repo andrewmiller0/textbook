@@ -8,7 +8,7 @@ angular.module('textbookApp', [
   'ui.router',
   'ngSanitize',
   'ui.bootstrap',
-  'ngHandsontable'
+  'ui.utils'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

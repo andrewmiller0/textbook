@@ -10,12 +10,16 @@ angular.module('textbookApp')
     });
 
     $scope.updateClassroom = function() {
-      console.log($scope.classroom);
-      var unpopulated = angular.copy($scope.classroom);
-      unpopulated.students = unpopulated.students.map(function(student) {return student._id});
-      Classroom.update(unpopulated, function(classroom) {
-        $scope.$emit('updated user', $scope.user);
-      });
+      $scope.classSubmit = true;
+      if($scope.classForm.$valid) {
+        console.log($scope.classroom);
+        var unpopulated = angular.copy($scope.classroom);
+        unpopulated.students = unpopulated.students.map(function(student) {return student._id});
+        Classroom.update(unpopulated, function(classroom) {
+          // $scope.$emit('updated user', $scope.user);
+          $scope.classSubmit = false;
+        });
+      }
     };
 
     $scope.deleteStudent = function(studentId) {
