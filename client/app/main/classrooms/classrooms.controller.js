@@ -28,7 +28,6 @@ angular.module('textbookApp')
             })
           });
           Conversation.setUnread($scope.unread);
-          $scope.applyFlags();
         });
       });
 
@@ -60,7 +59,6 @@ angular.module('textbookApp')
       console.log($scope.selectedClass);
       for(var i = 0 ; i<$scope.user.classrooms.length; i++){
         if($scope.user.classrooms[i].name == $scope.selectedClass){
-          console.log('hi');
           var classObj = $scope.user.classrooms[i];
           console.log(classObj.homework);
         }
@@ -88,27 +86,11 @@ angular.module('textbookApp')
 
     $scope.applyFlags = function(contactId) {
       $scope.unread = Conversation.getUnread();
-      console.log($scope.unread);
-      if (!contactId || $state.params.contactId !== contactId) {
-        for (var classKey in $scope.unread) {
-          angular.element('#'+classKey).html(' <i class="fa fa-comment"></i>');
-          if ($state.params.classId === classKey) {
-            for (var studentKey in $scope.unread[classKey]) {
-              // i hate this so much i am so sorry
-              setTimeout(function(){
-                angular.element("#" + studentKey).html(' <i class="fa fa-comment"></i>')
-                for (var contactKey in $scope.unread[classKey][studentKey]) {
-                  angular.element("#" + contactKey).html('&nbsp;<span class="badge">'+ $scope.unread[classKey][studentKey][contactKey] +'</span>');
-                  }
-              },0);
-            }
-          }
-        }
-      }
     };
 
     socket.socket.on('new message', function(res){
-      if (!$stateParams.contactId || $stateParams.contactId !== res.convo.contactId) {
+      console.log(res.convo);
+      if (!$state.params.contactId || $state.params.contactId !== res.convo.contactId) {
         $scope.user.classrooms.forEach(function(classroom) {
           classroom.students.forEach(function(student) {
             var contact = _.find(student.contacts, function(c) { return c._id == res.convo.contactId});
@@ -124,11 +106,13 @@ angular.module('textbookApp')
                   additionToUnread[classroom._id][student._id][contact._id] = 1;
                   _.merge($scope.unread, additionToUnread);
                 }
-                $scope.applyFlags(res.convo.contactId);
-                return;
               }
             });
           })
        }
+      else {
+        res.convo.unreadMessages = 0;
+        Conversation.update({id: res.convo._id}, res.convo);
+      }
     });
 });
