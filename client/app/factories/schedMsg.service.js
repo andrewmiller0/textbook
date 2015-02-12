@@ -1,16 +1,10 @@
 'use strict';
 
 angular.module('textbookApp')
-  .factory('SchedMsg', function () {
-    // Service logic
-    // ...
-
-    var meaningOfLife = 42;
-
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
+  .factory('SchedMsg', function ($resource) {
+    return $resource('/api/schedmsgs/:id', {id: '@_id'}, {
+      update: {
+        method: 'PUT'
       }
-    };
+    });
   });
