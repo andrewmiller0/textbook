@@ -2,15 +2,24 @@
 	<div class="navbar-header"><a href="" class="logo navbar-brand">Add Homework</a></div>
 </div>
 
-<div class="btn-group" dropdown is-open="status.isopen">
-	<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-		{{selectedClass}}<span class="caret"></span>
-	</button>
-	<ul class="dropdown-menu" role="menu">
-		<li ng-repeat="class in user.classrooms" ng-click="homeworkActiveClass(class.name)"><a>{{class.name}}</a></li>
-	</ul>
-</div>
 <div class="modal-container">
+
+	<div>Homework:
+	</div>
+		<div ng-repeat="class in user.classrooms">{{class.name}}
+			<ul class="list-group">
+				<li class="list-group-item" ng-repeat="homework in class.homework">{{homework}}</li>
+			</ul>
+		</div>
+
+	<div class="btn-group" dropdown is-open="status.isopen">
+		<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+			{{selectedClass}}<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+			<li ng-repeat="class in user.classrooms" ng-click="homeworkActiveClass(class.name)"><a>{{class.name}}</a></li>
+		</ul>
+	</div>
 	<div class="input-group">
 		<input type="text" class="form-control" ng-model="assignment" placeholder="Assignment...">
 		<span class="input-group-btn">

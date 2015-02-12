@@ -9,12 +9,8 @@ angular.module('textbookApp')
 
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
-<<<<<<< HEAD
 
       });
-=======
-      })
->>>>>>> master
 
    $scope.gotoBottom = function() {
       $location.hash('bottom');

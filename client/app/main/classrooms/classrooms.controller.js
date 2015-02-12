@@ -36,6 +36,7 @@ angular.module('textbookApp')
         if($scope.user.classrooms[i].name == $scope.selectedClass){
           console.log('hi');
           var classObj = $scope.user.classrooms[i];
+          console.log(classObj.homework);
         }
       }
       Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
