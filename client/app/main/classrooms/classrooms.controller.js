@@ -6,7 +6,8 @@ angular.module('textbookApp')
     $scope.unread = {};
 
     $scope.open = function () {
-        console.log('open');
+
+        console.log($scope.user.classrooms);
         $modal.open({
             templateUrl: 'app/main/classrooms/homeworkmodal.html',
             backdrop: true,
@@ -14,16 +15,37 @@ angular.module('textbookApp')
             scope: $scope
         });
     };
+    $scope.status = {
+      isopen: false
+    };
 
+    $scope.selectedClass = 'Select a Class';
+    $scope.homeworkActiveClass = function(className){
+      $scope.selectedClass = className;
+    }
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
     $scope.assignment;
     $scope.addAssignment = function(assignment){
-
-      Classroom.addHomework({classId: $scope.currentClass, homework: assignment}).$promise.then(function(homework){
+      $scope.assignment = "";
+      console.log($scope.selectedClass);
+      for(var i = 0 ; i<$scope.user.classrooms.length; i++){
+        if($scope.user.classrooms[i].name == $scope.selectedClass){
+          console.log('hi');
+          var classObj = $scope.user.classrooms[i];
+        }
+      }
+      Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
 
         console.log(homework);
+        $scope.selectedClass = 'Select a Class';
       });
     }
 
+    console.log($scope.user);
     $scope.user.$promise.then(function(user){
       user.classrooms.forEach(function(classroom) {
         classroom.students.forEach(function(student) {
@@ -38,13 +60,9 @@ angular.module('textbookApp')
           })
         });
       });
-      applyFlags();
+      $scope.applyFlags();
     });
 
-
-    $scope.$on('updated user', function(event, data) {
-      $scope.user = Auth.getCurrentUser();
-    });
 
     $scope.$on('delete classroom', function(event, data) {
       User.get().$promise.then(function(user) {

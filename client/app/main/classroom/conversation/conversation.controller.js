@@ -5,6 +5,11 @@ angular.module('textbookApp')
   	var classId = $stateParams.classId,
   		contactId = $stateParams.contactId;
 
+      Contact.get({id: contactId}, function(contact){
+        $scope.activeContact = contact;
+
+      });
+
    $scope.gotoBottom = function() {
       $location.hash('bottom');
       $anchorScroll();
@@ -47,6 +52,7 @@ angular.module('textbookApp')
         _id: $scope.conversation._id,
         message: message,
         from: $scope.user.phone,
+        to: $scope.activeContact.phone,
         userId: $scope.user._id,
         contactId: contactId
       };

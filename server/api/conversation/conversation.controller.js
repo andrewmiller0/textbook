@@ -24,11 +24,9 @@ exports.show = function(req, res) {
 };
 
 exports.sendMsg = function(req, res, next) {
-  Contact.findById(req.body.contactId, function(err, contact){
-    if (err) console.log(err);
     var message = new Sms({
         body: req.body.message,
-        to: contact.phone,
+        to: req.body.to,
         from: req.body.from
     });
 
@@ -44,8 +42,8 @@ exports.sendMsg = function(req, res, next) {
         });
       });
     });
-  });
-}
+  }
+
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
   Conversation.create(req.body, function(err, conversation) {

@@ -7,7 +7,8 @@ angular.module('textbookApp')
     $scope.error = {};
     $scope.addClassroom = function() {
       Classroom.save($scope.classroom, function(classroom) {
-        $scope.user.classrooms.push(classroom);
+        var newClassroom = classroom.toJSON();
+        $scope.user.classrooms.push(newClassroom);
         Auth.updateUser($scope.user);
         User.getUnpopulated({id: $scope.user._id}, function(user) {
           user.classrooms.push(classroom._id);
