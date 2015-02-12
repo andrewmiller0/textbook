@@ -28,7 +28,6 @@ angular.module('textbookApp')
             })
           });
           Conversation.setUnread($scope.unread);
-          $scope.applyFlags();
         });
       });
 
@@ -89,6 +88,7 @@ angular.module('textbookApp')
     };
 
     socket.socket.on('new message', function(res){
+      console.log(res.convo);
       if (!$state.params.contactId || $state.params.contactId !== res.convo.contactId) {
         $scope.user.classrooms.forEach(function(classroom) {
           classroom.students.forEach(function(student) {
@@ -109,5 +109,9 @@ angular.module('textbookApp')
             });
           })
        }
+      else {
+        res.convo.unreadMessages = 0;
+        Conversation.update({id: res.convo._id}, res.convo);
+      }
     });
 });

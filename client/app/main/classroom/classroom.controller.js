@@ -8,10 +8,6 @@ angular.module('textbookApp')
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {
         $scope.currentClass = classroom;
-
-        setTimeout(function(){
-          $scope.applyFlags();
-        }, 0);
       }
     });
     
