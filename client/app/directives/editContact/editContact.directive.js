@@ -11,17 +11,20 @@ angular.module('textbookApp')
   })
   .controller('editContactController', function($scope, Contact) {
   	$scope.editContact = function(contactId) {
-  		Contact.update({id: contactId}, $scope.contact, function(contactSaved) {
-  			console.log(contactSaved);
-        $scope.currentStudent.contacts.forEach(function(contact, i) {
-          if(contact._id === contactId) {
-            $scope.currentStudent.contacts[i] = contactSaved;
-          }
-        });
-  			$scope.$emit('close addeditview');
-        $scope.$emit('close editview');
-  		});
-  	}
+      $scope.editFormSubmit = true;
+      if($scope.editContactForm.$valid) {
+    		Contact.update({id: contactId}, $scope.contact, function(contactSaved) {
+    			console.log(contactSaved);
+          $scope.currentStudent.contacts.forEach(function(contact, i) {
+            if(contact._id === contactId) {
+              $scope.currentStudent.contacts[i] = contactSaved;
+            }
+          });
+    			$scope.$emit('close addeditview');
+          $scope.$emit('close editview');
+    		});
+      }
+  	};
 
 
   });

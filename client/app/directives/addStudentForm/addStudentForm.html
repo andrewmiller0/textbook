@@ -1,39 +1,43 @@
 <div class="student-add-form" ng-controller="studentFormController">
-	<form ng-submit="addStudent()" name="studentForm"novalidate>
+	<form ng-submit="addStudent()" name="studentForm" novalidate>
 		<h4>Student</h4>
 		<div ng-hide="studentAdded">
 			<div class="form-group">
 				<label class="control-label col-lg-4">First name</label>
 				<div class="col-lg-8">
 					<input class="form-control" type="text" name="firstName" ng-model="currentStudent.firstName" ng-required="true" ng-minlength="2"/>
+					<p class="help-block" ng-show="studentForm.firstName.$invalid && studentFormSubmit">Please enter a valid first name for the student.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Last name</label>
 				<div class="col-lg-8">
 					<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" ng-required="true" ng-minlength="2" />
+					<p class="help-block" ng-show="studentForm.lastName.$invalid && studentFormSubmit">Please enter a valid last name for the student.</p>
 				</div>
 			</div>
 			<h4>Primary Contact</h4>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="primaryContactName" ng-model="currentStudent.contacts[0].name" ng-required="true" />
+					<input class="form-control" type="text" name="primaryContactName" ng-model="currentStudent.contacts[0].name" ng-required="true" ng-minlength="2"/>
+					<p class="help-block" ng-show="studentForm.primaryContactName.$invalid && studentFormSubmit">Please enter a valid primary contact for the student.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Relationship</label>
 				<div class="col-lg-8">
 					<input class="form-control" type="text" name="primaryContactRelationship" ng-model="currentStudent.contacts[0].relationship" ng-required="true" />
+					<p class="help-block" ng-show="studentForm.primaryContactRelationship.$invalid && studentFormSubmit">Please enter a valid primary contact's relationship to the student.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Phone</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="primaryContactPhone" ng-model="currentStudent.contacts[0].phone" ng-required="true" ng-minlength="10" ng-maxlength="10" />
+					<input class="form-control" type="text" name="primaryContactPhone" ng-model="currentStudent.contacts[0].phone" ng-required="true" ui-mask="{{'(999) 999-9999'}}" />
 				</div>
 			</div>
-			<button class="btn btn-default center-block" type="submit" ng-disabled="studentForm.$invalid">Add student</button>
+			<button class="btn btn-default center-block" type="submit">Add student</button>
 		</form>
 		</div>
 	<div class="contact-add-form" ng-show="studentAdded">
@@ -52,25 +56,30 @@
 			</div>
 		</div>
 		<h5>Add a contact for this student:</h5>
+		<form name="contactForm" ng-submit="addContact()" novalidate>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Contact's name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="lastName" ng-model="currentContact.name" /> <br />
+					<input class="form-control" type="text" name="contactName" ng-model="currentContact.name" ng-required="true" ng-minlength="5"/> <br />
+					<p class="help-block" ng-show="contactForm.contactName.$invalid && contactFormSubmit">Please enter a valid contact name.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Relationship to student</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="relationship" ng-model="currentContact.relationship" /><br />
+					<input class="form-control" type="text" name="relationship" ng-model="currentContact.relationship" ng-required="true" ng-minlength="3"/><br />
+					<p class="help-block" ng-show="contactForm.relationship.$invalid && contactFormSubmit">Please enter a valid contact relationship to student.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Cell phone number</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="lastName" ng-model="currentContact.phone" /><br />	
+					<input class="form-control" type="text" name="contactPhone" ng-model="currentContact.phone" / ng-required="true" ui-mask="{{'(999) 999-9999'}}"><br />
+					<p class="help-block" ng-show="contactForm.contactPhone.$invalid && contactFormSubmit">Please enter a valid contact phone number.</p>
 				</div>
 			</div>
-		<button class="btn btn-default center-block" type="button" ng-click="addContact()">Save contact</button>
+		<button class="btn btn-default center-block" type="submit">Save contact</button>
+		</form>
 		<button class="btn btn-success center-block" type="button" ng-click="resetStudent()">Done adding contacts</button>
 	</div><br />
 </div>
