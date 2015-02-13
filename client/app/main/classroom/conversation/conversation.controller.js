@@ -6,7 +6,6 @@ angular.module('textbookApp')
   		contactId = $stateParams.contactId,
       studentId = $stateParams.studentId;
       $scope.$emit('activestudent', studentId);
-
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
       });

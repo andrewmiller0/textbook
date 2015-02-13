@@ -44,9 +44,11 @@ angular.module('textbookApp')
 
     $scope.openGroupMsg = function() {
         $modal.open({
-            templateUrl: 'app/main/classrooms/messagemodal.html',
+            templateUrl: 'app/main/classrooms/groupMessager/messagemodal.html',
+            controller: 'GroupMessagerCtrl',
             backdrop: true,
             windowClass: 'modal',
+            size: 'lg',
             scope: $scope
         });
     }

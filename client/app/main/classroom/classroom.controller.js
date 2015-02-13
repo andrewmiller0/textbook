@@ -4,7 +4,6 @@ angular.module('textbookApp')
   .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
-      console.log($scope.activeStudent)
     });
     $scope.user.classrooms.forEach(function(classroom) {
       if(classroom._id === $stateParams.classId) {

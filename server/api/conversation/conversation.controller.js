@@ -31,18 +31,27 @@ exports.sendMsg = function(req, res, next) {
     });
 
     message.send(function(message){
-      Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation){
-        if (err) console.log(err);
-        console.log('Save ', conversation);
-        conversation.messages.push(message);
-        conversation.save(function(err,conversation2){
-          if (err) console.log('Save Error ', err);
-          console.log(conversation2);
+      Conversation.saveSentMessage(message, req.body.userId, req.body.contactId, function() {
+          res.json(200, message);
+        });
+    });
+  }
+
+exports.sendMultiple = function(req, res, next) {
+    req.body.to.forEach(function(contact) {
+      var message = new Sms({
+        body: req.body.message,
+        to: contact.phone,
+        from: req.body.from
+      });
+      // this is total duplication and i should move this into a method but
+      message.send(function(message) {
+        Conversation.saveSentMessage(message, req.body.userId, contact._id, function() {
           res.json(200, message);
         });
       });
     });
-  }
+};
 
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
@@ -53,7 +62,6 @@ exports.create = function(req, res) {
 };
 
 exports.getOne = function(req, res) {
-  console.log("get one route");
   Conversation.find({userId: req.body.userId, contactId: req.body.contactId}, function(err, data){
     if(err) console.log(err);
     res.send({data: data});
