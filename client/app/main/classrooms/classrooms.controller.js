@@ -2,11 +2,14 @@
 
 angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket, $modal) {
+    
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
       $scope.unread = {};
       var convArray = [];
-
+      $scope.findfirstState = function() {
+      return $state.is('classrooms');
+    };
       Conversation.query().$promise.then(function(conversations) {
           conversations.forEach(function(convo) {
             if (convo.unreadMessages > 0) convArray.push(convo);
