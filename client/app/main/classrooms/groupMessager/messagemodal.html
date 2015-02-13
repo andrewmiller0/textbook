@@ -2,7 +2,7 @@
 	<div class="navbar-header"><a href="" class="logo navbar-brand">Send a group message</a></div>
 </div>
 <div class="row modal-container">
-	<div class="col-lg-4">
+	<div class="col-lg-4 search-panel">
 	<p>Send to all primary contacts in one class</p>
 	<div class="btn-group" dropdown is-open="status.isopen">
 		<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
@@ -27,17 +27,21 @@
 		</div>
 	</div>
 	<div class="col-lg-8">
-		<div class="panel panel-default">
+		<div class="panel">
 			To:
-			<span class="panel panel-default" ng-repeat="contact in to">
+			<span class="panel" ng-repeat="contact in to">
 				<i class="fa fa-times" ng-click="removeFromTo(contact._id)"></i> {{ contact.name }}
 			</span>
 		</div>
-		<form class="input-group" ng-submit="sendGroupMsg()">
-			<input type="text" class="form-control" ng-model="body">
-			<span class="input-group-btn">
-				<button class="btn btn-default" type="submit" ng-disabled="!body.length || !to.length">Submit</button>
-			</span>
+		<form ng-submit="sendGroupMsg()">
+			<input type="textarea" class="form-control" ng-model="body">
+			<button class="btn btn-default" type="button" ng-click="schedule=true">Schedule for later</button>
+			<div ng-show="schedule">
+				<datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
+				<input type="text" class="lil-input" />:<input type="text" class="lil-input"/>AM
+				<div ng-show="dt">Selected date is {{ dt | date:'fullDate' }}</div>
+			</div>
+			<button class="btn btn-primary form-control" type="submit" ng-hide="schedule" ng-disabled="!body.length || !to.length">Send</button>
 		</form>
 	</div>
 </div>
