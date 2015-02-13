@@ -32,7 +32,6 @@ angular.module('textbookApp')
       });
 
     $scope.open = function () {
-        console.log($scope.user.classrooms);
         $modal.open({
             templateUrl: 'app/main/classrooms/homeworkmodal.html',
             backdrop: true,
@@ -63,14 +62,15 @@ angular.module('textbookApp')
           console.log(classObj.homework);
         }
       }
+      classObj.homework.push(assignment);
       Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
         console.log(homework);
         $scope.selectedClass = 'Select a Class';
       });
     };
- 
+
     $scope.$on('updated user', function(event, data) {
-      $scope.user = Auth.getCurrentUser();  
+      $scope.user = Auth.getCurrentUser();
     });
 
     $scope.$on('delete classroom', function(event, data) {

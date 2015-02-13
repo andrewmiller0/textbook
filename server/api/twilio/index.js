@@ -46,6 +46,7 @@ module.exports = function(socket) {
 						conversation.save(function(err, conversation2) {
 
 							if(newMessage.body.toLowerCase() === 'homework'){
+								console.log("Homework");
 								user.deepPopulate('classrooms.students.contacts', function(err) {
 									if (err) console.log(err);
 									var retArr = [];
@@ -64,7 +65,7 @@ module.exports = function(socket) {
 										});
 									});
 									retArr.forEach(function(homework){
-										var messageBody = homework.class + " Homework: %0a" + homework.homework.join('%0a');
+										var messageBody = homework.class + " Homework: \n" + homework.homework.join('%0a');
 										var message = new Sms({
 											body: messageBody,
 											to: text.From,
