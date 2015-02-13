@@ -64,6 +64,7 @@ angular.module('textbookApp')
             }
             $scope.studentRoster = json;
             $state.go('.studentRoster');
+            $scope.$apply();
       };
       reader.readAsBinaryString($scope.file);
     };
