@@ -13,12 +13,17 @@
 		    </div>
 		    </div>
 		</div>
+       <div class="alert alert-success alert-dismissible" ng-show="sentAlert">
+	    	Message successfully sent
+	    	<button type="button" class="close" ng-click="sentAlert=false"><span aria-hidden="true">&times;</span></button>
+	    </div>
 	    <div class="panel-body frontpage">
 		    <div ui-view></div>
 		</div>
 	</div>
 	<!-- homework stuff -->
 	<div class="row">
+		<button type="button" class="btn btn-info" ng-click="openGroupMsg()">Send a group message</button>
 		<button type="button" class="btn btn-warning" ng-click="open()">Add Homework Assignment</button>
 	</div>
 	<!-- end homework stuff -->

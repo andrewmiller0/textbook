@@ -1,0 +1,43 @@
+<div class="navbar navbar-static-top navbar-inverse">
+	<div class="navbar-header"><a href="" class="logo navbar-brand">Send a group message</a></div>
+</div>
+<div class="row modal-container">
+	<div class="col-lg-4">
+	<p>Send to all primary contacts in one class</p>
+	<div class="btn-group" dropdown is-open="status.isopen">
+		<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+			{{selectedClass}}<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu classes-dropdown" role="menu">
+			<li class="text-center" ng-click="setClass()"> -- </li>
+			<li ng-repeat="class in user.classrooms" ng-click="setClass(class)"><a>{{class.name}}</a></li>
+		</ul>
+	</div>
+		<div>
+			Or, search for contact by student name
+			<input type="text" class="form-control" ng-model="term" />
+			<div ng-show="term.length > 2">
+				<div class="panel panel-default search-results" ng-repeat="student in students | filter: studentFilter">
+					{{ student.firstName }} {{ student.lastName }}:	
+					<div class="list-group-item search-result" ng-repeat="contact in student.contacts" ng-click="addToTo(contact)">
+						<i class="fa fa-plus"></i> {{contact.name}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-8">
+		<div class="panel panel-default">
+			To:
+			<span class="panel panel-default" ng-repeat="contact in to">
+				<i class="fa fa-times" ng-click="removeFromTo(contact._id)"></i> {{ contact.name }}
+			</span>
+		</div>
+		<form class="input-group" ng-submit="sendGroupMsg()">
+			<input type="text" class="form-control" ng-model="body">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit" ng-disabled="!body.length || !to.length">Submit</button>
+			</span>
+		</form>
+	</div>
+</div>

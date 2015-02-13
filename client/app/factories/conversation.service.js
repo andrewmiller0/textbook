@@ -9,6 +9,10 @@ angular.module('textbookApp')
       sendMsg: {
         method:'POST'
       },
+      sendMultiple: {
+        method: 'POST',
+        url: '/api/conversations/send/multiple'
+      },
       getConversation: {
         url: '/api/conversations/:userId/:contactId',
         method: 'GET'

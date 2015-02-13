@@ -45,6 +45,26 @@ angular.module('textbookApp')
             scope: $scope
         });
     };
+
+    $scope.close = function() {
+      $scope.groupMessager.close();
+    };
+
+    $scope.openGroupMsg = function() {
+        $scope.groupMessager = $modal.open({
+            templateUrl: 'app/main/classrooms/groupMessager/messagemodal.html',
+            controller: 'GroupMessagerCtrl',
+            backdrop: true,
+            windowClass: 'modal',
+            size: 'lg',
+            scope: $scope
+        });
+    };
+
+    $scope.applySentAlert = function() {
+      $scope.sentAlert = true;
+    };
+
     $scope.status = {
       isopen: false
     };
