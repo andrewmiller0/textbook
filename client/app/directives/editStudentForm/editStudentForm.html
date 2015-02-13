@@ -13,9 +13,6 @@
 				<input class="form-control" type="text" name="lastName" ng-model="currentStudent.lastName" ng-required="true" ng-minlength="2"/>
 				<p class="help-block" ng-show="editStudent.lastName.$invalid && editStudentSubmit">Student last name needs to be at least 2 characters long</p>
 			</div>
-			firstName: {{editStudent.firstName.$valid}}
-			lastName: {{editStudent.lastName.$valid}}
-			whole form: {{editStudent.$valid}}
 		</div>
 		<button class="btn btn-default center-block" type="submit">Save student name</button>
 	</form>

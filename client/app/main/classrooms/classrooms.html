@@ -3,7 +3,7 @@
 		<h2>You don't have any classrooms!  Create one to get started!</h2>
 		<a ui-sref="addClassroom"><button class="btn btn-primary">Create a Class</button></a>
 	</div>
-	<div class="panel panel-default" style="height:600px;">
+	<div class="panel panel-default" style="height:600px;" ng-hide="findfirstState()">
 		<div class="panel-heading">
 			<div ng-show="user.classrooms.length > 0">
 			<div class="btn-group" role="group">

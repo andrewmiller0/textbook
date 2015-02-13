@@ -5,6 +5,9 @@ angular.module('textbookApp')
     $scope.user = Auth.getCurrentUser();
     $scope.unread = {};
     var convArray = [];
+    $scope.findfirstState = function() {
+      return $state.is('classrooms');
+    };
 
     Conversation.query().$promise.then(function(conversations) {
         conversations.forEach(function(convo) {
