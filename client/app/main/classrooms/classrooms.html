@@ -3,7 +3,7 @@
 		<h2>You don't have any classrooms!  Create one to get started!</h2>
 		<a ui-sref="addClassroom"><button class="btn btn-primary">Create a Class</button></a>
 	</div>
-	<div class="panel panel-default frontpage">
+	<div class="panel panel-default" style="height:600px;">
 		<div class="panel-heading">
 			<div ng-show="user.classrooms.length > 0">
 			<div class="btn-group" role="group">
@@ -13,12 +13,12 @@
 		    </div>
 		    </div>
 		</div>
-	    <div class="panel-body">
+	    <div class="panel-body frontpage">
 		    <div ui-view></div>
 		</div>
 	</div>
 	<!-- homework stuff -->
-	<div>
+	<div class="row">
 		<button type="button" class="btn btn-warning" ng-click="open()">Add Homework Assignment</button>
 	</div>
 	<!-- end homework stuff -->

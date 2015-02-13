@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket) {
+  .controller('ClassroomCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, User, Auth, socket, $state) {
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
     });
@@ -10,8 +10,9 @@ angular.module('textbookApp')
         $scope.currentClass = classroom;
       }
     });
-    
-
+    $scope.findState = function() {
+      return $state.is('classrooms.classroom');
+    };
    $scope.ids = {};
 
     $scope.toggleContacts = function(student) {
