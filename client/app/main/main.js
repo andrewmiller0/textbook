@@ -8,11 +8,6 @@ angular.module('textbookApp')
         templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl',
         authenticate: true,
-        resolve: {
-          resolvedUser: function(User) {
-            return User.get();
-          }
-        },
         onEnter: function($state, User, newClass) {
           User.get().$promise.then(function(user) {
           if(user.classrooms.length !== 0 && !newClass.get()) {
