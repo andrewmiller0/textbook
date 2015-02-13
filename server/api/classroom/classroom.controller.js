@@ -99,7 +99,7 @@ exports.saveSpreadsheet = function(req, res) {
     };
     var newStudent = {
       firstName: obj['First Name'],
-      lastName: obj.['Last Name'],
+      lastName: obj['Last Name'],
       primaryPhone: obj['Contact Phone'],
       contacts: []
     }
