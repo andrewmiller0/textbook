@@ -1,13 +1,6 @@
 <div class="row">
 	<div class="col-md-8">
 		<h3 class="text-center">{{newClass.name}}</h3>
-		<!-- <hot-table id="studentTable" settings="{colHeaders: colHeaders, contextMenu: ['row_above', 'row_below', 'remove_row'], afterChange: afterChange, currentColClassName: 'currentCol', selectedIndex: 'selectedIndex' }" rowHeaders="false" datarows="studentRoster" height="500">
-			{{ columnNames[0] }}
-			{{ columnNames[1] }}
-			<span ng-repeat="column in columnNames">
-				<hot-column data="{{column}}" title="'{{column}}'" value="'{{column}}'"></hot-column>
-			</span>
-		</hot-table> -->
 		<table class="table table-bordered">
 			<thead>
 				<tr>
@@ -21,20 +14,25 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-4" class="pull-right">
 		<div ng-show="progress === 0">
-			<p>First, what do you want to call your class?</p>
-			<input type="text" ng-model="newClass.name">
-			<button class="btn btn-primary" ng-click="createClass()">Save Class Name</button>
+			<form name="addClassSpreadsheetForm" ng-submit="createClass()" novalidate>
+				<p>First, what do you want to call your class?</p>
+				<input type="text" name="classname" ng-model="newClass.name" ng-required="true" ng-minlength="4">
+				<p class="help-block" ng-show="addClassSpreadsheetForm.classname.$invalid && validClass">Class name should be at least 4 characters</p>
+				<button class="btn btn-primary" type="submit">Save Class Name</button>
+			</form>
 		</div>
-		<div ng-repeat="(key, value) in modelNames" ng-show="($index + 1) === progress">
-		<p>Select the column with the student's {{value}}<p>
-			<select class="form-control" ng-model="columnSelected[key]" ng-options="column as column for column in columnNames">
-			</select>
-		<button type="submit" class="btn btn-primary" ng-click="changeDataKey(key)">Next</button>
+			<div ng-repeat="(key, value) in modelNames" ng-show="($index + 1) === progress">
+			<form name="selectForm">
+				<p>Select the column with the student's {{value}}<p>
+					<select class="form-control" ng-model="columnSelected[key]" ng-options="column as column for column in columnNames" value="column" ng-required="true">
+					</select>
+				<button type="submit" class="btn btn-primary" ng-click="changeDataKey(key)" ng-disabled="selectForm.$invalid">Next</button>
+				</form>
+					</div>
+				<div ng-show="progress > 5">
+					<button class="btn btn-success" ng-click="saveData()">Save Class</button>
+				</div>
 			</div>
-		<div ng-show="progress > 5">
-			<button class="btn btn-success" ng-click="saveData()">Save Class</button>
-		</div>
-	</div>
 </div>

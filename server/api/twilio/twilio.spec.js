@@ -52,7 +52,7 @@ describe('Twilio Call', function() {
             userId: user._id,
             contactId: contact._id,
             messages: [],
-            unreadMessages: false
+            // unreadMessages: false
           });
           var newMessage = {
             body: "yo this is a text message",
@@ -63,13 +63,13 @@ describe('Twilio Call', function() {
             Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation2) {
               console.log('found conversation', conversation2);
               conversation2.messages.push(newMessage);
-              conversation2.unreadMessages = true;
+              // conversation2.unreadMessages = true;
               conversation2.save(function(err, conversation3) {
               console.log('saved conversation', conversation3);
               done();
             });
           });
-          
+
       });
     });
   });

@@ -51,7 +51,7 @@ body {
 	background-color: #FAFAFA;
 }
 
-.navbar {
+.navbar-main {
 	background-color: $primary-color;
 	a {
 		color: #f2f2f2;
@@ -84,6 +84,7 @@ body {
 @import 'about/about.scss';
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
+@import 'directives/addContact/addContact.scss';
 @import 'directives/addStudentForm/studentForm.scss';
 @import 'directives/contactList/contactList.scss';
 @import 'directives/editContact/editContact.scss';

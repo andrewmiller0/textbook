@@ -3,10 +3,12 @@
 var _ = require('lodash');
 var Conversation = require('./conversation.model');
 var config = require('../../config/environment');
+var Sms = require('../../remotes/sms');
+var Contact = require('../contact/contact.model');
 
 // Get list of conversations
 exports.index = function(req, res) {
-  Conversation.find(function (err, conversations) {
+  Conversation.find({userId: req.user._id}, function (err, conversations) {
     if(err) { return handleError(res, err); }
     return res.json(200, conversations);
   });
@@ -14,40 +16,43 @@ exports.index = function(req, res) {
 
 // Get a single conversation
 exports.show = function(req, res) {
-  Conversation.findById(req.params.id, function (err, conversation) {
+  Conversation.findOne({userId: req.params.userId, contactId: req.params.contactId}, function (err, conversation) {
     if(err) { return handleError(res, err); }
     if(!conversation) { return res.send(404); }
     return res.json(conversation);
   });
 };
 
-exports.sendMsg = function(req, res) {
-  var accountSid = config.twilio.clientID;
-  var authToken = config.twilio.clientToken;
-  var client = require('twilio')(accountSid, authToken);
-  console.log(req.body);
-  client.messages.create({
-      body: req.body.message,
-      to: req.body.to,
-      from: req.body.from
-  }, function(err, message) {
-      console.log(message);
-      if(err) console.log(err);
-      if(message.errorMessage === null){
-        var newMessage = {
-          body: req.body.message,
-          dateSent: new Date(),
-          type: 'sent'
-        };
-        Conversation.findOne({userId: req.body.userId, contactId: req.body.contactId}, function(err, conversation) {
-          conversation.messages.push(newMessage);
-          conversation.save(function(err, conversation2) {
-            res.json(200, newMessage);
-          });
+exports.sendMsg = function(req, res, next) {
+    var message = new Sms({
+        body: req.body.message,
+        to: req.body.to,
+        from: req.body.from
+    });
+
+    message.send(function(message){
+      Conversation.saveSentMessage(message, req.body.userId, req.body.contactId, function() {
+          res.json(200, message);
         });
-      }
-  });
-}
+    });
+  }
+
+exports.sendMultiple = function(req, res, next) {
+    req.body.to.forEach(function(contact) {
+      var message = new Sms({
+        body: req.body.message,
+        to: contact.phone,
+        from: req.body.from
+      });
+      // this is total duplication and i should move this into a method but
+      message.send(function(message) {
+        Conversation.saveSentMessage(message, req.body.userId, contact._id, function() {
+          res.json(200, message);
+        });
+      });
+    });
+};
+
 // Creates a new conversation in the DB.
 exports.create = function(req, res) {
   Conversation.create(req.body, function(err, conversation) {

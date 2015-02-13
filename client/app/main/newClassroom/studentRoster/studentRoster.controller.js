@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth, newClass) {
   	$scope.newClass = {
   		students: []
   	};
@@ -28,14 +28,19 @@ angular.module('textbookApp')
     };
 
     $scope.createClass = function() {
-    	User.getUnpopulated({id: $scope.user._id}, function(user) {
-	    	Classroom.save($scope.newClass, function(classroom) {
-	    		$scope.newClass._id = classroom._id;
-	    		user.classrooms.push(classroom._id);
-	    		User.update(user);
-	    	});
-    	});
-      $scope.progress = $scope.progress + 1;
+      $scope.validClass = true;
+      if($scope.addClassSpreadsheetForm.$valid) {
+      	User.getUnpopulated({id: $scope.user._id}, function(user) {
+  	    	Classroom.save($scope.newClass, function(classroom) {
+  	    		$scope.newClass._id = classroom._id;
+  	    		user.classrooms.push(classroom._id);
+  	    		User.update(user);
+  	    	});
+      	});
+        $scope.progress = $scope.progress + 1;
+        $scope.validClass = false;
+        newClass.set(true);
+      }
     };
 
     $scope.saveData = function() {

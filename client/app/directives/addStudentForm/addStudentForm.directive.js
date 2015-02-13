@@ -27,21 +27,9 @@ angular.module('textbookApp')
       phone: ""
     };
 
-    $scope.addContact = function() {
-      Contact.save($scope.currentContact, function(contact) {
-          $scope.currentStudent.contacts.push(contact);
-          var studentToSave = angular.copy($scope.currentStudent);
-          studentToSave.contacts = studentToSave.contacts.map(function(contact) { return contact._id; });
-          Student.update(studentToSave);
-      });
-      $scope.currentContact = {
-        name: "",
-        relationship: "",
-        phone: ""
-      };
-    };
-
     $scope.addStudent = function() {
+        $scope.studentFormSubmit = true;
+        if($scope.studentForm.$valid) {
          $scope.studentAdded = true;
          $scope.currentStudent.primaryPhone = $scope.currentStudent.contacts[0].phone;
          $scope.currentStudent.contacts[0].phone = '+1' + $scope.currentStudent.contacts[0].phone;
@@ -55,6 +43,8 @@ angular.module('textbookApp')
               $scope.classroom.students[$scope.classroom.students.length - 1]._id = student._id;
            });
         });
+         $scope.studentFormSubmit = false;
+       }
     };
 
     $scope.resetStudent = function() {

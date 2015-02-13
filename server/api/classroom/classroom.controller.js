@@ -46,9 +46,9 @@ exports.create = function(req, res) {
 
 // Updates an existing classroom in the DB.
 exports.update = function(req, res) {
-  if(req.body._id) { 
+  if(req.body._id) {
     delete req.body._id;
-    delete req.body.__v; 
+    delete req.body.__v;
   }
   Classroom.findById(req.params.id, function (err, classroom) {
     if (err) { return handleError(res, err); }
@@ -74,10 +74,21 @@ exports.destroy = function(req, res) {
   });
 };
 
+
+exports.addHomework = function(req, res) {
+  var assignment = req.body.homework;
+  Classroom.findById(req.body.classId, function(err, classroom){
+    classroom.homework.push(assignment);
+    classroom.save(function(classroom){
+      res.json(200, assignment);
+    });
+  });
+}
+
 exports.saveSpreadsheet = function(req, res) {
-  if(req.body._id) { 
+  if(req.body._id) {
     delete req.body._id;
-    delete req.body.__v; 
+    delete req.body.__v;
   }
   var studentArr = [];
   req.body.forEach(function(obj) {
@@ -88,7 +99,7 @@ exports.saveSpreadsheet = function(req, res) {
     };
     var newStudent = {
       firstName: obj.firstName,
-      lastName: obj.lastName, 
+      lastName: obj.lastName,
       primaryPhone: obj.phone,
       contacts: []
     }
@@ -109,11 +120,9 @@ exports.saveSpreadsheet = function(req, res) {
           });
         }
       ], function(err, results) {
-        console.log(studentArr.length);
         studentArr.push(results[1]);
         if(studentArr.length === req.body.length) {
           Classroom.findById(req.params.id, function (err, classroom) {
-            // console.log("these are the students", studentArr);
             if (err) { return handleError(res, err); }
             classroom.students = studentArr;
             classroom.markModified('students');
@@ -132,6 +141,7 @@ exports.saveSpreadsheet = function(req, res) {
       });
     });
 };
+
 
 function handleError(res, err) {
   return res.send(500, err);

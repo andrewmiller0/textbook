@@ -1,23 +1,27 @@
 <div ng-controller="editContactController" ng-show="contact._id === addEditView">
 	<div class="contact-add-form">
+		<form name="editContactForm" ng-submit="editContact(contact._id)" novalidate>
 		<h5>Edit {{contact.name}}</h5>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Contact's name</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="lastName" ng-model="contact.name" /> <br />
+					<input class="form-control" type="text" name="contactName" ng-model="contact.name" ng-required="true" ng-minlength="5"/> <br />
+					<p class="help-block" ng-show="editContactForm.contactName.$invalid && editFormSubmit">Please enter a valid contact name.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Relationship to student</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="relationship" ng-model="contact.relationship" /><br />
+					<input class="form-control" type="text" name="relationship" ng-model="contact.relationship" ng-required="true" ng-minlength="3"/><br />
+					<p class="help-block" ng-show="editContactForm.relationship.$invalid && editFormSubmit">Please enter a valid contact relationship to student.</p>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="control-label col-lg-4">Cell phone number</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="lastName" ng-model="contact.phone" /><br />	
+					<input class="form-control" type="text" name="contactPhone" ng-model="contact.phone" ng-required="true" ui-mask="{{'(999) 999-9999'}}"><br />
+					<p class="help-block" ng-show="editContactForm.contactPhone.$invalid && editFormSubmit">Please enter a valid contact phone number.</p>	
 				</div>
 			</div>
-		<button class="btn btn-default center-block" type="button" ng-click="editContact(contact._id)">Save contact</button>
+		<button class="btn btn-default center-block" type="submit">Save contact</button>
 </div>

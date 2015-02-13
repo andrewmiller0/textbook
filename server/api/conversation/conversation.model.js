@@ -33,4 +33,15 @@ ConversationSchema.virtual('updated').get(function() {
 	}
 });
 
+ConversationSchema.statics.saveSentMessage = function(sentMessage, userId, contactId, cb) {
+	this.findOne({userId: userId, contactId: contactId}, function(err, conversation){
+        if (err) console.log(err);
+        conversation.messages.push(sentMessage);
+        conversation.save(function(err,conversation2){
+          if (err) console.log('Save Error ', err);
+          cb();
+        });
+      });
+}
+
 module.exports = mongoose.model('Conversation', ConversationSchema);

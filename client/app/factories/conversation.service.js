@@ -9,9 +9,24 @@ angular.module('textbookApp')
       sendMsg: {
         method:'POST'
       },
+      sendMultiple: {
+        method: 'POST',
+        url: '/api/conversations/send/multiple'
+      },
       getConversation: {
-        method: 'POST'
+        url: '/api/conversations/:userId/:contactId',
+        method: 'GET'
       }
     });
+
+    var unread = {};
+
+    Conversation.getUnread = function(){
+      return unread;
+    };
+    Conversation.setUnread = function(obj) {
+      unread = obj;
+    }
+    
     return Conversation;
   });
