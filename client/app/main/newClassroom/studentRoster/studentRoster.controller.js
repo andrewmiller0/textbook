@@ -13,6 +13,7 @@ angular.module('textbookApp')
     $scope.loading.name = false;
 
     $scope.changeDataKey = function(model) {
+      $scope.loading.name = true;
       var i;
     	$scope.studentRoster.forEach(function(student) {
     		for(var key in student) {
@@ -26,6 +27,7 @@ angular.module('textbookApp')
       $scope.columnNames.splice(i, 1, model);
       console.log($scope.columnNames);
       $scope.progress = $scope.progress + 1;
+      $scope.loading.name = false;
     };
 
     $scope.createClass = function() {

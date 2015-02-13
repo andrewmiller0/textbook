@@ -28,7 +28,7 @@
 				<p>Select the column with the student's {{value}}<p>
 					<select class="form-control" ng-model="columnSelected[key]" ng-options="column as column for column in columnNames" value="column" ng-required="true">
 					</select>
-				<button type="submit" class="btn btn-primary" ng-click="changeDataKey(key)" ng-disabled="selectForm.$invalid">Next</button>
+				<button type="submit" class="btn btn-primary" ng-click="changeDataKey(key)" ng-disabled="selectForm.$invalid">Next</button><i class="fa fa-spinner fa-spin" ng-show="loading.name"></i>
 				</form>
 					</div>
 				<div ng-show="progress > 5">
