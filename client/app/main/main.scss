@@ -55,9 +55,13 @@ select {
   text-align: right;
 }
 
+.discussion-bg {
+  height: 350px;
+  background: #f5f5f5;
+}
+
 .discussion {
   list-style: none;
-  background: #f5f5f5;
   margin: 0;
   padding: 0 0 50px 0; // finality
   li {
@@ -91,7 +95,7 @@ select {
 }
 
 .chat-panel {
-  max-height: 350px;
+  height: 350px;
   overflow-y: auto;
 }
 
@@ -151,44 +155,39 @@ $lighter-primary-color: lighten($primary-color, 5%);
   padding-left: 10px;
 }
 
-.toggle.ng-hide-add, .toggle.ng-hide-remove {
-  /* this is required as of 1.3x to properly
-     apply all styling in a show/hide animation */
-  transition: 0s linear all;
-}
-
-.toggle.ng-hide-add-active,
-.toggle.ng-hide-remove-active {
-  /* the transition is defined in the active class */
-  transition: 1s linear all;
-}
-
-.toggle.ng-hide-add {
-  animation-duration: 1s;
-  animation-name: slide-down;
-}
-
-@keyframes slide-down {
-  from {
-    display: none;
-  }
-  to {
-    display: block;
-  }
-}
-.toggle.ng-hide-add.ng-hide-add-active {
-
-}
-.toggle.ng-hide-remove {
-
-}
-.toggle.ng-hide-remove.ng-hide-remove-active {
-
-}
-
 .small {
   margin-left: 10px;
 }
+
+.modal-container {
+  height: 400px;
+}
+
+.search-results {
+  padding: 5px;
+  margin-top: 8px;
+}
+.search-result {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.panel {
+  padding: 3px;
+}
+
+.fa-times, .classes-dropdown {
+  cursor: pointer;
+}
+
+.modal-container {
+  height: 400px;
+}
+
+.frontpage {
+  height: 500px;
+}
+
 
 .modal-container {
   height: 500px;
@@ -211,4 +210,12 @@ $lighter-primary-color: lighten($primary-color, 5%);
   input{
     width: auto;
   }
+.borderright {
+  border-right: 2px solid $second-background;
+  overflow: auto;
+
+}
+
+.fa-spinner {
+  font-size: 4em;
 }

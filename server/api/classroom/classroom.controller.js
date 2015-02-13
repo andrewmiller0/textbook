@@ -93,14 +93,14 @@ exports.saveSpreadsheet = function(req, res) {
   var studentArr = [];
   req.body.forEach(function(obj) {
     var newContact = {
-      name: obj.name,
-      phone: obj.phone,
-      relationship: obj.relationship
+      name: obj['Contact Name'],
+      phone: obj['Contact Phone'],
+      relationship: obj['Contact Relationship']
     };
     var newStudent = {
-      firstName: obj.firstName,
-      lastName: obj.lastName,
-      primaryPhone: obj.phone,
+      firstName: obj['First Name'],
+      lastName: obj['Last Name'],
+      primaryPhone: obj['Contact Phone'],
       contacts: []
     }
 

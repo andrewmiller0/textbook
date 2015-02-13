@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ConversationCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, socket) {
-  	var classId = $stateParams.classId,
-  		contactId = $stateParams.contactId,
+  .controller('ConversationCtrl', function ($scope, $stateParams, $location, $anchorScroll, socket, Classroom, Student, Conversation, Contact) {
+    var classId = $stateParams.classId,
+      contactId = $stateParams.contactId,
       studentId = $stateParams.studentId;
       $scope.$emit('activestudent', studentId);
-
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
 
@@ -19,7 +18,7 @@ angular.module('textbookApp')
 
     $scope.unread = Conversation.getUnread()
 
-	Conversation.getConversation({userId: $scope.user._id, contactId: contactId})
+  Conversation.getConversation({userId: $scope.user._id, contactId: contactId})
         .$promise
         .then(function(conversation){
           $scope.conversation = conversation;
@@ -43,7 +42,7 @@ angular.module('textbookApp')
           Conversation.update({id: $scope.conversation._id}, $scope.conversation);
         });
 
-	$scope.isSent = function(message){
+  $scope.isSent = function(message){
       return message.type === 'sent';
     }
 
@@ -62,14 +61,15 @@ angular.module('textbookApp')
       });
 
       $scope.msgToSend = "";
-
     };
-
-    $scope.messages;
 
     socket.socket.on('new message', function(res){
       if ($stateParams.contactId == res.convo.contactId) {
         $scope.messages.push(_.last(res.convo.messages));
       }
-  	});
+    });
+
+    $scope.$on('group message', function(event, message) {
+      $scope.messages.push(message);
+    });
 });

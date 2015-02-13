@@ -13,7 +13,6 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(client) app/vendor.css -->
       <!-- bower:css -->
-      <link rel="stylesheet" href="bower_components/handsontable/dist/handsontable.full.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -48,12 +47,11 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/js-xlsx/dist/jszip.js"></script>
       <script src="bower_components/js-xlsx/dist/xlsx.js"></script>
       <script src="bower_components/js-xls/dist/xls.js"></script>
-      <script src="bower_components/zeroclipboard/dist/ZeroClipboard.js"></script>
-      <script src="bower_components/handsontable/dist/handsontable.full.js"></script>
-      <script src="bower_components/nghandsontable/dist/ngHandsontable.js"></script>
       <script src="bower_components/papaparse/papaparse.js"></script>
+      <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
       <!-- endbower -->
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
@@ -68,6 +66,7 @@
           <script src="app/account/signup/signup.controller.js"></script>
           <script src="app/admin/admin.controller.js"></script>
           <script src="app/admin/admin.js"></script>
+          <script src="app/directives/addContact/addContact.directive.js"></script>
           <script src="app/directives/addStudentForm/addStudentForm.directive.js"></script>
           <script src="app/directives/contactList/contactList.directive.js"></script>
           <script src="app/directives/editContact/editContact.directive.js"></script>
@@ -76,11 +75,13 @@
           <script src="app/factories/classroom.service.js"></script>
           <script src="app/factories/contact.service.js"></script>
           <script src="app/factories/conversation.service.js"></script>
+          <script src="app/factories/newClass/newClass.service.js"></script>
           <script src="app/factories/schedMsg.service.js"></script>
           <script src="app/factories/student.service.js"></script>
           <script src="app/main/classroom/classroom.controller.js"></script>
           <script src="app/main/classroom/conversation/conversation.controller.js"></script>
           <script src="app/main/classrooms/classrooms.controller.js"></script>
+          <script src="app/main/classrooms/groupMessager/groupMessager.controller.js"></script>
           <script src="app/main/editClassroom/editClassroom.controller.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
