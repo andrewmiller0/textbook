@@ -8,11 +8,17 @@ angular.module('textbookApp')
         templateUrl: 'app/main/classrooms/classrooms.html',
         controller: 'ClassroomsCtrl',
         authenticate: true,
-        abstract: true,
         resolve: {
           resolvedUser: function(User) {
             return User.get();
           }
+        },
+        onEnter: function($state, User, newClass) {
+          User.get().$promise.then(function(user) {
+          if(user.classrooms.length !== 0 && !newClass.get()) {
+            $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
+          }
+          });
         }
       })
       .state('about', {
