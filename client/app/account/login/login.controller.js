@@ -15,7 +15,7 @@ angular.module('textbookApp')
         })
         .then( function() {
           // Logged in, redirect to home
-          $state.go('classrooms');
+          $state.go('classrooms.classroom');
         })
         .catch( function(err) {
           $scope.errors.other = err.message;

@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Contact, $state, Auth) {
-    
-    $scope.user.classrooms.forEach(function(classroom) {
-      if(classroom._id === $stateParams.classId) {
-        $scope.classroom = classroom;
-      }
+  .controller('EditClassroomCtrl', function ($scope, $stateParams, User, Classroom, Student, Contact, $state, Auth, newClass) {
+    console.log(newClass.get());
+    // newClass.set(false);
+    Auth.getCurrentUser().$promise.then(function(user) {
+      $scope.user.classrooms.forEach(function(classroom) {
+        if(classroom._id === $stateParams.classId) {
+          $scope.classroom = classroom;
+        }
+      });
     });
 
     $scope.updateClassroom = function() {

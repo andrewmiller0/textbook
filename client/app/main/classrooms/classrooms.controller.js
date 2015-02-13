@@ -2,37 +2,39 @@
 
 angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket, $modal) {
-    $scope.user = Auth.getCurrentUser();
-    $scope.unread = {};
-    var convArray = [];
-    $scope.findfirstState = function() {
+    
+    Auth.getCurrentUser().$promise.then(function(user) {
+      $scope.user = user;
+      $scope.unread = {};
+      var convArray = [];
+      $scope.findfirstState = function() {
       return $state.is('classrooms');
     };
-
-    Conversation.query().$promise.then(function(conversations) {
-        conversations.forEach(function(convo) {
-          if (convo.unreadMessages > 0) convArray.push(convo);
-        });
-        $scope.user.$promise.then(function(user) {
-          user.classrooms.forEach(function(classroom) {
-            classroom.students.forEach(function(student) {
-              student.contacts.forEach(function(contact) {
-                if (_.find(convArray, function(convo) {
-                  return convo.contactId == contact._id
-                })) {
-                  // for now.  i know this is so bad
-                  var additionToUnread = {};
-                  additionToUnread[classroom._id] = {};
-                  additionToUnread[classroom._id][student._id] = {};
-                  additionToUnread[classroom._id][student._id][contact._id] = 1;
-                  _.merge($scope.unread, additionToUnread);
-                }
-              })
-            })
+      Conversation.query().$promise.then(function(conversations) {
+          conversations.forEach(function(convo) {
+            if (convo.unreadMessages > 0) convArray.push(convo);
           });
-          Conversation.setUnread($scope.unread);
+          $scope.user.$promise.then(function(user) {
+            user.classrooms.forEach(function(classroom) {
+              classroom.students.forEach(function(student) {
+                student.contacts.forEach(function(contact) {
+                  if (_.find(convArray, function(convo) {
+                    return convo.contactId == contact._id
+                  })) {
+                    // for now.  i know this is so bad
+                    var additionToUnread = {};
+                    additionToUnread[classroom._id] = {};
+                    additionToUnread[classroom._id][student._id] = {};
+                    additionToUnread[classroom._id][student._id][contact._id] = 1;
+                    _.merge($scope.unread, additionToUnread);
+                  }
+                })
+              })
+            });
+            Conversation.setUnread($scope.unread);
+          });
         });
-      });
+    });
 
     $scope.open = function () {
         console.log($scope.user.classrooms);
@@ -81,7 +83,7 @@ angular.module('textbookApp')
         if(user.classrooms.length === 0) {
           $state.go('classrooms');
         } else {
-          $state.go('classrooms.classroom', {classId: user.classrooms[0]._id});
+          $state.go('classrooms.classroom', {classId: user.classrooms[user.classrooms.length-1]._id});
         }
       });
     });

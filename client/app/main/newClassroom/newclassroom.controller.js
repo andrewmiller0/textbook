@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NewClassCtrl', function ($scope, $state, Auth, Classroom, User, $http) {
+  .controller('NewClassCtrl', function ($scope, $state, Auth, Classroom, User, $http, newClass) {
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
     $scope.error = {};
@@ -20,6 +20,7 @@ angular.module('textbookApp')
             User.update(user);
           });
           $scope.addFormSubmit = false;
+          newClass.set(true);
           $state.go('classrooms.edit', {classId: classroom._id});
         });
       }
