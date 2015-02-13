@@ -1,12 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('ConversationCtrl', function ($scope, $stateParams, Classroom, Student, Conversation, Contact, $location, $anchorScroll, socket) {
-    $scope.$on('group message', function(event, message) {
-      console.log("we're not even getting here");
-      $scope.messages.push(message);
-    });
-
+  .controller('ConversationCtrl', function ($scope, $stateParams, $location, $anchorScroll, socket, Classroom, Student, Conversation, Contact) {
     var classId = $stateParams.classId,
       contactId = $stateParams.contactId,
       studentId = $stateParams.studentId;
@@ -65,7 +60,6 @@ angular.module('textbookApp')
       });
 
       $scope.msgToSend = "";
-
     };
 
     socket.socket.on('new message', function(res){
@@ -74,4 +68,7 @@ angular.module('textbookApp')
       }
     });
 
+    $scope.$on('group message', function(event, message) {
+      $scope.messages.push(message);
+    });
 });

@@ -45,7 +45,7 @@ angular.module('textbookApp')
 
     $scope.close = function() {
       $scope.groupMessager.close();
-    }
+    };
 
     $scope.openGroupMsg = function() {
         $scope.groupMessager = $modal.open({
@@ -56,7 +56,11 @@ angular.module('textbookApp')
             size: 'lg',
             scope: $scope
         });
-    }
+    };
+
+    $scope.applySentAlert = function() {
+      $scope.sentAlert = true;
+    };
 
     $scope.status = {
       isopen: false

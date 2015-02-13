@@ -9,6 +9,10 @@
             {{classroom.name}} <i ng-show="unread[classroom._id]" class="fa fa-comment"></i>
        </button>
     </div>
+    <div class="alert alert-success alert-dismissible" ng-show="sentAlert">
+    	Message successfully sent
+    	<button type="button" class="close" ng-click="sentAlert=false"><span aria-hidden="true">&times;</span></button>
+    </div>
     <div ui-view></div>
 	</div>
 	<!-- homework stuff -->

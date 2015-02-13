@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-	.controller('GroupMessagerCtrl', function($scope, $state, Contact, Conversation) {
+	.controller('GroupMessagerCtrl', function($scope, $state, $rootScope, Contact, Conversation) {
 		$scope.body;
 		$scope.to = [];
 		$scope.term;
@@ -47,9 +47,9 @@ angular.module('textbookApp')
 			});
 			if ($state.params.contactId && _.find($scope.to, {_id: $state.params.contactId})) {
 				// steve told me to do this, blame him
-				console.log("we're getting here but");
-				$scope.$broadcast('group message', $scope.body);
+				$rootScope.$broadcast('group message', {body: $scope.body});
 			}
 			$scope.close();
+			$scope.applySentAlert();
 		};
 	})
