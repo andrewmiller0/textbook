@@ -5,16 +5,16 @@ angular.module('textbookApp')
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
     });
-    $scope.user.classrooms.forEach(function(classroom) {
-      if(classroom._id === $stateParams.classId) {
-        $scope.currentClass = classroom;
-
-        setTimeout(function(){
-          $scope.applyFlags();
-        }, 0);
-      }
-    });
     
+    Auth.getCurrentUser().$promise.then(function(user) {
+      $scope.user = user;
+      $scope.user.classrooms.forEach(function(classroom) {
+        if(classroom._id === $stateParams.classId) {
+          $scope.currentClass = classroom;
+        }
+      });
+    });
+
 
    $scope.ids = {};
 
@@ -34,7 +34,9 @@ angular.module('textbookApp')
       $scope.user.classrooms.forEach(function(classroom, i) {
         if(classroom._id === classroomId) {
           $scope.user.classrooms.splice(i, 1);
-          User.update({id: $scope.user._id}, $scope.user);
+          var unpopulatedUser = angular.copy($scope.user);
+          unpopulatedUser.classrooms = unpopulatedUser.classrooms.map(function(classroom) {return classroom._id});
+          User.update({id: $scope.user._id}, unpopulatedUser);
           $scope.$emit('delete classroom', classroom);
         }
       });

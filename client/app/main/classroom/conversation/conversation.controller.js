@@ -33,13 +33,10 @@ angular.module('textbookApp')
             for (var contactKey in $scope.unread[classId][studentKey]) {
               if (contactKey == contactId) {
                 delete $scope.unread[classId][studentKey][contactKey]
-                angular.element("#"+contactKey).html('&nbsp;');
                 if (!Object.keys($scope.unread[classId][studentKey]).length) {
                   delete $scope.unread[classId][studentKey];
-                  angular.element('#'+studentKey).html('&nbsp;');
                   if (!Object.keys($scope.unread[classId]).length) {
                     delete $scope.unread[classId];
-                    angular.element('#'+classId).html('&nbsp;');
                   }
                 }
               }
