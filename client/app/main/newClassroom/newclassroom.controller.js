@@ -5,6 +5,9 @@ angular.module('textbookApp')
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
     $scope.error = {};
+    $scope.loading = {
+      name: false
+    };
     $scope.addClassroom = function() {
       $scope.addFormSubmit = true;
       if($scope.addClassForm.$valid) {
@@ -28,12 +31,14 @@ angular.module('textbookApp')
           var json = [];
           var csv;
           reader.onload = function(e) {
+            $scope.loading.name = true;
             var data = e.target.result;
             if(name.indexOf('.xlsx') > -1) {
               console.log('this is a xlsx');
               var workbook = XLSX.read(data, {type:'binary'});
               console.log(typeof workbook);
               json = XLSX.utils.sheet_to_json(workbook.Sheets[workbook.SheetNames[0]]);
+              // debugger;
               console.log(json);
             } else if(name.indexOf('.xls') > -1) {
               console.log('this is xls');

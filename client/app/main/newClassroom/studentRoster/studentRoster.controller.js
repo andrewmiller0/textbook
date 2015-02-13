@@ -6,12 +6,15 @@ angular.module('textbookApp')
   		students: []
   	};
   	$scope.columnNames = Object.keys($scope.studentRoster[0]);
-  	$scope.modelNames = {'firstName':'first name', 'lastName': 'last name', 'name': 'primary contact\'s name', 'phone': 'primary contact\'s phone number', 'relationship': 'relation to primary contact'};
+  	$scope.modelNames = {'First Name':'first name', 'Last Name': 'last name', 'Contact Name': 'primary contact\'s name', 'Contact Phone': 'primary contact\'s phone number', 'Contact Relationship': 'relation to primary contact'};
+    $scope.modelKeys = Object.keys($scope.modelNames);
   	$scope.progress = 0;
     $scope.columnSelected = {};
     console.log($scope.studentRoster);
+    $scope.loading.name = false;
 
     $scope.changeDataKey = function(model) {
+      $scope.loading.name = true;
       var i;
     	$scope.studentRoster.forEach(function(student) {
     		for(var key in student) {
@@ -25,6 +28,7 @@ angular.module('textbookApp')
       $scope.columnNames.splice(i, 1, model);
       console.log($scope.columnNames);
       $scope.progress = $scope.progress + 1;
+      $scope.loading.name = false;
     };
 
     $scope.createClass = function() {
