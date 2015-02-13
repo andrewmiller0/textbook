@@ -3,20 +3,26 @@
 		<h2>You don't have any classrooms!  Create one to get started!</h2>
 		<a ui-sref="addClassroom"><button class="btn btn-primary">Create a Class</button></a>
 	</div>
-	<div ng-show="user.classrooms.length > 0">
-	<div class="btn-group" role="group">
-        <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})" ui-sref-active="active">
-            {{classroom.name}} <i ng-show="unread[classroom._id]" class="fa fa-comment"></i>
-       </button>
-    </div>
-    <div class="alert alert-success alert-dismissible" ng-show="sentAlert">
-    	Message successfully sent
-    	<button type="button" class="close" ng-click="sentAlert=false"><span aria-hidden="true">&times;</span></button>
-    </div>
-    <div ui-view></div>
+	<div class="panel panel-default" style="height:600px;" ng-hide="findfirstState()">
+		<div class="panel-heading">
+			<div ng-show="user.classrooms.length > 0">
+			<div class="btn-group" role="group">
+		        <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})" ui-sref-active="active">
+		            {{classroom.name}} <i ng-show="unread[classroom._id]" class="fa fa-comment"></i>
+		       </button>
+		    </div>
+		    </div>
+		</div>
+       <div class="alert alert-success alert-dismissible" ng-show="sentAlert">
+	    	Message successfully sent
+	    	<button type="button" class="close" ng-click="sentAlert=false"><span aria-hidden="true">&times;</span></button>
+	    </div>
+	    <div class="panel-body frontpage">
+		    <div ui-view></div>
+		</div>
 	</div>
 	<!-- homework stuff -->
-	<div>
+	<div class="row">
 		<button type="button" class="btn btn-info" ng-click="openGroupMsg()">Send a group message</button>
 		<button type="button" class="btn btn-warning" ng-click="open()">Add Homework Assignment</button>
 	</div>

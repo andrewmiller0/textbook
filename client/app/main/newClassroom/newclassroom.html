@@ -1,5 +1,5 @@
     <div class="main">
-        <div class="row" ng-hide="studentRoster">
+        <div class="row" ng-hide="studentRoster || loading.name">
             <div class="col-lg-6">
                 <form class="form-horizontal" name="addClassForm" ng-submit="addClassroom()" novalidate>
                         <label><h3>Class name</h3></label>
@@ -22,6 +22,7 @@
                 </form>
             </div>
         </div>
+        <div ng-show="loading.name" class="text-center"><h1>Loading</h1><i class="fa fa-spinner fa-spin"></i></div>
         <div class="row">
             <div ui-view></div>
         </div>
