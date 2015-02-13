@@ -5,6 +5,9 @@ angular.module('textbookApp')
     $scope.user = Auth.getCurrentUser();
     $scope.file = {};
     $scope.error = {};
+    $scope.loading = {
+      name: false
+    };
     $scope.addClassroom = function() {
       $scope.addFormSubmit = true;
       if($scope.addClassForm.$valid) {
@@ -57,6 +60,7 @@ angular.module('textbookApp')
               return;
             }
             $scope.studentRoster = json;
+            $scope.loading.name = true;
             $state.go('.studentRoster');
       };
       reader.readAsBinaryString($scope.file);

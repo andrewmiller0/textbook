@@ -10,6 +10,7 @@ angular.module('textbookApp')
   	$scope.progress = 0;
     $scope.columnSelected = {};
     console.log($scope.studentRoster);
+    $scope.loading.name = false;
 
     $scope.changeDataKey = function(model) {
       var i;

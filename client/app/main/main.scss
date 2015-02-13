@@ -206,3 +206,7 @@ $lighter-primary-color: lighten($primary-color, 5%);
   border-right: 2px solid $second-background;
   overflow: auto;
 }
+
+.fa-spinner {
+  font-size: 4em;
+}
