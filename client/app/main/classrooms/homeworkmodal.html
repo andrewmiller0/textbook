@@ -24,7 +24,7 @@
 		<div ng-repeat="class in user.classrooms"><h4>{{class.name}}</h4>
 			<h5 ng-hide="class.homework.length"><i class="fa fa-book"></i> Add some homework!</h5>
 			<ul class="list-group modal-list-group">
-				<li class="list-group-item modal-li" ng-show="class.homework.length" ng-repeat="homework in class.homework"> <i class="fa fa-book"></i> {{homework}}</li>
+				<li class="list-group-item modal-li" ng-show="class.homework.length" ng-repeat="homework in class.homework"> <i class="fa fa-book"></i> {{homework}} <button class="edit-button"> <i class="fa fa-trash-o"></i> </button></li>
 			</ul>
 		</div>
 
