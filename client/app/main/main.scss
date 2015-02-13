@@ -55,12 +55,15 @@ select {
   text-align: right;
 }
 
+.discussion-bg {
+  height: 350px;
+  background: #f5f5f5;
+}
+
 .discussion {
   list-style: none;
-  background: #f5f5f5;
   margin: 0;
   padding: 0 0 50px 0; // finality
-  height: 350px;
   li {
     padding: 0.5rem;
     overflow: hidden;
