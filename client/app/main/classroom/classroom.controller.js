@@ -29,17 +29,4 @@ angular.module('textbookApp')
         $scope.ids[student._id] = true;
       }
     };
-
-    $scope.deleteClassroom = function(classroomId) {
-      Classroom.delete({id: classroomId});
-      $scope.user.classrooms.forEach(function(classroom, i) {
-        if(classroom._id === classroomId) {
-          $scope.user.classrooms.splice(i, 1);
-          var unpopulatedUser = angular.copy($scope.user);
-          unpopulatedUser.classrooms = unpopulatedUser.classrooms.map(function(classroom) {return classroom._id});
-          User.update({id: $scope.user._id}, unpopulatedUser);
-          $scope.$emit('delete classroom', classroom);
-        }
-      });
-    };
   });

@@ -34,8 +34,21 @@ angular.module('textbookApp')
             Conversation.setUnread($scope.unread);
           });
         });
+        angular.forEach($scope.user.classrooms, function(classroom) {
+          if(classroom._id === $state.params.classId) {
+            $scope.selectedClassroom = classroom;
+          }
+        });
     });
 
+    $scope.setClassroomDropdown = function(classId) {
+      angular.forEach($scope.user.classrooms, function(classroom) {
+          if(classroom._id === classId) {
+            $scope.selectedClassroom = classroom;
+          }
+        });
+    };
+    
     $scope.open = function () {
         $modal.open({
             templateUrl: 'app/main/classrooms/homeworkmodal.html',
@@ -102,11 +115,7 @@ angular.module('textbookApp')
     $scope.$on('delete classroom', function(event, data) {
       User.get().$promise.then(function(user) {
         $scope.user = user;
-        if(user.classrooms.length === 0) {
-          $state.go('classrooms');
-        } else {
-          $state.go('classrooms.classroom', {classId: user.classrooms[user.classrooms.length-1]._id});
-        }
+        
       });
     });
 
@@ -141,4 +150,23 @@ angular.module('textbookApp')
         Conversation.update({id: res.convo._id}, res.convo);
       }
     });
+
+    $scope.deleteClassroom = function(classroomId) {
+      Classroom.delete({id: classroomId});
+      $scope.user.classrooms.forEach(function(classroom, i) {
+        if(classroom._id === classroomId) {
+          $scope.user.classrooms.splice(i, 1);
+          var unpopulatedUser = angular.copy($scope.user);
+          unpopulatedUser.classrooms = unpopulatedUser.classrooms.map(function(classroom) {return classroom._id});
+          User.update({id: $scope.user._id}, unpopulatedUser, function(user) {
+            if($scope.user.classrooms.length === 0) {
+              $state.go('classrooms');
+            } else {
+              $scope.selectedClassroom = $scope.user.classrooms[0];
+              $state.go('classrooms.classroom', {classId: $scope.user.classrooms[0]._id});
+            }
+          });
+        }
+      });
+    };
 });
