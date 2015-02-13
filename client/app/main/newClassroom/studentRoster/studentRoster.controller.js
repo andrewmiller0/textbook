@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth) {
+  .controller('StudentRosterCtrl', function ($scope, $state, Classroom, User, $http, Auth, newClass) {
   	$scope.newClass = {
   		students: []
   	};
@@ -39,6 +39,7 @@ angular.module('textbookApp')
       	});
         $scope.progress = $scope.progress + 1;
         $scope.validClass = false;
+        newClass.set(true);
       }
     };
 
