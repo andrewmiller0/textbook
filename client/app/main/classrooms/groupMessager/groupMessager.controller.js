@@ -46,7 +46,10 @@ angular.module('textbookApp')
 				userId: $scope.user._id
 			});
 			if ($state.params.contactId && _.find($scope.to, {_id: $state.params.contactId})) {
-				console.log("hello");
+				// steve told me to do this, blame him
+				console.log("we're getting here but");
+				$scope.$broadcast('group message', $scope.body);
 			}
+			$scope.close();
 		};
 	})
