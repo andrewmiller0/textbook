@@ -2,7 +2,7 @@
 
 angular.module('textbookApp')
   .controller('ClassroomsCtrl', function ($scope, $state, $stateParams, User, Classroom, Student, Auth, Conversation, socket, $modal) {
-    
+
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
       $scope.unread = {};
@@ -77,8 +77,9 @@ angular.module('textbookApp')
       $event.stopPropagation();
       $scope.status.isopen = !$scope.status.isopen;
     };
-    $scope.assignment;
+    $scope.assignment = "";
     $scope.addAssignment = function(assignment){
+      console.log(assignment)
       $scope.assignment = "";
       console.log($scope.selectedClass);
       for(var i = 0 ; i<$scope.user.classrooms.length; i++){
