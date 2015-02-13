@@ -5,17 +5,6 @@ angular.module('textbookApp')
     $scope.$on('activestudent', function(event, data) {
       $scope.activeStudent = data;
     });
-<<<<<<< HEAD
-    $scope.user.classrooms.forEach(function(classroom) {
-      if(classroom._id === $stateParams.classId) {
-        $scope.currentClass = classroom;
-      }
-    });
-    $scope.findState = function() {
-      return $state.is('classrooms.classroom');
-    };
-=======
-    
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
       $scope.user.classrooms.forEach(function(classroom) {
@@ -23,10 +12,11 @@ angular.module('textbookApp')
           $scope.currentClass = classroom;
         }
       });
+      $scope.findState = function() {
+      return $state.is('classrooms.classroom');
+    };
     });
 
-
->>>>>>> master
    $scope.ids = {};
 
     $scope.toggleContacts = function(student) {

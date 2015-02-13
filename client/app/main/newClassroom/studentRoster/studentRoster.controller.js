@@ -6,7 +6,7 @@ angular.module('textbookApp')
   		students: []
   	};
   	$scope.columnNames = Object.keys($scope.studentRoster[0]);
-  	$scope.modelNames = {'firstName':'first name', 'lastName': 'last name', 'name': 'primary contact\'s name', 'phone': 'primary contact\'s phone number', 'relationship': 'relation to primary contact'};
+  	$scope.modelNames = {'First Name':'first name', 'Last Name': 'last name', 'Contact Name': 'primary contact\'s name', 'Contact Phone': 'primary contact\'s phone number', 'Contact Relationship': 'relation to primary contact'};
   	$scope.progress = 0;
     $scope.columnSelected = {};
     console.log($scope.studentRoster);
