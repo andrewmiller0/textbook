@@ -9,9 +9,9 @@
         </ul>
         </div>
       </div>
-      <form name="chat" ng-submit="sendMsg(msgToSend)">
+      <form name="chat" ng-submit="sendMsg(msgToSend)" novalidate>
       <div class="input-group">
-        <input type="text" class="form-control" ng-model="msgToSend" placeholder="Message..." ng-minlength="1">
+        <input type="text" class="form-control" ng-model="msgToSend" placeholder="Message..." ng-required="true" ng-minlength="1">
         <span class="input-group-btn">
           <button class="btn btn-default" type="submit" ng-disabled="chat.$invalid">Send!</button>
         </span>
