@@ -8,6 +8,7 @@ var Contact = require('../contact/contact.model');
 var StudentSchema = new Schema({
   firstName: {type: String, required: true},
   lastName: {type: String, required: true},
+  // primaryPhone: {type: String, required: true},
   contacts: [{type: Schema.Types.ObjectId, ref: 'Contact'}]
 });
 

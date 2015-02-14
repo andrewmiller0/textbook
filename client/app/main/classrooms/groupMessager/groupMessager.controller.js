@@ -24,7 +24,6 @@ angular.module('textbookApp')
 			return (condition.test(kid.firstName) || condition.test(kid.lastName));
 		}
 		$scope.setClass = function(classroom) {
-			console.log(classroom.students);
 			if (!classroom) {
 				$scope.message.to = [];
 				$scope.selectedClass = 'Select a Class'

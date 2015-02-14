@@ -76,11 +76,12 @@ exports.destroy = function(req, res) {
 
 
 exports.addHomework = function(req, res) {
+  console.log(req.body.homework);
   var assignment = req.body.homework;
   Classroom.findById(req.body.classId, function(err, classroom){
     classroom.homework.push(assignment);
     classroom.save(function(classroom){
-      res.json(200, assignment);
+      res.send(200);
     });
   });
 }

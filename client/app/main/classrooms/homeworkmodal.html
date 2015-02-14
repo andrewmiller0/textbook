@@ -2,19 +2,31 @@
 	<div class="navbar-header"><a href="" class="logo navbar-brand">Add Homework</a></div>
 </div>
 
-<div class="btn-group" dropdown is-open="status.isopen">
-	<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-		{{selectedClass}}<span class="caret"></span>
-	</button>
-	<ul class="dropdown-menu" role="menu">
-		<li ng-repeat="class in user.classrooms" ng-click="homeworkActiveClass(class.name)"><a>{{class.name}}</a></li>
-	</ul>
-</div>
 <div class="modal-container">
-	<div class="input-group">
-		<input type="text" class="form-control" ng-model="assignment" placeholder="Assignment...">
-		<span class="input-group-btn">
-			<button class="btn btn-default" type="button" ng-click="addAssignment(assignment)">Submit</button>
-		</span>
+	<form class="form-inline">
+		<div class="btn-group inline" dropdown is-open="status.isopen">
+			<button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+				{{selectedClass}}<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li ng-repeat="class in user.classrooms" ng-click="homeworkActiveClass(class.name)"><a>{{class.name}}</a></li>
+			</ul>
+		</div>
+		<div class="input-group inline">
+			<input type="text" class="form-control" ng-model="assignment" placeholder="Assignment...">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit" ng-click="addAssignment(assignment)">Submit</button>
+			</span>
+		</div>
+	</form>
+	<div><h3>Assigned Homework</h3>
 	</div>
+		<div ng-repeat="class in user.classrooms"><h4>{{class.name}}</h4>
+			<h5 ng-hide="class.homework.length"><i class="fa fa-book"></i> Add some homework!</h5>
+			<ul class="list-group modal-list-group">
+				<li class="list-group-item modal-li" ng-show="class.homework.length" ng-repeat="homework in class.homework"> <i class="fa fa-book"></i> {{homework}}</li>
+			</ul>
+		</div>
+
+
 </div>

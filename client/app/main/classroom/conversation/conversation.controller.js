@@ -8,6 +8,7 @@ angular.module('textbookApp')
       $scope.$emit('activestudent', studentId);
       Contact.get({id: contactId}, function(contact){
         $scope.activeContact = contact;
+
       });
 
    $scope.gotoBottom = function() {

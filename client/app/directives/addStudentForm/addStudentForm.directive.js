@@ -20,11 +20,11 @@ angular.module('textbookApp')
         phone: ""
       }]
     };
-    console.log($scope.currentStudent);
     $scope.currentContact = {
       name: "",
       relationship: "",
-      phone: ""
+      phone: "",
+      primary: false
     };
 
     $scope.addStudent = function() {
@@ -33,6 +33,7 @@ angular.module('textbookApp')
          $scope.studentAdded = true;
          $scope.currentStudent.primaryPhone = $scope.currentStudent.contacts[0].phone;
          $scope.currentStudent.contacts[0].phone = '+1' + $scope.currentStudent.contacts[0].phone;
+         $scope.currentStudent.contacts[0].primary = true;
          var studentToSave = angular.copy($scope.currentStudent);
          Contact.save($scope.currentStudent.contacts[0], function(contact) {
            $scope.currentStudent.contacts[0]._id = contact._id;

@@ -11,6 +11,7 @@ var express = require('express'),
 module.exports = function(socket) {
 
 	var getMessage = function(req, res) {
+		console.log("HI");
 		console.log(req.body);
 		var text = req.body;
 		// if (twilio.validateExpressRequest(req, config.twilio.clientToken, {url: config.twilio.smsWebhook})) {
@@ -40,12 +41,14 @@ module.exports = function(socket) {
 				}
 				else {
 					Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
+						console.log("In conversation.findone");
 						if (err) console.log(err);
 						conversation.messages.push(newMessage);
 						conversation.unreadMessages++;
 						conversation.save(function(err, conversation2) {
 
 							if(newMessage.body.toLowerCase() === 'homework'){
+								console.log("Homework");
 								user.deepPopulate('classrooms.students.contacts', function(err) {
 									if (err) console.log(err);
 									var retArr = [];
@@ -64,7 +67,7 @@ module.exports = function(socket) {
 										});
 									});
 									retArr.forEach(function(homework){
-										var messageBody = homework.class + " Homework: %0a" + homework.homework.join('%0a');
+										var messageBody = homework.class + " Homework: \n" + homework.homework.join('\n');
 										var message = new Sms({
 											body: messageBody,
 											to: text.From,
