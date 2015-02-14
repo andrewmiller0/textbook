@@ -38,4 +38,8 @@ angular.module('textbookApp')
         }
       });
     };
+
+    $scope.returnToClass = function() {
+      $state.go('classrooms.classroom', {classId: $scope.classroom._id});
+    };
   });
