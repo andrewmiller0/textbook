@@ -42,13 +42,13 @@ describe('Student Model', function() {
         done();
       })
     });
-     it('should require a primary phone number', function(done) {
-      student.primaryPhone = '';
-      student.save(function(err) {
-        should.exist(err);
-        done();
-      })
-    });
+    //  it('should require a primary phone number', function(done) {
+    //   student.primaryPhone = '';
+    //   student.save(function(err) {
+    //     should.exist(err);
+    //     done();
+    //   })
+    // });
   });
 
 
