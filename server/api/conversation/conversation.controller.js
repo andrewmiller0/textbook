@@ -39,7 +39,7 @@ exports.sendMsg = function(req, res, next) {
 exports.sendMultiple = function(req, res, next) {
     req.body.to.forEach(function(contact) {
       var message = new Sms({
-        body: req.body.message,
+        body: req.body.body,
         to: contact.phone,
         from: req.body.from
       });

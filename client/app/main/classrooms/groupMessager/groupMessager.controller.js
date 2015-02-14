@@ -45,9 +45,9 @@ angular.module('textbookApp')
 
 		$scope.sendGroupMsg = function() {
 			Conversation.sendMultiple($scope.message);
-			if ($state.params.contactId && _.find($scope.to, {_id: $state.params.contactId})) {
+			if ($state.params.contactId && _.find($scope.message.to, {_id: $state.params.contactId})) {
 				// steve told me to do this, blame him
-				$rootScope.$broadcast('group message', {body: $scope.body});
+				$rootScope.$broadcast('group message', {body: $scope.message.body});
 			}
 			$scope.close();
 			$scope.applySentAlert();
