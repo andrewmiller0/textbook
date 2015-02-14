@@ -10,9 +10,9 @@ angular.module('textbookApp')
 			from: $scope.user.phone,
 			userId: $scope.user._id
 		};
-		$scope.dt = new Date();
-		$scope.amPm = "AM";
-		$scope.hours = "12";
+		$scope.dt = $scope.minDate = new Date();
+		$scope.amPm = "PM";
+		$scope.hours = "5";
 		$scope.minutes = "00";
 
 		// i don't know if this is a good thing to do but
@@ -57,15 +57,17 @@ angular.module('textbookApp')
 		};
 
 		$scope.setAmPm = function() {
-			$scope.amPm === "AM" ? $scope.amPm = "PM" : $scope.amPm = "AM";
-			console.log($scope.dt);
+			$scope.amPm == "AM" ? $scope.amPm = "PM" : $scope.amPm = "AM";
 		}
 
 		$scope.scheduleMsg = function() {
 			var hours = parseInt($scope.hours);
 			var minutes = parseInt($scope.minutes);
-			if ($scope.amPm === "PM") {
+			if ($scope.amPm == "PM") {
 				hours += 12;
+			}
+			else if ($scope.hours == 12) {
+				hours = 0;
 			}
 			$scope.dt.setHours(hours);
 			$scope.dt.setMinutes(minutes);
