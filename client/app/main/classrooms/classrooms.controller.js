@@ -63,6 +63,9 @@ angular.module('textbookApp')
     $scope.applySentAlert = function() {
       $scope.sentAlert = true;
     };
+    $scope.applyScheduledAlert = function() {
+      $scope.scheduledAlert = true;
+    }
 
     $scope.status = {
       isopen: false

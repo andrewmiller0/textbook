@@ -1,16 +1,19 @@
 'use strict';
 
 angular.module('textbookApp')
-	.controller('GroupMessagerCtrl', function($scope, $state, $rootScope, Contact, Conversation) {
-		$scope.body;
-		$scope.to = [];
+	.controller('GroupMessagerCtrl', function($scope, $state, $rootScope, Contact, Conversation, SchedMsg) {
 		$scope.term;
+		// some defaults
 		$scope.results;
 		$scope.message = {
 			to: [],
 			from: $scope.user.phone,
 			userId: $scope.user._id
-		}
+		};
+		$scope.dt = new Date();
+		$scope.amPm = "AM";
+		$scope.hours = "12";
+		$scope.minutes = "00";
 
 		// i don't know if this is a good thing to do but
 		$scope.students = [];
@@ -55,15 +58,28 @@ angular.module('textbookApp')
 
 		$scope.setAmPm = function() {
 			$scope.amPm === "AM" ? $scope.amPm = "PM" : $scope.amPm = "AM";
+			console.log($scope.dt);
 		}
 
 		$scope.scheduleMsg = function() {
-			SchedMsg.create({
-				to: $scope.to,
+			var hours = parseInt($scope.hours);
+			var minutes = parseInt($scope.minutes);
+			if ($scope.amPm === "PM") {
+				hours += 12;
+			}
+			$scope.dt.setHours(hours);
+			$scope.dt.setMinutes(minutes);
+			if (new Date() > $scope.dt) {
+				return alert("what do you think we are, TIME TRAVELERS");
+			}
+			SchedMsg.save({
+				to: $scope.message.to,
 				from: $scope.user.phone,
-				message: $scope.body,
+				body: $scope.message.body,
 				userId: $scope.user._id,
-
+				date: $scope.dt
 			});
+			$scope.close();
+			$scope.applyScheduledAlert();
 		}
 	})

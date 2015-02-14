@@ -9,9 +9,9 @@ var mongoose = require('mongoose'),
 var SchedMsgSchema = new Schema({
   scheduleTime: {type: Date, required: true},
   body: {type: String, required: true},
-  userId: {type: Schema.Types.ObjectId, ref: 'Student', required: true},
-  students: [{type: Schema.Types.ObjectId, ref: 'Student'}],
-  classroom: {type: Schema.Types.ObjectId, ref: 'Classroom'},
+  userId: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+  to: Array // this should have some validation but i just can't
+  // classroom: {type: Schema.Types.ObjectId, ref: 'Classroom'},
 });
 
 module.exports = mongoose.model('SchedMsg', SchedMsgSchema);
