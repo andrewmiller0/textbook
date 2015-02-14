@@ -6,6 +6,11 @@ angular.module('textbookApp')
 		$scope.to = [];
 		$scope.term;
 		$scope.results;
+		$scope.message = {
+			to: [],
+			from: $scope.user.phone,
+			userId: $scope.user._id
+		}
 
 		// i don't know if this is a good thing to do but
 		$scope.students = [];
@@ -19,32 +24,28 @@ angular.module('textbookApp')
 			return (condition.test(kid.firstName) || condition.test(kid.lastName));
 		}
 		$scope.setClass = function(classroom) {
-			console.log($scope.messages);
+			console.log(classroom.students);
 			if (!classroom) {
-				$scope.to = [];
+				$scope.message.to = [];
 				$scope.selectedClass = 'Select a Class'
 			}
 			else {
 				$scope.selectedClass = classroom.name;
-				$scope.to = _.flatten(_.pluck(classroom.students, 'contacts'));
+				$scope.message.to = _.filter(_.flatten(_.pluck(classroom.students, 'contacts')), {primary: true});
 			}
 		}
 
 		$scope.addToTo = function(addition) {
-			if (!_.find($scope.to, {_id: addition._id})) {
-				$scope.to.push(addition);
+			if (!_.find($scope.message.to, {_id: addition._id})) {
+				$scope.message.to.push(addition);
 			}
 		}
-		$scope.removeFromTo = function(id) {
-			_.remove($scope.to, {_id: id});
+		$scope.removeFromTo = function(num) {
+			_.pull($scope.message.to, num);
 		}
+
 		$scope.sendGroupMsg = function() {
-			Conversation.sendMultiple({
-				to: $scope.to,
-				from: $scope.user.phone,
-				message: $scope.body,
-				userId: $scope.user._id
-			});
+			Conversation.sendMultiple($scope.message);
 			if ($state.params.contactId && _.find($scope.to, {_id: $state.params.contactId})) {
 				// steve told me to do this, blame him
 				$rootScope.$broadcast('group message', {body: $scope.body});
@@ -52,4 +53,18 @@ angular.module('textbookApp')
 			$scope.close();
 			$scope.applySentAlert();
 		};
+
+		$scope.setAmPm = function() {
+			$scope.amPm === "AM" ? $scope.amPm = "PM" : $scope.amPm = "AM";
+		}
+
+		$scope.scheduleMsg = function() {
+			SchedMsg.create({
+				to: $scope.to,
+				from: $scope.user.phone,
+				message: $scope.body,
+				userId: $scope.user._id,
+
+			});
+		}
 	})

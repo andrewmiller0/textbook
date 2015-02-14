@@ -29,19 +29,21 @@
 	<div class="col-lg-8">
 		<div class="panel">
 			To:
-			<span class="panel" ng-repeat="contact in to">
-				<i class="fa fa-times" ng-click="removeFromTo(contact._id)"></i> {{ contact.name }}
+			<span class="panel" ng-repeat="contact in message.to">
+				<i class="fa fa-times" ng-click="removeFromTo(contact)"></i> {{ contact.name }} - {{ contact.phone }}
 			</span>
 		</div>
-		<form ng-submit="sendGroupMsg()">
-			<input type="textarea" class="form-control" ng-model="body">
-			<button class="btn btn-default" type="button" ng-click="schedule=true">Schedule for later</button>
+			<input type="textarea" class="form-control" ng-model="message.body">
+			<button class="btn btn-default" type="button" ng-click="schedule=true" ng-show="!schedule">Schedule for later</button>
+			<button class="btn btn-default" type="button" ng-click="schedule=false" ng-show="schedule">Exit schedule mode</button>
+
 			<div ng-show="schedule">
 				<datepicker ng-model="dt" min-date="minDate" show-weeks="true" class="well well-sm"></datepicker>
-				<input type="text" class="lil-input" />:<input type="text" class="lil-input"/>AM
+				<input type="text" class="lil-input" /> : <input type="text" class="lil-input"/>
+				<button type="button" ng-click="setAmPm()">{{ amPm }}</button>
 				<div ng-show="dt">Selected date is {{ dt | date:'fullDate' }}</div>
 			</div>
-			<button class="btn btn-primary form-control" type="submit" ng-hide="schedule" ng-disabled="!body.length || !to.length">Send</button>
-		</form>
+			<button class="btn btn-primary form-control" ng-click="sendGroupMsg()" ng-show="!schedule" ng-disabled="!message.body.length || !message.to.length">Send</button>
+			<button class="btn btn-primary form-control" ng-click="scheduleMsg()" ng-show="schedule" ng-disabled="!message.body.lengt || !message.to.length">Schedule</button>
 	</div>
 </div>
