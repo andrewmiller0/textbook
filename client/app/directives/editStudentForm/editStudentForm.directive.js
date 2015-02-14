@@ -31,7 +31,11 @@ angular.module('textbookApp')
 	    		if(contact._id === contactId) {
 	    			Contact.delete({id: contact._id});
 	    			$scope.currentStudent.contacts.splice(i, 1);
-	    		}	
+		    		if ($scope.currentStudent.contacts.length == 1) {
+		    			$scope.currentStudent.contacts[0].primary = true;
+		    			Contact.update($scope.currentStudent.contacts[0]);
+		    		}
+	    		}
 	    	})
 	    };
 
@@ -43,6 +47,21 @@ angular.module('textbookApp')
 	        $scope.addEditView = contactId;  
 	      }
 	    };
+
+	    $scope.makePrimary = function(contactId) {
+	    	$scope.currentStudent.contacts.forEach(function(contact) {
+	    		if (contact._id !== contactId) {
+	    			if (contact.primary == true) {
+	    				contact.primary = false;
+		    			Contact.update(contact);
+	    			}
+	    		}
+	    		else {
+	    			contact.primary = true;
+	    			Contact.update(contact);
+	    		}
+	    	})
+	    }
 
 	      $scope.$on('close addeditview', function(event, data) {
 	        $scope.addEditView = '';

@@ -17,10 +17,12 @@
 		<button class="btn btn-default center-block" type="submit">Save student name</button>
 	</form>
 		<h4>Contacts</h4>
-		<div ng-repeat="contact in currentStudent.contacts">
+		<div class="contact" ng-repeat="contact in currentStudent.contacts | orderBy: 'primary'">
 			<span ng-hide="addEditView">
-			{{ contact.name }} ({{ contact.relationship }}): {{contact.phone | tel}}
+			{{ contact.name }} ({{ contact.relationship }}) - {{contact.phone | tel}} 
+			<span ng-show="contact.primary"><strong>(primary contact) </strong></span>
 			<div class="btn-group">
+				<button class="btn btn-warning btn-xs" ng-show="!contact.primary" ng-click="makePrimary(contact._id)">Make primary</button>
 				<button class="btn btn-default btn-xs" ng-click="addShowEdit(contact._id)"><i class="fa fa-pencil"></i></button>
 				<button class="btn btn-danger btn-xs" ng-click="deleteContact(contact._id)"><i class="fa fa-times"></i></button>
 			</div>
