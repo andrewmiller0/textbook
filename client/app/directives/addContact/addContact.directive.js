@@ -13,7 +13,6 @@ angular.module('textbookApp')
 		  	  $scope.contactFormSubmit = true;
 	      	  if($scope.contactForm.$valid) {
 	      	  	var primary = _.find($scope.currentStudent.contacts, {primary: true});
-	      	  	console.log(primary);
 	      	  	if (!primary) {
 	      	  		$scope.currentContact.primary = true;
 	      	  	}
