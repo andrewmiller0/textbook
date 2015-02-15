@@ -1,12 +1,11 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, newClass) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state) {
 
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
       $scope.selectedClassroom = $scope.user.classrooms[0];
-      console.log('change');
     });
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
@@ -22,20 +21,16 @@ angular.module('textbookApp')
       return route === $location.path();
     };
 
-    $scope.showClassroom = function() {
-      console.log($scope.selectedClassroom);
-    }
-
     $scope.setClassroomDropdown = function(classId) {
       angular.forEach($scope.user.classrooms, function(classroom) {
           if(classroom._id === classId) {
             $scope.selectedClassroom = classroom;
           }
         });
-      console.log($scope.selectedClassroom);
     };
 
      $scope.deleteClassroom = function(classroomId) {
+
       Classroom.delete({id: classroomId});
       $scope.user.classrooms.forEach(function(classroom, i) {
         if(classroom._id === classroomId) {

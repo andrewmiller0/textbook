@@ -1,7 +1,7 @@
 <div ng-show="isLoggedIn()" class="navbar navbar-fixed-bottom bottom-nav">
 		<div class="btn btn-group btn-group-justified">
-			<a ui-sref="classrooms.edit({classId: selectedClassroom._id})" class="btn btn-default" ng-click="showClassroom()"><i class="fa fa-pencil-square-o"></i></a>
-			<a class="btn btn-default">Delete</a>
+			<a ui-sref="classrooms.edit({classId: selectedClassroom._id})" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></a>
+			<a class="btn btn-default" ng-click="deleteClassroom(selectedClassroom._id)">Delete</a>
 			<a href="#" class="btn btn-default">Group Msg</a>
 			<a href="#" class="btn btn-default">Homework</a>
 		</div>
