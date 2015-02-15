@@ -21,4 +21,12 @@ angular.module('textbookApp')
       return route === $location.path();
     };
 
+    $scope.setClassroomDropdown = function(classId) {
+      angular.forEach($scope.user.classrooms, function(classroom) {
+          if(classroom._id === classId) {
+            $scope.selectedClassroom = classroom;
+          }
+        });
+    };
+
   });

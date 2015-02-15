@@ -80,6 +80,10 @@ body {
 	display: none;
 }
 
+.bottom-nav {
+	background-color: #FAFAFA;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
@@ -129,7 +133,7 @@ body {
     	height: 150px;
     }
     .edit-students {
-    	height: 150px;
+    	height: 100px;
     }
 }
 
