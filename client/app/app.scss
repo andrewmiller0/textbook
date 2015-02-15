@@ -95,6 +95,9 @@ body {
 	.bottom-nav {
 		display: none;
 	}
+	.bottom-btns {
+		display: inline;
+	}
 
 }
 
@@ -105,6 +108,9 @@ body {
     }
     .bottom-nav {
     	display:block;
+    }
+    .bottom-btns {
+    	display: none;
     }
 }
 
