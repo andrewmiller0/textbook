@@ -17,6 +17,12 @@ angular.module('textbookApp')
         params: {
           controller: 'homework'
         }
+      },
+      deleteHomework:{
+        method: 'POST',
+        params:{
+          controller: 'homeworkdelete'
+        }
       }
     });
 

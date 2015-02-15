@@ -77,6 +77,16 @@ angular.module('textbookApp')
       $event.stopPropagation();
       $scope.status.isopen = !$scope.status.isopen;
     };
+
+    $scope.deleteHomework = function(classroom,homework){
+      classroom.homework.splice(classroom.homework.indexOf(homework), 1);
+      Classroom.deleteHomework({
+        classroomId: classroom._id,
+        homework: homework
+      }).$promise.then(function(obj){
+        console.log('Delete Homework OBJ ', obj);
+      });
+    }
     $scope.assignment = "";
     $scope.addAssignment = function(assignment){
       console.log(assignment)

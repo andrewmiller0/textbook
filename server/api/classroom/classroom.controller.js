@@ -28,6 +28,19 @@ exports.show = function(req, res, next) {
     });
 };
 
+exports.delHomework = function(req, res, next){
+  Classroom.findById(req.body.classroomId, function(err, classroom){
+    _.pull(classroom.homework, req.body.homework);
+    console.log(classroom.homework);
+    classroom.markModified('homework');
+    classroom.save(function(err, data){
+      console.log(classroom);
+
+      res.send(200);
+    });
+  });
+}
+
 exports.getUnpopulated = function(req, res) {
   Classroom.findById(req.params.id, function (err, classroom) {
     if(err) { return handleError(res, err); }
