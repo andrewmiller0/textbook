@@ -37,6 +37,8 @@ angular.module('textbookApp')
         angular.forEach($scope.user.classrooms, function(classroom) {
           if(classroom._id === $state.params.classId) {
             $scope.selectedClassroom = classroom;
+          } else {
+            $scope.selectedClassroom = $scope.user.classrooms[0];
           }
         });
     });
@@ -54,7 +56,7 @@ angular.module('textbookApp')
             templateUrl: 'app/main/classrooms/homeworkmodal.html',
             backdrop: true,
             windowClass: 'modal',
-            scope: $scope
+            scope: $scope 
         });
     };
 
