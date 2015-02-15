@@ -25,6 +25,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <div ng-controller="NavbarCtrl">
     <div ng-include="'components/navbar/navbar.html'"></div>
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
@@ -36,6 +37,7 @@
     </footer>
     </div>
     <div ng-include="'components/bottomnav/bottomnav.html'"></div>
+    </div>
     </div>
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -82,7 +84,6 @@
           <script src="app/factories/conversation.service.js"></script>
           <script src="app/factories/newClass/newClass.service.js"></script>
           <script src="app/factories/schedMsg.service.js"></script>
-          <script src="app/factories/selectedClassroom/selectedClassroom.service.js"></script>
           <script src="app/factories/student.service.js"></script>
           <script src="app/main/classroom/classroom.controller.js"></script>
           <script src="app/main/classroom/conversation/conversation.controller.js"></script>
