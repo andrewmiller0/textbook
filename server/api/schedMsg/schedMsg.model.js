@@ -14,4 +14,11 @@ var SchedMsgSchema = new Schema({
   // classroom: {type: Schema.Types.ObjectId, ref: 'Classroom'},
 });
 
+SchedMsgSchema
+	.path('scheduleTime')
+	.validate(function(value, respond) {
+		if (new Date() > value) return respond(false);
+		respond(true);
+	}, 'Invalid date.');
+
 module.exports = mongoose.model('SchedMsg', SchedMsgSchema);

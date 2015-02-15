@@ -69,12 +69,13 @@ angular.module('textbookApp')
 			else if ($scope.hours == 12) {
 				hours = 0;
 			}
-			if (!(hours instanceof Number) || !(minutes instanceof Number) || hours > 12 || hours < 1 || minutes > 59 || minutes < 0) {
+			if (isNaN(hours) || isNaN(minutes) || hours > 23 || hours < 1 || minutes > 59 || minutes < 0) {
 				return $scope.timeError = true;
 			}
 			$scope.dt.setHours(hours);
 			$scope.dt.setMinutes(minutes);
 			if (new Date() > $scope.dt) {
+				console.log("is this the thing we're hitting");
 				return $scope.timeError = true;
 			}
 			SchedMsg.save({
