@@ -83,7 +83,7 @@ body {
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 730px;
+        max-width: 850px;
         margin: 0 auto;
     }
     .navbar-collapsed {
@@ -92,11 +92,20 @@ body {
 	.uncollapsed-nav {
 		display: block;
 	}
+	.bottom-nav {
+		display: none;
+	}
 
 }
 
 @media screen and (max-width: 768px) {
-	
+	.container {
+        max-width: 730px;
+        margin: 0 auto;
+    }
+    .bottom-nav {
+    	display:block;
+    }
 }
 
 // Component styles are injected through grunt
