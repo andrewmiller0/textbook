@@ -98,6 +98,12 @@ body {
 	.bottom-btns {
 		display: inline;
 	}
+	.classdropdown {
+		display: none;
+	}
+	.pagetoggle {
+		display: inline;
+	}
 
 }
 
@@ -110,6 +116,13 @@ body {
     	display:block;
     }
     .bottom-btns {
+    	display: none;
+    }
+    .classdropdown {
+    	display: inline;
+    	margin-top: 5px;
+    }
+    .pagetoggle {
     	display: none;
     }
 }
