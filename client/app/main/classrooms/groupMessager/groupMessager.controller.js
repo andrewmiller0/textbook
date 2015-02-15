@@ -69,10 +69,13 @@ angular.module('textbookApp')
 			else if ($scope.hours == 12) {
 				hours = 0;
 			}
+			if (!(hours instanceof Number) || !(minutes instanceof Number) || hours > 12 || hours < 1 || minutes > 59 || minutes < 0) {
+				return $scope.timeError = true;
+			}
 			$scope.dt.setHours(hours);
 			$scope.dt.setMinutes(minutes);
 			if (new Date() > $scope.dt) {
-				return alert("what do you think we are, TIME TRAVELERS");
+				return $scope.timeError = true;
 			}
 			SchedMsg.save({
 				to: $scope.message.to,
