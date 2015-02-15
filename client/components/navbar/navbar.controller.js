@@ -1,15 +1,26 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state, $modal) {
 
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
       $scope.selectedClassroom = $scope.user.classrooms[0];
+      $scope.students = [];
+      $scope.user.classrooms.forEach(function(classroom) {
+        $scope.students.push(classroom.students);
+      });
+      $scope.students = _.flatten($scope.students);
+
     });
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
+
+    $scope.body;
+    $scope.to = [];
+    $scope.term;
+    $scope.results;
 
     $scope.logout = function() {
       newClass.set(false);
@@ -30,7 +41,6 @@ angular.module('textbookApp')
     };
 
      $scope.deleteClassroom = function(classroomId) {
-
       Classroom.delete({id: classroomId});
       $scope.user.classrooms.forEach(function(classroom, i) {
         if(classroom._id === classroomId) {
@@ -47,6 +57,26 @@ angular.module('textbookApp')
           });
         }
       });
+    };
+
+    $scope.openGroupMsg = function() {
+        $scope.groupMessager = $modal.open({
+            templateUrl: 'app/main/classrooms/groupMessager/messagemodal.html',
+            controller: 'GroupMessagerCtrl',
+            backdrop: true,
+            windowClass: 'modal',
+            size: 'lg',
+            scope: $scope
+        });
+    };
+
+        $scope.open = function () {
+        $modal.open({
+            templateUrl: 'app/main/classrooms/homeworkmodal.html',
+            backdrop: true,
+            windowClass: 'modal',
+            scope: $scope 
+        });
     };
 
   });

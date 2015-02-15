@@ -1,6 +1,6 @@
  <div class="row">
-        <button class="btn btn-default btn-primary pull-right" ng-click="returnToClass()">Done Editing</button>
             <div class="col-lg-6">
+                <button class="btn btn-default btn-primary pull-right" ng-click="returnToClass()">Done Editing</button>
                 <form class="form-horizontal" name="classForm" ng-submit="updateClassroom()" novalidate>
                         <label><h3>Edit class name</h3></label>
                         <input class="form-control" type="text" name="name" ng-model="classroom.name" ng-required="true" ng-minlength="4" />
