@@ -1,6 +1,6 @@
 <div ng-show="isLoggedIn()" class="navbar navbar-fixed-bottom bottom-nav">
 		<div class="btn btn-group btn-group-justified">
-			<a ui-sref="classrooms.edit({classId: selectedClassroom._id})" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></a>
+			<a ui-sref="classrooms.edit({classId: selected.classroom._id})" class="btn btn-default"><i class="fa fa-pencil-square-o"></i></a>
 			<a href="#" class="btn btn-default" ng-click="openGroupMsg()">Group Msg</a>
 			<a href="#" class="btn btn-default" ng-click="open()">Homework</a>
 		</div>

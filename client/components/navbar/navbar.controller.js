@@ -99,7 +99,7 @@ angular.module('textbookApp')
       $scope.user = Auth.getCurrentUser();
     });
     $scope.$on('updated class', function(event, data) {
-      $scope.selectedClassroom = data;
+      $scope.selected.classroom = data;
     });
 
   });
