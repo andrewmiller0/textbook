@@ -21,6 +21,7 @@ angular.module('textbookApp')
           });
           $scope.addFormSubmit = false;
           newClass.set(true);
+          $scope.$emit('updated class', classroom.toJSON())
           $state.go('classrooms.edit', {classId: classroom._id});
         });
       }
@@ -64,6 +65,7 @@ angular.module('textbookApp')
             }
             $scope.studentRoster = json;
             $state.go('.studentRoster');
+            $scope.$apply();
       };
       reader.readAsBinaryString($scope.file);
     };

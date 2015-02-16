@@ -1,5 +1,6 @@
  <div class="row">
             <div class="col-lg-6">
+                <button class="btn btn-default btn-primary pull-right" ng-click="returnToClass()">Done Editing</button>
                 <form class="form-horizontal" name="classForm" ng-submit="updateClassroom()" novalidate>
                         <label><h3>Edit class name</h3></label>
                         <input class="form-control" type="text" name="name" ng-model="classroom.name" ng-required="true" ng-minlength="4" />
@@ -9,9 +10,10 @@
                         <h4>Add students:</h4>
                         <student-form></student-form>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 edit-students-container">
                     <h3>Edit students: in {{ classroom.name }}</h3>
                     <span ng-show="!classroom.students.length">None yet!</span>
+                <div class="edit-students">
                 <accordion close-others="true">
                     <accordion-group ng-repeat="student in classroom.students" ng-click="setStudentBeingEdited(student)">
                         <accordion-heading>
@@ -20,5 +22,6 @@
                         <edit-student-form curr="student"></edit-student-form>
                     </accordion-group>
                 </accordion>
+            </div>
             </div>
         </div>

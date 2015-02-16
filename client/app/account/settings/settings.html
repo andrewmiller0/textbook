@@ -3,19 +3,18 @@
     <h2>{{user.name}}</h2>
     <h3>Your TextBook Number: {{user.phone | tel}}</h3>
   </div>
-  <div class="row">
-      <div class="col-md-5">
+      <div class="col-lg-5 col-md-5">
       <h3>Classrooms</h3>
       <ul class="list-group" ng-show="classrooms.length">
-        <li class="list-group-item contact" ng-repeat="classroom in classrooms" ui-sref="classrooms.edit({classId: classroom._id})">
-          <h5>{{classroom.name}}</h5>
+        <li class="list-group-item" ng-repeat="classroom in classrooms" ui-sref="classrooms.edit({classId: classroom._id})" >
+          <span>{{classroom.name}}</span>
+          <button class="btn btn-danger btn-xs pull-right" ng-click="$event.preventDefault(); $event.stopPropagation(); deleteClassroom(classroom._id)">x</button>
         </li>
       </ul>
       <h4 ng-hide="classrooms.length">You don't have any classrooms!</h4>
       <button ui-sref="addClassroom" class="btn btn-success">Create a class</button>
-    </div>
-      <div class="row">
-        <div class="col-lg-6">
+      </div>
+        <div class="col-lg-7 col-md-7">
         <h3>Change Password</h3>
         <form name="form" ng-submit="changePassword(form)" novalidate>
                 <label>Current Password</label>
@@ -38,6 +37,4 @@
           <button class="btn btn-primary" type="submit">Save changes</button>
         </form>
       </div>
-      </div>
-  </div>
 </div>

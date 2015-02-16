@@ -3,16 +3,26 @@
 		<h2>You don't have any classrooms!  Create one to get started!</h2>
 		<a ui-sref="addClassroom"><button class="btn btn-primary">Create a Class</button></a>
 	</div>
-	<div class="panel panel-default" style="height:600px;" ng-hide="findfirstState()">
-		<div class="panel-heading">
-			<div ng-show="user.classrooms.length > 0">
-			<div class="btn-group" role="group">
-		        <button type="button" class="btn btn-default" ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})" ui-sref-active="active">
-		            {{classroom.name}} <i ng-show="unread[classroom._id]" class="fa fa-comment"></i>
-		       </button>
-		    </div>
-		    </div>
-		</div>
+	<div ng-show="user.classrooms.length > 0" class="class-dropdown pagetoggle">
+    <div class="btn-group" dropdown>
+      <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+        {{selected.classroom.name}} <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref=".classroom({classId: classroom._id})" ui-sref-active="active" ng-click="setClassroomDropdown(classroom._id)">
+          <a href>{{classroom.name}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="pull-right">
+            <!-- homework stuff -->
+        	<button type="button" class="btn btn-info bottom-btns" ng-click="openGroupMsg()">Send a group message</button>
+        	<button type="button" class="btn btn-warning bottom-btns" ng-click="open()">Add Homework Assignment</button>
+  			<!-- end homework stuff -->
+            <button type="button" class="btn btn-default bottom-btns" ui-sref="classrooms.edit({classId: selected.classroom._id})"><i class="fa fa-pencil-square-o"></i>Edit</button>
+          </div>
+    </div>
+	<div class="panel panel-default" style="height:100%;" ng-hide="findfirstState()">
        <div class="alert alert-success alert-dismissible" ng-show="sentAlert">
 	    	Message successfully sent
 	    	<button type="button" class="close" ng-click="sentAlert=false"><span aria-hidden="true">&times;</span></button>
@@ -22,9 +32,9 @@
 		</div>
 	</div>
 	<!-- homework stuff -->
-	<div class="row">
+	<!-- <div class="row">
 		<button type="button" class="btn btn-info" ng-click="openGroupMsg()">Send a group message</button>
 		<button type="button" class="btn btn-warning" ng-click="open()">Add Homework Assignment</button>
-	</div>
+	</div> -->
 	<!-- end homework stuff -->
 </div>

@@ -71,11 +71,71 @@ body {
 	background-color: $primary-color;
 }
 
+.navbar-collapsed {
+	float: right;
+	margin-top: 5px;
+}
+
+.uncollapsed-nav {
+	display: none;
+}
+
+.bottom-nav {
+	background-color: #FAFAFA;
+}
+.dropdown-menu-mobile {
+	margin: 40px 125px 0;
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
+        max-width: 850px;
+        margin: 0 auto;
+    }
+    .navbar-collapsed {
+		display: none;
+	}
+	.uncollapsed-nav {
+		display: block;
+	}
+	.bottom-nav {
+		display: none;
+	}
+	.bottom-btns {
+		display: inline;
+	}
+	.classdropdown {
+		display: none;
+	}
+	.pagetoggle {
+		display: inline;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+	.container {
         max-width: 730px;
         margin: 0 auto;
+    }
+    .bottom-nav {
+    	display:block;
+    }
+    .bottom-btns {
+    	display: none;
+    }
+    .classdropdown {
+    	display: inline;
+    	margin-top: 5px;
+    }
+    .pagetoggle {
+    	display: none;
+    }
+    .borderright {
+    	height: 150px;
+    }
+    .edit-students {
+    	height: 100px;
     }
 }
 
@@ -89,6 +149,7 @@ body {
 @import 'directives/contactList/contactList.scss';
 @import 'directives/editContact/editContact.scss';
 @import 'directives/editStudentForm/editStudentForm.scss';
+@import 'main/editClassroom/editClassroom.scss';
 @import 'main/main.scss';
 @import 'main/newClassroom/studentRoster/studentRoster.scss';
 // endinjector
