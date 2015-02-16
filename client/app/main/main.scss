@@ -137,16 +137,15 @@ $lighter-primary-color: lighten($primary-color, 5%);
   display: block;
 }
 
-.list-group-item {
-  padding: 0;
-}
+// .list-group-item {
+//   padding: 0;
+// }
 
 .item-heading {
   padding: 10px;
 }
 
 .contact {
-  width: 90%;
   margin-left: 5%;
   padding-left: 10px;
 }
