@@ -1,18 +1,19 @@
 'use strict';
 
 angular.module('textbookApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state, $modal) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state, $modal, newClass) {
+    Auth.isLoggedInAsync(function(user) {
+      Auth.getCurrentUser().$promise.then(function(user) {
+        $scope.user = user;
+        $scope.selectedClassroom = $scope.user.classrooms[0];
+        $scope.students = [];
+        $scope.user.classrooms.forEach(function(classroom) {
+          $scope.students.push(classroom.students);
+        });
+        $scope.students = _.flatten($scope.students);
 
-    Auth.getCurrentUser().$promise.then(function(user) {
-      $scope.user = user;
-      $scope.selectedClassroom = $scope.user.classrooms[0];
-      $scope.students = [];
-      $scope.user.classrooms.forEach(function(classroom) {
-        $scope.students.push(classroom.students);
       });
-      $scope.students = _.flatten($scope.students);
-
-    });
+     });
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.getCurrentUser = Auth.getCurrentUser;
@@ -21,6 +22,7 @@ angular.module('textbookApp')
     $scope.to = [];
     $scope.term;
     $scope.results;
+    $scope.selectedClass = 'Select a Class';
 
     $scope.logout = function() {
       newClass.set(false);
@@ -77,6 +79,35 @@ angular.module('textbookApp')
             windowClass: 'modal',
             scope: $scope 
         });
+    };
+
+    $scope.homeworkActiveClass = function(className){
+      $scope.selectedClass = className;
+    }
+    $scope.toggleDropdown = function($event) {
+      $event.preventDefault();
+      $event.stopPropagation();
+      $scope.status.isopen = !$scope.status.isopen;
+    };
+    $scope.assignment = "";
+    $scope.addAssignment = function(assignment){
+      console.log(assignment)
+      $scope.assignment = "";
+      console.log($scope.selectedClass);
+      for(var i = 0 ; i<$scope.user.classrooms.length; i++){
+        if($scope.user.classrooms[i].name == $scope.selectedClass){
+          var classObj = $scope.user.classrooms[i];
+          console.log(classObj.homework);
+        }
+      }
+      classObj.homework.push(assignment);
+      Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
+        console.log(homework);
+        $scope.selectedClass = 'Select a Class';
+      });
+    };
+    $scope.close = function() {
+      $scope.groupMessager.close();
     };
 
   });
