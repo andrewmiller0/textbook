@@ -31,6 +31,7 @@ angular.module('textbookApp')
 
     $scope.logout = function() {
       newClass.set(false);
+      $scope.selected.classroom = {}; 
       Auth.logout();
       $location.path('/login');
     };

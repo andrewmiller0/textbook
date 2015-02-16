@@ -35,13 +35,13 @@ angular.module('textbookApp')
             Conversation.setUnread($scope.unread);
           });
         });
-        // angular.forEach($scope.user.classrooms, function(classroom) {
-        //   if(classroom._id === $state.params.classId) {
-        //     $scope.selectedClassroom = classroom;
-        //   } else {
-        //     $scope.selectedClassroom = $scope.user.classrooms[0];
-        //   }
-        // });
+        angular.forEach($scope.user.classrooms, function(classroom) {
+          if(classroom._id === $state.params.classId) {
+            $scope.selectedClassroom = classroom;
+          } else {
+            $scope.selected.classroom = $scope.user.classrooms[0];
+          }
+        });
     });
 
     $scope.setClassroomDropdown = function(classId) {
