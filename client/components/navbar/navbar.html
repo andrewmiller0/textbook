@@ -8,7 +8,7 @@
             <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled" style="margin-top:7px;">
               {{selectedClassroom.name}} <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu dropdown-menu-mobile">
               <li ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref="classrooms.classroom({classId: classroom._id})" ui-sref-active="active" ng-click="setClassroomDropdown(classroom._id)">
                 <a href>{{classroom.name}}</a>
               </li>
