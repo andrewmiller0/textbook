@@ -6,7 +6,10 @@ angular.module('textbookApp')
       if(bol) {
         Auth.getCurrentUser().$promise.then(function(user) {
           $scope.user = user;
-          $scope.selectedClassroom = $scope.user.classrooms[0];
+          $scope.selected = {
+            classroom: {}
+          };
+          $scope.selected.classroom = $scope.user.classrooms[0];
           $scope.students = [];
           $scope.user.classrooms.forEach(function(classroom) {
             $scope.students.push(classroom.students);
@@ -39,7 +42,7 @@ angular.module('textbookApp')
     $scope.setClassroomDropdown = function(classId) {
       angular.forEach($scope.user.classrooms, function(classroom) {
           if(classroom._id === classId) {
-            $scope.selectedClassroom = classroom;
+            $scope.selected.classroom = classroom;
           }
         });
     };
@@ -92,5 +95,11 @@ angular.module('textbookApp')
     $scope.close = function() {
       $scope.groupMessager.close();
     };
+    $scope.$on('updated user', function(event, data) {
+      $scope.user = Auth.getCurrentUser();
+    });
+    $scope.$on('updated class', function(event, data) {
+      $scope.selectedClassroom = data;
+    });
 
   });

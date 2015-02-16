@@ -1,12 +1,12 @@
 <div class="navbar navbar-static-top navbar-main">
   <div class="container">
         <div class="navbar-header">
-          <a ui-sref="classrooms.classroom({classId: getCurrentUser().classrooms[0]._id})" ng-show="isLoggedIn()" class="logo navbar-brand">Text<span class="logo-bold">Book</span></a>
+          <a ui-sref="classrooms.classroom({classId: getCurrentUser().classrooms[0]._id})" ng-show="isLoggedIn()" class="logo navbar-brand" ng-click="setClassroomDropdown(user.classrooms[0]._id)">Text<span class="logo-bold">Book</span></a>
           <a ui-sref="about" ng-hide="isLoggedIn()" class="logo navbar-brand">Text<strong class="black">Book</strong></a>
           <div class="navbar-inner">
           <div class="btn-group classdropdown" dropdown ng-show="isLoggedIn()">
             <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled" style="margin-top:7px;">
-              {{selectedClassroom.name}} <span class="caret"></span>
+              {{selected.classroom.name}} <span class="caret"></span>
             </button>
             <ul class="dropdown-menu dropdown-menu-mobile">
               <li ng-repeat="classroom in user.classrooms track by classroom._id" ui-sref="classrooms.classroom({classId: classroom._id})" ui-sref-active="active" ng-click="setClassroomDropdown(classroom._id)">

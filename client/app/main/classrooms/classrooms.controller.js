@@ -5,6 +5,7 @@ angular.module('textbookApp')
 
     Auth.getCurrentUser().$promise.then(function(user) {
       $scope.user = user;
+      $scope.$emit('updated user');
       $scope.unread = {};
       var convArray = [];
       $scope.findfirstState = function() {
@@ -34,19 +35,19 @@ angular.module('textbookApp')
             Conversation.setUnread($scope.unread);
           });
         });
-        angular.forEach($scope.user.classrooms, function(classroom) {
-          if(classroom._id === $state.params.classId) {
-            $scope.selectedClassroom = classroom;
-          } else {
-            $scope.selectedClassroom = $scope.user.classrooms[0];
-          }
-        });
+        // angular.forEach($scope.user.classrooms, function(classroom) {
+        //   if(classroom._id === $state.params.classId) {
+        //     $scope.selectedClassroom = classroom;
+        //   } else {
+        //     $scope.selectedClassroom = $scope.user.classrooms[0];
+        //   }
+        // });
     });
 
     $scope.setClassroomDropdown = function(classId) {
       angular.forEach($scope.user.classrooms, function(classroom) {
           if(classroom._id === classId) {
-            $scope.selectedClassroom = classroom;
+            $scope.selected.classroom = classroom;
           }
         });
     };
