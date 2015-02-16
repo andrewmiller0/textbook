@@ -3,7 +3,7 @@
     <li class="list-group-item" ng-repeat="student in currentClass.students | filter: studentFilter" ng-class="{studentactive: ids[student._id] || activeStudent === student._id}">
       <h5 class="item-heading" ng-click="toggleContacts(student)">{{ student.firstName }} {{ student.lastName }} <i ng-show="unread[currentClass._id][student._id]" class="fa fa-comment"></i></h5>
       <ul class="list-group toggle" ng-show="ids[student._id] || activeStudent === student._id">
-        <li class="list-group-item contact" ng-repeat="contact in student.contacts" class="list-group-item" ui-sref=".conversation({contactId: contact._id, studentId: student._id})" ui-sref-active="active">
+        <li class="list-group-item contact" ng-repeat="contact in student.contacts | orderBy: 'primary'" class="list-group-item" ui-sref=".conversation({contactId: contact._id, studentId: student._id})" ui-sref-active="active">
         <h5>{{contact.name}} <span ng-show="unread[currentClass._id][student._id][contact._id]" class="badge">{{unread[currentClass._id][student._id][contact._id]}}</span></h5>
         </li>
       </ul>
