@@ -17,6 +17,10 @@ angular.module('textbookApp')
           $scope.students = _.flatten($scope.students);
 
         });
+      } else {
+        $scope.selected = {
+            classroom: {}
+          };
       }
      });
     $scope.isCollapsed = true;
