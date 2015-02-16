@@ -2,17 +2,19 @@
 
 angular.module('textbookApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, Classroom, User, $state, $modal, newClass) {
-    Auth.isLoggedInAsync(function(user) {
-      Auth.getCurrentUser().$promise.then(function(user) {
-        $scope.user = user;
-        $scope.selectedClassroom = $scope.user.classrooms[0];
-        $scope.students = [];
-        $scope.user.classrooms.forEach(function(classroom) {
-          $scope.students.push(classroom.students);
-        });
-        $scope.students = _.flatten($scope.students);
+    Auth.isLoggedInAsync(function(bol) {
+      if(bol) {
+        Auth.getCurrentUser().$promise.then(function(user) {
+          $scope.user = user;
+          $scope.selectedClassroom = $scope.user.classrooms[0];
+          $scope.students = [];
+          $scope.user.classrooms.forEach(function(classroom) {
+            $scope.students.push(classroom.students);
+          });
+          $scope.students = _.flatten($scope.students);
 
-      });
+        });
+      }
      });
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
