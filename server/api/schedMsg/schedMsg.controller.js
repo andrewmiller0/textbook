@@ -1,7 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
-var SchedMsg = require('./schedMsg.model');
+var _ = require('lodash'),
+    cronJob = require('cron').CronJob;
+var SchedMsg = require('./schedMsg.model'),
+    conversationRoute = require('../conversation/conversation.controller');
+var Sms = require('../../remotes/sms');
 
 // Get list of schedMsgs
 exports.index = function(req, res) {
@@ -22,8 +25,18 @@ exports.show = function(req, res) {
 
 // Creates a new schedMsg in the DB.
 exports.create = function(req, res) {
-  SchedMsg.create(req.body, function(err, schedMsg) {
+  var date = new Date(req.body.date);
+  var toSave = {
+    scheduleTime: date,
+    body: req.body.body,
+    userId: req.body.userId,
+    to: req.body.to
+  };
+  SchedMsg.create(toSave, function(err, schedMsg) {
     if(err) { return handleError(res, err); }
+    var textJob = new cronJob(date, function(){
+      conversationRoute.sendMultiple(req, res);
+    }, null, true);
     return res.json(201, schedMsg);
   });
 };
