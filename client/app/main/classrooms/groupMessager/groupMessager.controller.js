@@ -25,7 +25,7 @@ angular.module('textbookApp')
 			}
 			else {
 				$scope.selectedClass = classroom.name;
-				$scope.to = _.flatten(_.pluck(classroom.students, 'contacts'));
+				$scope.to = _.filter(_.flatten(_.pluck(classroom.students, 'contacts')), {primary: true});
 			}
 		}
 
