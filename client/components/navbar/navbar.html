@@ -1,16 +1,30 @@
 <div class="navbar navbar-static-top navbar-main" ng-controller="NavbarCtrl">
   <div class="container">
         <div class="navbar-header">
-          {{user.classrooms[0]}}
           <a ui-sref="classrooms.classroom({classId: getCurrentUser().classrooms[0]._id})" ng-show="isLoggedIn()" class="logo navbar-brand">Text<span class="logo-bold">Book</span></a>
           <a ui-sref="about" ng-hide="isLoggedIn()" class="logo navbar-brand">Text<strong class="black">Book</strong></a>
+        <a ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" class="btn navbar-collapsed">
+            <i class="fa fa-bars"></i>
+          </a>
         </div>
+        <div class="navbar-inner">
+        <div collapse="navCollapsed" class="nav-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}" ng-click="navCollapsed = !navCollapsed"><a href="/signup">Sign up</a></li>
+          <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}" ng-click="navCollapsed = !navCollapsed"><a href="/login">Login</a></li>
+          <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}" ng-click="navCollapsed = !navCollapsed"><a href="/settings">Account</a></li>
+          <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}" ng-click="navCollapsed = !navCollapsed"><a href="" ng-click="logout()">Logout</a></li>
+        </ul>
+        </div>
+        <div class="uncollapsed-nav">
         <ul class="nav navbar-nav navbar-right">
           <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
           <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
           <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings">Account</a></li>
           <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
         </ul>
+        </div>
       </div>
     </div>
-</div>
+    </div>
+
