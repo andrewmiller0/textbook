@@ -11,7 +11,6 @@ var express = require('express'),
 module.exports = function(socket) {
 
 	var getMessage = function(req, res) {
-		console.log("HI");
 		console.log(req.body);
 		var text = req.body;
 		// if (twilio.validateExpressRequest(req, config.twilio.clientToken, {url: config.twilio.smsWebhook})) {
@@ -42,6 +41,7 @@ module.exports = function(socket) {
 				else {
 					Conversation.findOne({userId: user._id, contactId: contact._id}, function(err, conversation) {
 						console.log("In conversation.findone");
+						console.log(socket);
 						if (err) console.log(err);
 						conversation.messages.push(newMessage);
 						conversation.unreadMessages++;
