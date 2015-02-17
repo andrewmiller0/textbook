@@ -125,7 +125,6 @@ angular.module('textbookApp')
     };
 
     socket.socket.on('new message', function(res){
-      console.log(res.convo);
       if (!$state.params.contactId || $state.params.contactId !== res.convo.contactId) {
         $scope.user.classrooms.forEach(function(classroom) {
           classroom.students.forEach(function(student) {

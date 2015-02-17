@@ -19,14 +19,13 @@ angular.module('textbookApp')
 			return (condition.test(kid.firstName) || condition.test(kid.lastName));
 		}
 		$scope.setClass = function(classroom) {
-			console.log($scope.messages);
 			if (!classroom) {
 				$scope.to = [];
 				$scope.selectedClass = 'Select a Class'
 			}
 			else {
 				$scope.selectedClass = classroom.name;
-				$scope.to = _.flatten(_.pluck(classroom.students, 'contacts'));
+				$scope.to = _.filter(_.flatten(_.pluck(classroom.students, 'contacts')), {primary: true});
 			}
 		}
 

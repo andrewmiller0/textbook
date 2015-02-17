@@ -221,6 +221,14 @@ $lighter-primary-color: lighten($primary-color, 5%);
   float:right;
 }
 
-.modal-li:hover button { display: block }
+.modal-li:hover button {
+  display: block 
+}
 
-.modal-li button {display:none}
+.modal-li button {
+  display:none
+}
+
+.contact {
+  margin: 5px 0;
+}
