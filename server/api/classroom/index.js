@@ -15,5 +15,6 @@ router.put('/:id', controller.update);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.post('/homework', controller.addHomework);
+router.post('/homeworkdelete', controller.delHomework);
 
 module.exports = router;
