@@ -69,7 +69,6 @@ grunt test
 -	Ability to schedule messages
 -	Message templating system
 -	Native mobile app for iOS and Android
--	Translation engine for non-English speakers
 
 #### Known bugs
 
