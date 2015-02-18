@@ -9,7 +9,8 @@ angular.module('textbookApp')
       // Send auth token on connection, you will need to DI the Auth service above
       query: 'token=' + Auth.getToken(),
       path: '/socket.io-client',
-      transports: ['websocket']
+      transports: ['websocket'],
+      'force new connection': true
     });
 
     var socket = socketFactory({

@@ -13,7 +13,6 @@ angular.module('textbookApp')
   	$scope.currentStudent = {
       firstName: "",
       lastName: "",
-      primaryPhone: "",
       contacts: [{
         name: "",
         relationship: "",
@@ -31,8 +30,6 @@ angular.module('textbookApp')
         $scope.studentFormSubmit = true;
         if($scope.studentForm.$valid) {
          $scope.studentAdded = true;
-         $scope.currentStudent.primaryPhone = $scope.currentStudent.contacts[0].phone;
-         $scope.currentStudent.contacts[0].phone = '+1' + $scope.currentStudent.contacts[0].phone;
          $scope.currentStudent.contacts[0].primary = true;
          var studentToSave = angular.copy($scope.currentStudent);
          Contact.save($scope.currentStudent.contacts[0], function(contact) {

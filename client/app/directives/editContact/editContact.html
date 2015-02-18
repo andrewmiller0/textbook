@@ -19,7 +19,8 @@
 			<div class="form-group">
 				<label class="control-label col-lg-4">Cell phone number</label>
 				<div class="col-lg-8">
-					<input class="form-control" type="text" name="contactPhone" ng-model="contact.phone" ng-required="true" ui-mask="{{'(999) 999-9999'}}"><br />
+					<input class="form-control" type="text" name="contactPhone" ng-model="contact.phone" ng-required="true" ui-mask="{{'(999) 999-9999'}}">
+					<br />
 					<p class="help-block" ng-show="editContactForm.contactPhone.$invalid && editFormSubmit">Please enter a valid contact phone number.</p>	
 				</div>
 			</div>

@@ -28,11 +28,11 @@ ContactSchema.methods.createConversation = function(userId, contactId, message) 
 		});
 	};
 
-ContactSchema.pre('save', function(next) {
-	if(this.phone.indexOf('+1') === -1) {
-		this.phone = '+1' + this.phone;
-	}
-	next();
-})
+// ContactSchema.pre('save', function(next) {
+// 	if(this.phone.indexOf('+1') === -1) {
+// 		this.phone = '+1' + this.phone;
+// 	}
+// 	next();
+// })
 
 module.exports = mongoose.model('Contact', ContactSchema);
