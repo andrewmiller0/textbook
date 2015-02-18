@@ -1,6 +1,6 @@
 # Textbook
 ![Badge of Honor](https://img.shields.io/badge/Built%20at-Fullstack-green.svg?style=flat-square)
-> An online application for teacher SMS communication with parents and students
+> A web platform for teachers to communicate with parents via SMS messaging in an easy and organized way.
 
 
 ## Table of Contents
@@ -19,7 +19,7 @@ See a live version of the app [here](http://txtbk.herokuapp.com).
 
 ### Screenshot
 
-![TextBook Example](http://www.chuckmpierce.com/textbook/texting.gif)
+![TextBook Example](http://www.chuckmpierce.com/textbook/texting.gif)<br />
 _Above: An example of the working app_
 
 
