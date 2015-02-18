@@ -19,13 +19,10 @@ See a live version of the app [here](http://txtbk.herokuapp.com).
 
 ### Screenshot
 
-![TextBook Example](http://www.chuckmpierce.com/textbook/texting.webmhd.webm)
+![TextBook Example](http://www.chuckmpierce.com/textbook/texting.gif)
 _Above: An example of the working app_
 
 
-```html
-<p>This is some sample output</p>
-```
 ## Installation
 
 1. Clone the repository
