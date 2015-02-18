@@ -11,7 +11,6 @@ var express = require('express'),
 module.exports = function(socket) {
 
 	var getMessage = function(req, res) {
-		console.log("HI");
 		console.log(req.body);
 		var text = req.body;
 		// if (twilio.validateExpressRequest(req, config.twilio.clientToken, {url: config.twilio.smsWebhook})) {
@@ -28,11 +27,13 @@ module.exports = function(socket) {
 		};
 
 		User.findOne({phone: text.To}, function(err, user) {
-			Contact.findOne({phone: text.From}, function(err, contact) {
+			var from = text.From.substring(2);
+			console.log(from);
+			Contact.findOne({phone: from}, function(err, contact) {
 				if (err) console.log(err);
 				if (!contact) {
 					Contact.create({
-						phone: text.From
+						phone: from
 					}, function(err, contact) {
 						if (err) console.log(err);
 						contact.createConversation(user._id, contact._id, newMessage);

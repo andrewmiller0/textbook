@@ -26,7 +26,7 @@ exports.show = function(req, res) {
 exports.sendMsg = function(req, res, next) {
     var message = new Sms({
         body: req.body.message,
-        to: req.body.to,
+        to: "+1" + req.body.to,
         from: req.body.from
     });
 
@@ -41,7 +41,7 @@ exports.sendMultiple = function(req, res, next) {
     req.body.to.forEach(function(contact) {
       var message = new Sms({
         body: req.body.message,
-        to: contact.phone,
+        to: "+1" + contact.phone,
         from: req.body.from
       });
       // this is total duplication and i should move this into a method but

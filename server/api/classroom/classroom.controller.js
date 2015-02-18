@@ -109,7 +109,8 @@ exports.saveSpreadsheet = function(req, res) {
     var newContact = {
       name: obj['Contact Name'],
       phone: obj['Contact Phone'],
-      relationship: obj['Contact Relationship']
+      relationship: obj['Contact Relationship'],
+      primary: true
     };
     var newStudent = {
       firstName: obj['First Name'],
