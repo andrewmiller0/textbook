@@ -1,9 +1,9 @@
  <div class="row">
-      <div class="col-lg-4 borderright frontpage">
+      <div class="col-lg-4 col-md-4 borderright frontpage">
         <contact-list>
         </contact-list>
      </div>
-    <div class="col-lg-8">
+    <div class="col-lg-8 col-md-8">
       <div class="pull-right">
             <button type="button" class="btn btn-default" ui-sref="classrooms.edit({classId: currentClass._id})"><i class="fa fa-pencil-square-o"></i>Edit</button>
             <button type="button" class="btn btn-danger" ng-click="deleteClassroom(currentClass._id)">Delete Class</button>
@@ -12,12 +12,10 @@
         <div class="panel-heading">Select a Conversation</div>
           <div class="panel-body">
            <div class="chat-panel">
-                <div class="discussion-bg">
                 <ul class="discussion">
                   <li ng-repeat= 'message in messages' ng-class="!isSent(message) ? 'other' : 'self'" class="discussion"><div class = "messages"><p>{{message.body}}</p></div></li>
                   <a id="bottom"></a>
               </ul>
-            </div>
            </div>
           <div class="input-group">
             <input type="text" class="form-control" ng-model="msgToSend" placeholder="Message..." ng-disabled="true">

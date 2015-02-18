@@ -71,13 +71,30 @@ body {
 	background-color: $primary-color;
 }
 
+.navbar-collapsed {
+	float: right;
+	margin-top: 5px;
+}
+
+.uncollapsed-nav {
+	display: none;
+}
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
     .container {
-        max-width: 730px;
+        max-width: 850px;
         margin: 0 auto;
     }
+    .navbar-collapsed {
+		display: none;
+	}
+	.uncollapsed-nav {
+		display: block;
+	}
+
 }
+
 
 // Component styles are injected through grunt
 // injector
