@@ -19,7 +19,7 @@ See a live version of the app [here](http://txtbk.herokuapp.com).
 
 ### Screenshot
 
-![Sphynx Example](http://cloud.oddur.io/ZlkH/Screen%20Recording%202015-02-13%20at%2006.09%20AM.gif)
+![TextBook Example](http://www.chuckmpierce.com/textbook/texting.webmhd.webm)
 _Above: An example of the working app_
 
 
