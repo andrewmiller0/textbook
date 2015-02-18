@@ -20,7 +20,7 @@ See a live version of the app [here](http://txtbk.herokuapp.com).
 ### Screenshot
 
 ![TextBook Example](http://www.chuckmpierce.com/textbook/texting.gif)<br />
-_Above: An example of the working app_
+_Above: An example of a teacher interacting with a parent using the app_
 
 
 ## Installation
@@ -37,7 +37,7 @@ _Above: An example of the working app_
 	bower install  # installs bower dependencies
 	```
 4. Sign up for a free [Twilio trial account](https://www.twilio.com/try-twilio)
-5. Edit the `/server/config/environment/local.env.js` to include your  TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and phoneNumber
+5. Create a `local.env.js` in `/server/config/environment` and include your  TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and phoneNumber
 
 __Note:__ If you encounter errors in the installation process for npm, it is recommended that you try running the install command with `sudo`
 
@@ -64,13 +64,17 @@ grunt test
 
 #### Features
 
--	New bug tacking system
--	Upgrade to Angular 2.0
+-	More unit tests for frontend and backend
+-	Classroom enrollment via SMS messaging
+-	Ability to schedule messages
+-	Message templating system
+-	Native mobile app for iOS and Android
+-	Translation engine for non-English speakers
 
 #### Known bugs
 
-- Syntax highlighting doesn't work in safari
-- It ain't easy being cheezy.
+- Spreadsheet upload does not account for empty cells or corrupted files
+- Edge case with same contact being on mulitple students for one teacher not met yet
 
 ## Contributors
 * __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
