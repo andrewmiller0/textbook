@@ -27,11 +27,13 @@ module.exports = function(socket) {
 		};
 
 		User.findOne({phone: text.To}, function(err, user) {
-			Contact.findOne({phone: text.From}, function(err, contact) {
+			var from = text.From.substring(2);
+			console.log(from);
+			Contact.findOne({phone: from}, function(err, contact) {
 				if (err) console.log(err);
 				if (!contact) {
 					Contact.create({
-						phone: text.From
+						phone: from
 					}, function(err, contact) {
 						if (err) console.log(err);
 						contact.createConversation(user._id, contact._id, newMessage);
