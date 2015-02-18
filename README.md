@@ -28,7 +28,7 @@ _Above: An example of a teacher interacting with a parent using the app_
 1. Clone the repository
 
 	```bash
-	git clone https://github.com/angular/angular.js.git
+	git clone https://github.com/andrewmiller0/textbook.git
 	```
 2.	Install dependencies
 
