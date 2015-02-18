@@ -77,7 +77,7 @@ grunt test
 
 ## Contributors
 * __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
-*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/profile/view?id=54084202) | [GitHub](linkedin.com/in/meliis)
+*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/in/meliis) | [GitHub](https://github.com/meliis)
 *  __Andrew Miller__ - [LinkedIn](https://www.linkedin.com/in/andrewmillerdev) | [GitHub](https://github.com/andrewmiller0)
 
 ## License
