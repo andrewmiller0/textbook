@@ -75,13 +75,13 @@ grunt test
 - Spreadsheet upload does not account for empty cells or corrupted files
 - Edge case with same contact being on mulitple students for one teacher not met yet
 
-## Contributors
-* __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
-*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/in/meliis) | [GitHub](https://github.com/meliis)
-*  __Andrew Miller__ - [LinkedIn](https://www.linkedin.com/in/andrewmillerdev) | [GitHub](https://github.com/andrewmiller0)
-
-## License
-
-This projected is licensed under the terms of the [MIT license](/LICENSE)
+ ## Contributors
++*  __Andrew Miller__ - [LinkedIn](https://www.linkedin.com/in/andrewmillerdev) | [GitHub](https://github.com/andrewmiller0)
++*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/in/meliis) | [GitHub](https://github.com/meliis)
++*  __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
+ 
+ ## License
+ 
++This project is licensed under the terms of the [MIT license](/LICENSE)
 
 
