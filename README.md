@@ -76,12 +76,12 @@ grunt test
 - Edge case with same contact being on mulitple students for one teacher not met yet
 
  ## Contributors
-+*  __Andrew Miller__ - [LinkedIn](https://www.linkedin.com/in/andrewmillerdev) | [GitHub](https://github.com/andrewmiller0)
-+*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/in/meliis) | [GitHub](https://github.com/meliis)
-+*  __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
+*  __Andrew Miller__ - [LinkedIn](https://www.linkedin.com/in/andrewmillerdev) | [GitHub](https://github.com/andrewmiller0)
+*  __Melissa Moy__ - [LinkedIn](https://www.linkedin.com/in/meliis) | [GitHub](https://github.com/meliis)
+*  __Chuck Pierce__ -  [LinkedIn](http://linkedin.com/in/chuckmpierce) | [GitHub](https://github.com/ChuckPierce)
  
  ## License
  
-+This project is licensed under the terms of the [MIT license](/LICENSE)
+This project is licensed under the terms of the [MIT license](/LICENSE)
 
 
