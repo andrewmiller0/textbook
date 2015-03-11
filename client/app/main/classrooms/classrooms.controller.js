@@ -89,18 +89,14 @@ angular.module('textbookApp')
     }
     $scope.assignment = "";
     $scope.addAssignment = function(assignment){
-      console.log(assignment)
-      $scope.assignment = "";
-      console.log($scope.selectedClass);
       for(var i = 0 ; i<$scope.user.classrooms.length; i++){
         if($scope.user.classrooms[i].name == $scope.selectedClass){
           var classObj = $scope.user.classrooms[i];
-          console.log(classObj.homework);
         }
       }
       classObj.homework.push(assignment);
       Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
-        console.log(homework);
+        $scope.assignment = "";
         $scope.selectedClass = 'Select a Class';
       });
     };

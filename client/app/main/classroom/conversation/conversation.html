@@ -4,7 +4,12 @@
       <div class="chat-panel">
         <div class="discussion-bg">
         <ul class="discussion">
-          <li ng-repeat= 'message in messages' ng-class="!isSent(message) ? 'other' : 'self'" class="discussion"><div class = "messages"><p>{{message.body}}</p></div></li>
+          <li ng-repeat='message in messages' ng-class="!isSent(message) ? 'other' : 'self'" class="discussion">
+            <div class="messages">
+              <p>{{message.body}}</p>
+              <span class="time">{{message.dateSent | date: 'EEE MMM d h:mm a'}}</span>
+            </div>
+          </li>
           <a id="bottom"></a>
         </ul>
         </div>
