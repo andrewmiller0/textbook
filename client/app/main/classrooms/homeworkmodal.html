@@ -13,11 +13,12 @@
 			</ul>
 		</div>
 		<div class="input-group inline">
-			<input type="text" class="form-control" ng-model="assignment" placeholder="Assignment...">
+			<input type="text" class="form-control" ng-model="assignment.value" placeholder="Assignment...">
 			<span class="input-group-btn">
 				<button class="btn btn-default" type="submit" ng-click="addAssignment(assignment)">Submit</button>
 			</span>
 		</div>
+		 <p class="help-block" ng-show="!classObj && assignmentSubmitted">Please select a class.</p>
 	</form>
 	<div><h3>Assigned Homework</h3>
 	</div>

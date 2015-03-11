@@ -83,26 +83,27 @@ angular.module('textbookApp')
       Classroom.deleteHomework({
         classroomId: classroom._id,
         homework: homework
-      }).$promise.then(function(obj){
-        console.log('Delete Homework OBJ ', obj);
       });
-    }
-    $scope.assignment = "";
+    };
+
+    $scope.assignment = {};
+
     $scope.addAssignment = function(assignment){
-      console.log(assignment)
-      $scope.assignment = "";
-      console.log($scope.selectedClass);
+      $scope.assignmentSubmitted = true;
       for(var i = 0 ; i<$scope.user.classrooms.length; i++){
         if($scope.user.classrooms[i].name == $scope.selectedClass){
           var classObj = $scope.user.classrooms[i];
-          console.log(classObj.homework);
+          break;
         }
       }
-      classObj.homework.push(assignment);
-      Classroom.addHomework({classId: classObj._id, homework: assignment}).$promise.then(function(homework){
-        console.log(homework);
-        $scope.selectedClass = 'Select a Class';
-      });
+      if (classObj) {
+        classObj.homework.push(assignment.value);
+        Classroom.addHomework({classId: classObj._id, homework: assignment.value}).$promise.then(function(homework){
+          $scope.assignment = {};
+          $scope.selectedClass = 'Select a Class';
+          $scope.assignmentSubmitted = false;
+        });
+      }
     };
 
     $scope.$on('updated user', function(event, data) {
