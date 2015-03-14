@@ -27,7 +27,10 @@
     <![endif]-->
     <div ng-include="'components/navbar/navbar.html'"></div>
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <noscript>
+      Please enable JavaScript to access TextBook.
+    </noscript>
+    <div ui-view></div>
     </body>
     <footer class="footer">
       Built and designed by: <a href="http://github.com/andrewmiller0">Andrew Miller</a>, <a href="http://github.com/chuckpierce">Chuck Pierce</a>, and <a href="http://github.com/Meliis">Melissa Moy</a>
@@ -47,7 +50,6 @@
       <script src="bower_components/angular-socket-io/socket.js"></script>
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-      <script src="bower_components/js-xlsx/dist/jszip.js"></script>
       <script src="bower_components/js-xlsx/dist/xlsx.js"></script>
       <script src="bower_components/js-xls/dist/xls.js"></script>
       <script src="bower_components/papaparse/papaparse.js"></script>

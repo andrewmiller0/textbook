@@ -95,6 +95,15 @@ body {
 
 }
 
+noscript {
+	display: block;
+	text-align: center;
+	margin: 80px auto 0;
+	max-width: 500px;
+	padding: 20px;
+	border: 1px dotted #ff0000;
+	font-size: 1.5em;
+}
 
 // Component styles are injected through grunt
 // injector
